@@ -13,8 +13,10 @@
         android:layout_centerHorizontal="true"
         android:text="Welcome"
         android:textSize="45sp"
-        tools:layout_editor_absoluteX="112dp"
-        tools:layout_editor_absoluteY="235dp" />
+        app:layout_constraintBottom_toTopOf="@+id/customer_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/customer_button"
@@ -25,10 +27,11 @@
         android:layout_marginTop="363dp"
         android:text="Customer"
         android:textSize="33sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/business_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="53dp" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/business_button"
@@ -39,7 +42,8 @@
         android:layout_marginTop="500dp"
         android:text="Business"
         android:textSize="33sp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="53dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
