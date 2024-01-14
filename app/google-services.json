@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "252155294570",
+    "project_id": "booknowdb",
+    "storage_bucket": "booknowdb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:252155294570:android:f8ff8530b37ef8b171ab13",
+        "android_client_info": {
+          "package_name": "com.myapp.booknow"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdz6WsWMBwmkcVImhTfBML2N5s57wjSgg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
