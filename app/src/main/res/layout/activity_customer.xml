@@ -17,9 +17,13 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text="Customer"
+        android:textStyle="bold"
         android:textSize="45sp"
-        tools:layout_editor_absoluteX="90dp"
-        tools:layout_editor_absoluteY="138dp" />
+        app:layout_constraintBottom_toTopOf="@+id/username"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
 
     <EditText
