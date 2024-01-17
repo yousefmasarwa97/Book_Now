@@ -15,6 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+
+/**
+ * Represents the Login page for a business user.
+ */
 public class BusinessActivity extends AppCompatActivity {
 
     private EditText editTextEmail, editTextPassword;

@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * The very first screen in the app, appears for less than a second.
+ */
 public class SplashActivity extends AppCompatActivity {
 
     @Override

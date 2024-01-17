@@ -21,6 +21,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/**
+ * Handles the process of signing up new businesses.
+ */
 public class BusinessRegistrationActivity extends AppCompatActivity {
 
     private EditText editTextEmail;

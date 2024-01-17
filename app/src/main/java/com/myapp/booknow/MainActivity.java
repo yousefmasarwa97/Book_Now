@@ -9,6 +9,9 @@ import android.widget.Button;
 import com.myapp.booknow.BusinessActivity;
 import com.myapp.booknow.CustomerActivity;
 
+/**
+ * The main screen of the app.
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override

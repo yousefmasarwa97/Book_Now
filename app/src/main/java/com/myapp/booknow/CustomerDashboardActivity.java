@@ -11,6 +11,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.List;
 
+/**
+ * Dashboard (Main page) for a customer user.
+ */
 public class CustomerDashboardActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;

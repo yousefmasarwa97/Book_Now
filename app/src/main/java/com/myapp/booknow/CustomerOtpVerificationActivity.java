@@ -1,6 +1,5 @@
 package com.myapp.booknow;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -24,7 +23,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
 
-public class OtpVerificationActivity extends AppCompatActivity {
+public class CustomerOtpVerificationActivity extends AppCompatActivity {
 
     private String phoneNumber;
     Long timeoutseconds = 60L;
@@ -139,7 +138,7 @@ public class OtpVerificationActivity extends AppCompatActivity {
                     dbHelper.addCustomer(userID,phoneNumber);
 
                     //redirect to the customer dashboard
-                    Intent intent = new Intent(OtpVerificationActivity.this, CustomerDashboardActivity.class);
+                    Intent intent = new Intent(CustomerOtpVerificationActivity.this, CustomerDashboardActivity.class);
                     intent.putExtra("phoneNumber", phoneNumber);
                     startActivity(intent);
                 }else{

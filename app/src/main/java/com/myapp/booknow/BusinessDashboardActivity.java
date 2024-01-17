@@ -11,6 +11,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
+/**
+ * Dashboard (Main page) for a customer user.
+ */
 public class BusinessDashboardActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;

@@ -13,6 +13,9 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/**
+ * Responsible for handling the email verification using Firebase Authentication.
+ */
 public class BusinessEmailVerificationActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
@@ -91,8 +94,8 @@ public class BusinessEmailVerificationActivity extends AppCompatActivity {
         newBusiness.setEmail(email);
         newBusiness.setType("Business");
 
-        // Since the business name is optional, set it to null or an empty string
-        newBusiness.setName(null); // or "" if you prefer
+        // Since the business name is optional, we set it to null or an empty string
+        newBusiness.setName(null); // or ""
 
         DBHelper dbHelper = new DBHelper();
         dbHelper.addBusiness(newBusiness);

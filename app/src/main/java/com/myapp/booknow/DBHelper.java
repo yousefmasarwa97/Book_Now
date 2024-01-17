@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- This class will handle all the database interactions.
- In the relevant activities, an instance of this class will be created
+ This class will handle all the interactions with the database (Cloud Firestore database).
+ In the relevant activities, an instance of this class will be created.
  the appropriate method will be called.
  */
 public class DBHelper {

@@ -7,6 +7,11 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
+/**
+ * Adapter for RecyclerView to display business information.
+ * This adapter handles the layout and binding of business data
+ * to the views defined in the ViewHolder.
+ */
 public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.ViewHolder> {
 
     private List<User> businessList;

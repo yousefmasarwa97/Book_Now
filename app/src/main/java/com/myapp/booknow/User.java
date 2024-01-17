@@ -4,6 +4,12 @@ import com.google.firebase.firestore.PropertyName;
 
 import java.util.UUID;
 
+/**
+ * Represents a user in the application, encapsulating attributes
+ * for both customer and business types. This class includes common fields
+ * like name, email, and phone, and allows for additional business-specific
+ * details where applicable.
+ */
 public class User {
 
     @PropertyName("userID")

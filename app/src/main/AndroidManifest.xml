@@ -35,7 +35,7 @@
             />
 
         <activity
-            android:name=".OtpVerificationActivity"
+            android:name=".CustomerOtpVerificationActivity"
             android:parentActivityName=".CustomerActivity"
             />
 
