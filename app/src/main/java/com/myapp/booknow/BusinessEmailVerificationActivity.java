@@ -70,6 +70,11 @@ public class BusinessEmailVerificationActivity extends AppCompatActivity {
                     // Email is verified
                     handler.removeCallbacks(checkEmailVerificationRunnable);
                     Toast.makeText(BusinessEmailVerificationActivity.this, "Email verified!", Toast.LENGTH_SHORT).show();
+
+
+                    //Adding the business to the database
+                    addBusinessToDatabase(user.getUid(),user.getEmail());
+
                     startActivity(new Intent(getApplicationContext(), BusinessDashboardActivity.class));
                     finish();
                 } else {
@@ -79,6 +84,20 @@ public class BusinessEmailVerificationActivity extends AppCompatActivity {
             });
         }
     }
+
+    private void addBusinessToDatabase(String userId, String email) {
+        User newBusiness = new User();
+        newBusiness.setId(userId);
+        newBusiness.setEmail(email);
+        newBusiness.setType("Business");
+
+        // Since the business name is optional, set it to null or an empty string
+        newBusiness.setName(null); // or "" if you prefer
+
+        DBHelper dbHelper = new DBHelper();
+        dbHelper.addBusiness(newBusiness);
+    }
+
 
     @Override
     protected void onDestroy() {

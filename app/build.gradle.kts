@@ -49,6 +49,9 @@ dependencies {
     //Firebase Authentication
     implementation("com.google.firebase:firebase-auth")
 
+    //dependency for the Cloud Firestore library
+    implementation("com.google.firebase:firebase-firestore")
+
 
     constraints {
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0") {
