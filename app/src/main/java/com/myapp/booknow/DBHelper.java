@@ -36,10 +36,6 @@ public class DBHelper {
 
 
 
-
-
-
-
         db.collection("Users").whereEqualTo("type","Business")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
@@ -57,6 +53,35 @@ public class DBHelper {
 
                 }).addOnFailureListener(e -> Log.d("DBHelper","Error fetching businesses",e));
     }
+
+
+
+    public void addCustomer(String userId, String phoneNumber) {
+        db.collection("Users").document(userId)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (!documentSnapshot.exists()) {
+                        // The user does not exist, create a new user
+                        User newUser = new User();
+                        newUser.setId(userId);
+                        newUser.setPhone(phoneNumber);
+                        newUser.setType("Customer");
+
+                        db.collection("Users").document(userId)
+                                .set(newUser)
+                                .addOnSuccessListener(unused -> Log.d("DBHelper", "Customer successfully added!"))
+                                .addOnFailureListener(e -> Log.d("DBHelper", "Error adding customer", e));
+                    } else {
+                        // User already exists, you might want to update the user data or do nothing
+                        Log.d("DBHelper", "Customer already exists.");
+                    }
+                })
+                .addOnFailureListener(e -> Log.d("DBHelper", "Error checking customer", e));
+    }
+
+
+
+
 
 
 }

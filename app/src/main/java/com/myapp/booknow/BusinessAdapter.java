@@ -39,7 +39,7 @@ public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.ViewHo
 
         public ViewHolder(View view) {
             super(view);
-            businessName = view.findViewById(R.id.businessName); // Replace with your actual view ID
+            businessName = view.findViewById(R.id.businessName); // can replace with actual view ID
             // Initialize other views
         }
     }

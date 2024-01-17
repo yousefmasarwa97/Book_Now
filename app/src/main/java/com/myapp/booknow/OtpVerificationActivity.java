@@ -108,10 +108,18 @@ public class OtpVerificationActivity extends AppCompatActivity {
         if(inProgress){
             progressBar.setVisibility(View.VISIBLE);
             nextBtn.setVisibility(View.GONE);
+            //
+            //also added :
+            otpInput.setVisibility(View.GONE);
+            resendOtpTextView.setVisibility(View.GONE);
         }
         else{
-            progressBar.setVisibility(View.GONE);
+            progressBar.setVisibility(View.INVISIBLE);
             nextBtn.setVisibility(View.VISIBLE);
+            //
+            //also added:
+            otpInput.setVisibility(View.VISIBLE);
+            resendOtpTextView.setVisibility(View.VISIBLE);
         }
     }
 
@@ -123,6 +131,14 @@ public class OtpVerificationActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 setInProgress(false);
                 if(task.isSuccessful()){
+                    //get the user ID from FirebaseAuth
+                    String userID = mAuth.getCurrentUser().getUid();
+
+                    //Add the customer to the database
+                    DBHelper dbHelper = new DBHelper();
+                    dbHelper.addCustomer(userID,phoneNumber);
+
+                    //redirect to the customer dashboard
                     Intent intent = new Intent(OtpVerificationActivity.this, CustomerDashboardActivity.class);
                     intent.putExtra("phoneNumber", phoneNumber);
                     startActivity(intent);
