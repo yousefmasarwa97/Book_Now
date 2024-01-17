@@ -107,6 +107,7 @@ public class BusinessEmailVerificationActivity extends AppCompatActivity {
                     db.collection("Users").document(userId)
                             .get()
                             .addOnSuccessListener(documentSnapshot -> {
+
                                 if (documentSnapshot.exists() && !documentSnapshot.getBoolean("setupCompleted")) {
                                     // Redirect to setup if setup is not completed
                                     Intent intent = new Intent(BusinessEmailVerificationActivity.this, BusinessSetupActivity.class);

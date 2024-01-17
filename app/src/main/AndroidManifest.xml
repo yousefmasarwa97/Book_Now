@@ -15,6 +15,10 @@
         android:enableOnBackInvokedCallback="true">
 
         <activity
+            android:name=".BusinessSetupActivity"
+            android:parentActivityName=".BusinessEmailVerificationActivity"
+            />
+        <activity
             android:name=".BusinessEmailVerificationActivity"
             android:parentActivityName=".BusinessRegistrationActivity"
             />

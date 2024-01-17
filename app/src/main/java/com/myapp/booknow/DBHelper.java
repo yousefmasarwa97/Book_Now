@@ -8,6 +8,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  This class will handle all the interactions with the database (Cloud Firestore database).
@@ -21,13 +22,22 @@ public class DBHelper {
         this.db = FirebaseFirestore.getInstance();
     }
 
+//    public void addBusiness(User business){
+//        db.collection("Users").document(business.getId())
+//                .set(business)
+//                .addOnSuccessListener(unused -> Log.d("DBHelper","Business successfuly added!"))
+//                .addOnFailureListener(e -> Log.d("DBHelper","Error adding business", e));
+//    }
+
     public void addBusiness(User business){
+        Map<String, Object> businessData = business.toMap();
+        businessData.put("setupCompleted", false); // Add setupCompleted field
+
         db.collection("Users").document(business.getId())
-                .set(business)
-                .addOnSuccessListener(unused -> Log.d("DBHelper","Business successfuly added!"))
+                .set(businessData)
+                .addOnSuccessListener(unused -> Log.d("DBHelper","Business successfully added!"))
                 .addOnFailureListener(e -> Log.d("DBHelper","Error adding business", e));
     }
-
 
     public void viewBusinesses(OnSuccessListener<List<User>> onSuccessListener){
         //The OnSuccessListener is an interface provided by Firebase. It defines a callback method, onSuccess,
@@ -37,6 +47,7 @@ public class DBHelper {
 
 
         db.collection("Users").whereEqualTo("type","Business")
+                .whereEqualTo("setupCompleted",true)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     List<User> businessList = new ArrayList<>();

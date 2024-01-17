@@ -115,6 +115,17 @@ public class BusinessRegistrationActivity extends AppCompatActivity {
                                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                                     if (user != null) {
+                                        String userID = user.getUid();
+                                        //creating a new User object
+                                        User newUser = new User();
+                                        newUser.setId(userID);
+                                        newUser.setEmail(user.getEmail());
+                                        newUser.setType("Business");
+                                        newUser.setName("");//the names is not available yet (didn't setup the business)
+
+                                        DBHelper dbHelper = new DBHelper();
+                                        dbHelper.addBusiness(newUser);
+
                                         user.sendEmailVerification()
                                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override

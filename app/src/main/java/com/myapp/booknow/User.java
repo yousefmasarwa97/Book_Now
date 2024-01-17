@@ -2,6 +2,8 @@ package com.myapp.booknow;
 
 import com.google.firebase.firestore.PropertyName;
 
+import java.util.Map;
+import java.util.HashMap;
 import java.util.UUID;
 
 /**
@@ -18,14 +20,20 @@ public class User {
     private String name;
     private String email;
     private String phone;
-    private String description;
-
 
 
     // Business-only fields (null for customers)
     //private String address;
     private String businessHours;
     private String address;
+    private String description;//for businsses only
+    private boolean setupCompleted;//for businesses only
+
+
+
+
+
+
     //default constructor for Firebase
     public User(){
 
@@ -120,6 +128,27 @@ public class User {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public boolean isSetupCompleted() {
+        return setupCompleted;
+    }
+
+    public void setSetupCompleted(boolean setupCompleted) {
+        this.setupCompleted = setupCompleted;
+    }
+
+    public Map<String,Object> toMap(){
+        Map<String, Object> result = new HashMap<>();
+        result.put("userID", id);
+        result.put("type", type);
+        result.put("name", name);
+        result.put("email", email);
+        result.put("phone", phone);
+        //if there is other fields... we can add here !
+
+
+        return result;
     }
 }
 
