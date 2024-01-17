@@ -18,6 +18,7 @@ public class User {
     private String name;
     private String email;
     private String phone;
+    private String description;
 
 
 
@@ -39,6 +40,7 @@ public class User {
         this.phone = phone;
         this.address = "";
         this.businessHours = "";
+        this.description = "";
     }
 
 
@@ -110,6 +112,14 @@ public class User {
 
     public void setBusinessHours(String businessHours) {
         this.businessHours = businessHours;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
 

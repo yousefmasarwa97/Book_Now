@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 /**
  * Responsible for handling the email verification using Firebase Authentication.
@@ -65,6 +66,7 @@ public class BusinessEmailVerificationActivity extends AppCompatActivity {
         }
     };
 
+    /*
     private void checkEmailVerification() {
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
@@ -87,6 +89,45 @@ public class BusinessEmailVerificationActivity extends AppCompatActivity {
             });
         }
     }
+
+     */
+
+    private void checkEmailVerification() {
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            user.reload().addOnCompleteListener(task -> {
+                if (user.isEmailVerified()) {
+                    // Email is verified
+                    handler.removeCallbacks(checkEmailVerificationRunnable);
+                    Toast.makeText(BusinessEmailVerificationActivity.this, "Email verified!", Toast.LENGTH_SHORT).show();
+
+                    // Determine whether to redirect to setup or dashboard
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    String userId = user.getUid();
+                    db.collection("Users").document(userId)
+                            .get()
+                            .addOnSuccessListener(documentSnapshot -> {
+                                if (documentSnapshot.exists() && !documentSnapshot.getBoolean("setupCompleted")) {
+                                    // Redirect to setup if setup is not completed
+                                    Intent intent = new Intent(BusinessEmailVerificationActivity.this, BusinessSetupActivity.class);
+                                    startActivity(intent);
+                                } else {
+                                    // Redirect to dashboard
+                                    Intent intent = new Intent(BusinessEmailVerificationActivity.this, BusinessDashboardActivity.class);
+                                    startActivity(intent);
+                                }
+                                finish(); // Ensure this activity is finished after redirection
+                            });
+
+                    // Remove the business addition code here if you are handling it in the BusinessSetupActivity
+                } else {
+                    // Email not verified, check again after the interval
+                    handler.postDelayed(checkEmailVerificationRunnable, CHECK_INTERVAL);
+                }
+            });
+        }
+    }
+
 
     private void addBusinessToDatabase(String userId, String email) {
         User newBusiness = new User();
