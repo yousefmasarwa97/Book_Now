@@ -2,7 +2,9 @@ package com.myapp.booknow;
 
 import android.util.Log;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -106,6 +108,70 @@ public class DBHelper {
                     .addOnFailureListener(e -> Log.d("DBHelper", "Error updating business hours", e));
         }
     }
+
+
+
+    public void setBusinessRegularHours(String businessId, Map<String, BusinessRegularHours> regular_hours){
+//        for(String day : regular_hours.keySet()){
+//            BusinessRegularHours regularDayHours = regular_hours.get(day);
+//            db.collection("BusinessRegularHours").document(businessId + "_" + day)
+//                    .set(regular_hours)//add to DB
+//                    .addOnSuccessListener(unused-> Log.d("DBHelper", "Business hours updated for " + day))
+//                    .addOnFailureListener(e -> Log.d("DBHelper", "Error updating business hours", e));
+//        }
+
+        //--------------The previous approach was adding each day as a document--------------//
+
+
+        //in this approach we add the business itself (the businessID) as a document
+        //and give it the fields in this way : {"day" : {businessID , day , openTime , closeTime}}
+        //this approach is more efficient in terms of reading/writing and more organized.
+        //(We use it because these hours are "fixed")
+        db.collection("BusinessRegularHours").document(businessId)// Search/Create a document with the userID name
+                .set(regular_hours)//add to DB (all days to the same document)
+                .addOnSuccessListener(unused-> Log.d("DBHelper", "Business schedule updated"))//Success
+                .addOnFailureListener(e -> Log.d("DBHelper", "Error updating business schedule", e));//Fail
+    }
+
+
+    //-------------------------Services--------------------------//
+
+    public void addBusinessService(BusinessService service, OnSuccessListener<Void> onSuccessListener, OnFailureListener onFailureListener) {
+//        db.collection("BusinessServices").document(service.getServiceId())
+//                .set(service)
+//                .addOnSuccessListener(onSuccessListener)
+//                .addOnFailureListener(onFailureListener);
+
+        String documentId = (service.getServiceId() == null || service.getServiceId().isEmpty())
+                ? db.collection("BusinessServices").document().getId()
+                : service.getServiceId();
+
+        service.setServiceId(documentId); // Set the generated ID back to the service object
+
+        db.collection("BusinessServices").document(documentId)
+                .set(service)
+                .addOnSuccessListener(onSuccessListener)
+                .addOnFailureListener(onFailureListener);
+    }
+
+
+    public void fetchBusinessServices(String businessId, OnSuccessListener<List<BusinessService>> onSuccessListener, OnFailureListener onFailureListener) {
+        db.collection("BusinessServices")
+                .whereEqualTo("businessId", businessId)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    List<BusinessService> services = new ArrayList<>();
+                    for (DocumentSnapshot snapshot : queryDocumentSnapshots.getDocuments()) {
+                        BusinessService service = snapshot.toObject(BusinessService.class);
+                        services.add(service);
+                    }
+                    onSuccessListener.onSuccess(services);
+                })
+                .addOnFailureListener(onFailureListener);
+    }
+
+
+
 
 
 

@@ -6,18 +6,18 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.firebase.Timestamp;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+
 /**
- * This class handles the editing of a business working hours in the current week (Special hours).
+ * This class handles the editing of a business schedule (working hours in general)
  */
-public class BusinessWorkingHoursActivity extends AppCompatActivity {
+public class BusinessWorkingHoursActivity_2 extends AppCompatActivity {
 
     // TimePickers for each day
     TimePicker timePickerSundayOpen , timePickerSundayClose;
@@ -67,7 +67,7 @@ public class BusinessWorkingHoursActivity extends AppCompatActivity {
     }
 
     private void saveWorkingHours() {
-        Map<String, BusinessHours> hours = new HashMap<>();
+        Map<String, BusinessRegularHours> hours = new HashMap<>();
 
 
         //Getting the currently logged in user
@@ -80,22 +80,21 @@ public class BusinessWorkingHoursActivity extends AppCompatActivity {
 
 
 
+
         // Add each day hours
-        hours.put("Sunday", getBusinessHours(businessId , "Sunday" ,timePickerSundayOpen, timePickerSundayClose));
-        hours.put("Monday", getBusinessHours(businessId , "Monday" ,timePickerMondayOpen, timePickerMondayClose));
-        hours.put("Tuesday", getBusinessHours(businessId , "Tuesday" ,timePickerTuesdayOpen, timePickerTuesdayClose));
-        hours.put("Wednesday", getBusinessHours(businessId , "Wednesday" ,timePickerWednesdayOpen, timePickerWednesdayClose));
-        hours.put("Thursday", getBusinessHours(businessId , "Thursday" ,timePickerThursdayOpen, timePickerThursdayClose));
-        hours.put("Friday", getBusinessHours(businessId , "Friday" ,timePickerFridayOpen, timePickerFridayClose));
-        hours.put("Saturday", getBusinessHours(businessId , "Saturday" ,timePickerSaturdayOpen, timePickerSaturdayClose));
+        hours.put("Sunday", getBusinessRegularHours(businessId , "Sunday" ,timePickerSundayOpen, timePickerSundayClose));
+        hours.put("Monday", getBusinessRegularHours(businessId , "Monday" ,timePickerMondayOpen, timePickerMondayClose));
+        hours.put("Tuesday", getBusinessRegularHours(businessId , "Tuesday" ,timePickerTuesdayOpen, timePickerTuesdayClose));
+        hours.put("Wednesday", getBusinessRegularHours(businessId , "Wednesday" ,timePickerWednesdayOpen, timePickerWednesdayClose));
+        hours.put("Thursday", getBusinessRegularHours(businessId , "Thursday" ,timePickerThursdayOpen, timePickerThursdayClose));
+        hours.put("Friday", getBusinessRegularHours(businessId , "Friday" ,timePickerFridayOpen, timePickerFridayClose));
+        hours.put("Saturday", getBusinessRegularHours(businessId , "Saturday" ,timePickerSaturdayOpen, timePickerSaturdayClose));
 
         //-----END----//
 
-
-
         if(businessId !=null){
             DBHelper dbHelper = new DBHelper();
-            dbHelper.setBusinessHours(businessId, hours);
+            dbHelper.setBusinessRegularHours(businessId, hours);
         }
         else{//Handling the case where business is null
             Toast.makeText(this, "Error: Business ID not found.", Toast.LENGTH_SHORT).show();
@@ -112,18 +111,19 @@ public class BusinessWorkingHoursActivity extends AppCompatActivity {
 
 
 
-    private BusinessHours getBusinessHours(String businessId, String day, TimePicker openTimePicker, TimePicker closeTimePicker) {
-        Calendar openCalendar = Calendar.getInstance();
-        openCalendar.set(Calendar.HOUR_OF_DAY, openTimePicker.getCurrentHour());
-        openCalendar.set(Calendar.MINUTE, openTimePicker.getCurrentMinute());
+    private BusinessRegularHours getBusinessRegularHours(String businessId, String day, TimePicker openTimePicker, TimePicker closeTimePicker) {
+        String openTime = convert_TimePicker_to_String(openTimePicker);
+        String closeTime = convert_TimePicker_to_String(closeTimePicker);
+        return new BusinessRegularHours( businessId ,  day , openTime, closeTime);
+    }
 
-        Calendar closeCalendar = Calendar.getInstance();
-        closeCalendar.set(Calendar.HOUR_OF_DAY, closeTimePicker.getCurrentHour());
-        closeCalendar.set(Calendar.MINUTE, closeTimePicker.getCurrentMinute());
 
-        Timestamp openTime = new Timestamp(openCalendar.getTime());
-        Timestamp closeTime = new Timestamp(closeCalendar.getTime());
+    private String convert_TimePicker_to_String(TimePicker timePicker){
+        int hour = timePicker.getHour();
+        int minute = timePicker.getMinute();
 
-        return new BusinessHours( businessId ,  day , openTime, closeTime);
+        String timeString = String.format("%02d:%02d", hour , minute);
+
+        return timeString;
     }
 }
