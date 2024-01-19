@@ -9,7 +9,7 @@
         android:id="@+id/textView2"
         android:layout_width="224dp"
         android:layout_height="129dp"
-        android:layout_marginTop="168dp"
+        android:layout_marginTop="52dp"
         android:text="Business Dashboard"
         android:textSize="45sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,4 +26,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <Button
+        android:id="@+id/Woking_hours_redirecting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit working hours"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.196"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.201" />
 </androidx.constraintlayout.widget.ConstraintLayout>

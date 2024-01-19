@@ -91,6 +91,22 @@ public class DBHelper {
     }
 
 
+    /**
+     *
+     * @param businessId the ID of the business
+     * @param hours a hashmap of the day-hours of the day (key-value as String-BusinessHours)
+     */
+    public void setBusinessHours(String businessId, Map<String, BusinessHours> hours) {
+        //The BusinessHours class comes to mirror the structure 'BusinessHours' collection in Firestore.
+        for (String day : hours.keySet()) {//for each day (for each key)
+            BusinessHours dayHours = hours.get(day);//take each day's hours (value)
+            db.collection("BusinessHours").document(businessId + "_" + day)//document name in DB
+                    .set(dayHours)//add to DB
+                    .addOnSuccessListener(unused -> Log.d("DBHelper", "Business hours updated for " + day))
+                    .addOnFailureListener(e -> Log.d("DBHelper", "Error updating business hours", e));
+        }
+    }
+
 
 
 

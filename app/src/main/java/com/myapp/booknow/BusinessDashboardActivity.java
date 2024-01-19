@@ -1,7 +1,10 @@
 package com.myapp.booknow;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -19,7 +22,7 @@ public class BusinessDashboardActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private TextView textViewWelcome;
 
-
+    private Button Woking_hours_redirect_btn;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -31,6 +34,7 @@ public class BusinessDashboardActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
         textViewWelcome = findViewById(R.id.textViewWelcome);
+        Woking_hours_redirect_btn = findViewById(R.id.Woking_hours_redirecting);
 
 
         if (currentUser != null && currentUser.getEmail() != null){
@@ -40,5 +44,16 @@ public class BusinessDashboardActivity extends AppCompatActivity {
         else{
             textViewWelcome.setText("Hello, User");
         }
+
+
+        Woking_hours_redirect_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BusinessDashboardActivity.this,BusinessWorkingHoursActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 }

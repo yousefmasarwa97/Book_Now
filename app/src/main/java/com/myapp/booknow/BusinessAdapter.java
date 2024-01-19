@@ -48,4 +48,11 @@ public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.ViewHo
             // Initialize other views
         }
     }
+
+
+    public void setBusinesses(List<User> businesses) {
+        this.businessList = businesses;
+    }
+
+
 }
