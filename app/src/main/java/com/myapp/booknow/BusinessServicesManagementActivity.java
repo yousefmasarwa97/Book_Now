@@ -78,6 +78,7 @@ public class BusinessServicesManagementActivity extends AppCompatActivity {
             businessId = curr_user.getUid();
         }
 
+        //generate ID for service
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference newServiceRef = db.collection("BusinessServices").document();
         String serviceId = newServiceRef.getId(); // Firestore generates the ID
@@ -139,5 +140,17 @@ public class BusinessServicesManagementActivity extends AppCompatActivity {
                     // Failure handling
                     Toast.makeText(BusinessServicesManagementActivity.this, "Failed to add service", Toast.LENGTH_SHORT).show();
                 });
+    }
+
+
+    /**
+     * Handles the case when the user goes to another activity and resumes with this activity.
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        //refresh the list of services every time activity resumes
+        fetchServices();
     }
 }

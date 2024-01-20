@@ -170,7 +170,17 @@ public class DBHelper {
                 .addOnFailureListener(onFailureListener);
     }
 
-
+    /**
+     * Handles any change/update in a service information (Name/Description/Duration).
+     * @param service a BusinessService object.
+     * The Id should be associated with the service object itself.
+     */
+    public void updateBusinessService (BusinessService service ,OnSuccessListener  onSuccessListener, OnFailureListener onFailureListener){
+        db.collection("BusinessServices").document(service.getServiceId())
+                .set(service)
+                .addOnSuccessListener(onSuccessListener)
+                .addOnFailureListener(onFailureListener);
+    }
 
 
 

@@ -1,5 +1,7 @@
 package com.myapp.booknow;
 
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,12 +37,21 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
         BusinessService serviceItem = serviceList.get(position);
         holder.serviceNameTextView.setText(serviceItem.getName());
 
+        // Handle edit service
         holder.editServiceButton.setOnClickListener(v -> {
-            // Handle edit service
-        });
+            try {
+                Intent intent = new Intent(v.getContext(), BusinessServiceEditActivity.class);
+                intent.putExtra("serviceId", serviceItem.getServiceId());
+                v.getContext().startActivity(intent);
+            }catch (Exception e){
+                Log.e("ServiceAdapter", "Error starting EditServiceActivity", e);
+            }
 
+            });
+
+        // Handle delete service
         holder.deleteServiceButton.setOnClickListener(v -> {
-            // Handle delete service
+
         });
     }
 

@@ -31,7 +31,9 @@ public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         User business = businessList.get(position);
         holder.businessName.setText(business.getName());
-        // Set other attributes if necessary
+
+        //we can set other attributes !
+
     }
 
     @Override
