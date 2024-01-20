@@ -62,7 +62,7 @@ public class BusinessServiceEditActivity extends AppCompatActivity {
         BusinessService newService = new BusinessService(serviceId , businessId, name, description, duration);
         updateFirestoreDocument(newService);
 
-        ///get back to the previous page!!!!!!!!!!
+        ///get back to the previous page, handled in the Onclick function for the button "change"
 
     }
 

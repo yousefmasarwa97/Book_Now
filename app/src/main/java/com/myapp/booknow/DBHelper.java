@@ -182,6 +182,20 @@ public class DBHelper {
                 .addOnFailureListener(onFailureListener);
     }
 
+    /**
+     * Deletes the service with id : 'serviceId' from database.
+     * @param serviceId the id of the service.
+     * @param onSuccessListener
+     * @param onFailureListener
+     */
+    public void deleteBusinessService(String serviceId, OnSuccessListener<Void> onSuccessListener, OnFailureListener onFailureListener) {
+        db.collection("BusinessServices").document(serviceId)
+                .delete()
+                .addOnSuccessListener(onSuccessListener)
+                .addOnFailureListener(onFailureListener);
+    }
+
+
 
 
 

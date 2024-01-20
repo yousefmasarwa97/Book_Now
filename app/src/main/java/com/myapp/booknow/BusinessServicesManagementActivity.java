@@ -97,7 +97,7 @@ public class BusinessServicesManagementActivity extends AppCompatActivity {
         serviceDurationEditText.setText("");
     }
 
-    private void fetchServices() {
+    public void fetchServices() {
         // Fetch services from Firestore and update the serviceItemList and serviceAdapter
         // Implement the logic to fetch services associated with the business
         DBHelper dbHelper = new DBHelper();
