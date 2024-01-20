@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- This class will handle all the interactions with the database (Cloud Firestore database).
+ This class handles all the interactions with the database (Cloud Firestore database).
  In the relevant activities, an instance of this class will be created.
  the appropriate method will be called.
  */
@@ -31,6 +31,13 @@ public class DBHelper {
 //                .addOnFailureListener(e -> Log.d("DBHelper","Error adding business", e));
 //    }
 
+
+
+
+    /**
+     * Adds a business to the database (Users collection), the business ID is as the given object ID.
+     * @param business object that represent the business to be added with the appropriate fields.
+     */
     public void addBusiness(User business){
         Map<String, Object> businessData = business.toMap();
         businessData.put("setupCompleted", false); // Add setupCompleted field
@@ -41,6 +48,12 @@ public class DBHelper {
                 .addOnFailureListener(e -> Log.d("DBHelper","Error adding business", e));
     }
 
+
+
+    /**
+     * Executes a query to get the businesses from database.
+     * @param onSuccessListener
+     */
     public void viewBusinesses(OnSuccessListener<List<User>> onSuccessListener){
         //The OnSuccessListener is an interface provided by Firebase. It defines a callback method, onSuccess,
         // which is executed when the  Firestore query successfully completes.
@@ -68,7 +81,11 @@ public class DBHelper {
     }
 
 
-
+    /**
+     * Adds a customer with userId , and phoneNumber to Users collection.
+     * @param userId
+     * @param phoneNumber
+     */
     public void addCustomer(String userId, String phoneNumber) {
         db.collection("Users").document(userId)
                 .get()
@@ -94,7 +111,7 @@ public class DBHelper {
 
 
     /**
-     *
+     * Sets a real schedule (TimeStamps) for business with 'businessId'.
      * @param businessId the ID of the business
      * @param hours a hashmap of the day-hours of the day (key-value as String-BusinessHours)
      */
@@ -110,7 +127,14 @@ public class DBHelper {
     }
 
 
-
+    /**
+     * Sets the schedule for a business (daily working hours) in the database (RegularHours collection)
+     * as given with the hashmap.
+     * Associates the days & hours with 'businessId', all the days & hours are represented in database
+     * as one document, with a field for each day, the field contains openTime + closeTime.
+     * @param businessId id of the business
+     * @param regular_hours hashmap {"day" : {id,openTime,closeTime,//day(we can remove)//}}
+     */
     public void setBusinessRegularHours(String businessId, Map<String, BusinessRegularHours> regular_hours){
 //        for(String day : regular_hours.keySet()){
 //            BusinessRegularHours regularDayHours = regular_hours.get(day);
@@ -134,8 +158,17 @@ public class DBHelper {
     }
 
 
+
+
     //-------------------------Services--------------------------//
 
+
+    /**
+     * Adds a service to database (BusinessServices collection).
+     * @param service
+     * @param onSuccessListener
+     * @param onFailureListener
+     */
     public void addBusinessService(BusinessService service, OnSuccessListener<Void> onSuccessListener, OnFailureListener onFailureListener) {
 //        db.collection("BusinessServices").document(service.getServiceId())
 //                .set(service)
@@ -155,6 +188,12 @@ public class DBHelper {
     }
 
 
+    /**
+     * Fetches/refreshes the services, and gets them from databse.
+     * @param businessId id of the business associated with services we want to fetch.
+     * @param onSuccessListener
+     * @param onFailureListener
+     */
     public void fetchBusinessServices(String businessId, OnSuccessListener<List<BusinessService>> onSuccessListener, OnFailureListener onFailureListener) {
         db.collection("BusinessServices")
                 .whereEqualTo("businessId", businessId)
@@ -170,6 +209,8 @@ public class DBHelper {
                 .addOnFailureListener(onFailureListener);
     }
 
+
+
     /**
      * Handles any change/update in a service information (Name/Description/Duration).
      * @param service a BusinessService object.
@@ -181,6 +222,9 @@ public class DBHelper {
                 .addOnSuccessListener(onSuccessListener)
                 .addOnFailureListener(onFailureListener);
     }
+
+
+
 
     /**
      * Deletes the service with id : 'serviceId' from database.
