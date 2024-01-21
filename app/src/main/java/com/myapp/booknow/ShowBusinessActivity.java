@@ -45,6 +45,11 @@ public class ShowBusinessActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Fetches all the business's data by calling other helping functions.
+     * The purpose of this function is to show the business's details on the screen.
+     * @param businessId
+     */
     private void fetchBusinessDetails(String businessId){
 
         DBHelper dbHelper = new DBHelper();
@@ -56,6 +61,11 @@ public class ShowBusinessActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Fetches the services the business gives.
+     * @param businessId
+     * @param dbHelper
+     */
     private void fetchServices(String businessId , DBHelper dbHelper){
         dbHelper.fetchBusinessServices(businessId, businessServices -> {
             StringBuilder servicesBuilder = new StringBuilder();
@@ -69,18 +79,12 @@ public class ShowBusinessActivity extends AppCompatActivity {
         });
     }
 
-//    private void fetchHours(String businessId , DBHelper dbHelper){
-//        dbHelper.fetchBusinessRegularHours(businessId, businessHours -> {
-//            StringBuilder hoursBuilder = new StringBuilder();
-//            for (Map.Entry<String, String> entry : businessHours.entrySet()) {
-//                hoursBuilder.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
-//            }
-//            tvBusinessHours.setText(hoursBuilder.toString());
-//        }, e -> {
-//            Log.e("ShowBusiness", "Error fetching business hours", e);
-//        });
-//    }
 
+    /**
+     * Fetches the business's weekly working hours.
+     * @param businessId
+     * @param dbHelper
+     */
     private void fetchHours(String businessId, DBHelper dbHelper) {
         dbHelper.fetchBusinessRegularHours(businessId, businessHours -> {
             Map<String, String> sortedHours = new TreeMap<>(Comparator.comparingInt(this::getDayOrder)); // Sorts by day order
@@ -103,11 +107,18 @@ public class ShowBusinessActivity extends AppCompatActivity {
         });
     }
 
+    //Helping function to show the days in order (Sunday, Monday, ...,Saturday)
     private int getDayOrder(String day) {
         List<String> daysOfWeek = Arrays.asList("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
         return daysOfWeek.indexOf(day);
     }
 
+
+    /**
+     * Fetches name + description of the business.
+     * @param businessId
+     * @param dbHelper
+     */
     private void fetchBusinessInfo(String businessId , DBHelper dbHelper){
         dbHelper.fetchBusinessInfo(businessId, businessInfo -> {
             tvBusinessName.setText(businessInfo.getName());
