@@ -9,8 +9,8 @@ public class BusinessRegularHours {
 
     private String businessId;
     private String day;
-    private String openTime;//for example "08:00"
-    private String closeTime;//for example "15:00"
+    private String openTime;//for example "08:00" (String)
+    private String closeTime;//for example "15:00" (String)
 
     BusinessRegularHours(){
         //Required for firestore

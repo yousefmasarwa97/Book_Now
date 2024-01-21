@@ -9,6 +9,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -72,6 +73,7 @@ public class DBHelper {
                     for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                         User user = documentSnapshot.toObject(User.class);
                         if (user.getType().equals("Business")) {
+                            user.setId(documentSnapshot.getId());
                             businessList.add(user);
                         }
                     }
@@ -225,7 +227,6 @@ public class DBHelper {
 
 
 
-
     /**
      * Deletes the service with id : 'serviceId' from database.
      * @param serviceId the id of the service.
@@ -238,6 +239,41 @@ public class DBHelper {
                 .addOnSuccessListener(onSuccessListener)
                 .addOnFailureListener(onFailureListener);
     }
+
+
+
+    public void fetchBusinessInfo(String businessId, OnSuccessListener<User> onSuccessListener, OnFailureListener onFailureListener) {
+        db.collection("Users").document(businessId)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        User business = documentSnapshot.toObject(User.class);
+                        onSuccessListener.onSuccess(business);
+                    } else {
+                        onFailureListener.onFailure(new Exception("Business not found"));
+                    }
+                })
+                .addOnFailureListener(onFailureListener);
+    }
+
+
+    public void fetchBusinessRegularHours(String businessId, OnSuccessListener<Map<String, String>> onSuccessListener, OnFailureListener onFailureListener) {
+        db.collection("BusinessRegularHours").document(businessId)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        Map<String, String> businessHours = new HashMap<>();
+                        documentSnapshot.getData().forEach((key, value) -> businessHours.put(key,  value.toString()));
+                        onSuccessListener.onSuccess(businessHours);
+                    } else {
+                        onFailureListener.onFailure(new Exception("Business hours not found"));
+                    }
+                })
+                .addOnFailureListener(onFailureListener);
+    }
+
+
+
 
 
 

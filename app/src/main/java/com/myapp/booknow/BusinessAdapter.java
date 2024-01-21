@@ -1,9 +1,13 @@
 package com.myapp.booknow;
 
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
@@ -33,7 +37,15 @@ public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.ViewHo
         holder.businessName.setText(business.getName());
 
         //we can set other attributes !
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
 
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(),ShowBusinessActivity.class);
+                intent.putExtra("businessId",business.getId());
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
