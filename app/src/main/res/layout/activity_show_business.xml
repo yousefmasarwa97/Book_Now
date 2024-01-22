@@ -56,5 +56,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"/>
+
+
+
+        <Button
+            android:id="@+id/btnBookAppointment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Book Appointment"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center_horizontal"/>
+
     </LinearLayout>
 </ScrollView>

@@ -1,7 +1,10 @@
 package com.myapp.booknow;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +24,7 @@ import java.util.TreeMap;
 public class ShowBusinessActivity extends AppCompatActivity {
 
     private TextView tvBusinessName, tvBusinessDescription, tvBusinessServices, tvBusinessHours;
-
+    private Button BookAppointmentButton;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +34,7 @@ public class ShowBusinessActivity extends AppCompatActivity {
         tvBusinessDescription = findViewById(R.id.tvBusinessDescription);
         tvBusinessServices = findViewById(R.id.tvBusinessServices);
         tvBusinessHours = findViewById(R.id.tvBusinessHours);
-
+        BookAppointmentButton = findViewById(R.id.btnBookAppointment);
 
         String businessId = getIntent().getStringExtra("businessId");
         if(businessId != null){
@@ -43,6 +46,17 @@ public class ShowBusinessActivity extends AppCompatActivity {
             Log.e("ShowBusinessActivity", "business id is : " + businessId);
             finish();  // Closes the current activity and returns to the previous one
         }
+
+        BookAppointmentButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ShowBusinessActivity.this,ChooseServiceActivity.class);
+                intent.putExtra("businessId",businessId);
+                Log.d("ShowBusiness","the putExtra (businessId from ShowbusinessActicity) is:  " + businessId);//FOR TESTING
+                startActivity(intent);
+            }
+        });
     }
 
     /**
