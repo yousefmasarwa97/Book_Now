@@ -1,9 +1,13 @@
 package com.myapp.booknow;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,6 +25,7 @@ public class ChooseServiceActivity extends AppCompatActivity {
     private DBHelper dbHelper;
     private String businessId;//to get the business ID from the pre. page
 
+    private Button nextButton;//button to go to the next page
 
 
     @Override
@@ -29,6 +34,7 @@ public class ChooseServiceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_choose_service);
 
         serviceSpinner = findViewById(R.id.serviceSpinner);
+        nextButton = findViewById(R.id.Next_button_choose_service);
 
        // String id = "example"; // must change to the business id given from the last page (didn't do it yet , must be implemented using putExtra)
 
@@ -38,6 +44,17 @@ public class ChooseServiceActivity extends AppCompatActivity {
         businessId = getIntent().getStringExtra("businessId");
 
         fetchAndDisplayServices();
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChooseServiceActivity.this,ChooseDayandTimeActivity.class);
+
+                startActivity(intent);
+            }
+        });
+
+
 
     }
 

@@ -5,10 +5,27 @@
     android:padding="16dp"
     android:gravity="center">
 
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Please Choose a service"
+        android:textSize="20dp"
+        />
+
     <Spinner
         android:id="@+id/serviceSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"/>
+
+    <Button
+        android:id="@+id/Next_button_choose_service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Next" />
+
+
 </LinearLayout>
