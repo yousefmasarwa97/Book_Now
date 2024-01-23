@@ -17,6 +17,10 @@
 
 
         <activity
+            android:name=".ServiceProvidersManagementActivity"
+            />
+
+        <activity
             android:name=".ChooseDayandTimeActivity"
             />
 

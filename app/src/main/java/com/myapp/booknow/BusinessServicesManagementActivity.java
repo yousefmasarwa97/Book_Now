@@ -84,7 +84,7 @@ public class BusinessServicesManagementActivity extends AppCompatActivity {
                             dayList.add(i);
                             Collections.sort(dayList);
                         }else{//when checkbox unselected
-                            dayList.remove(i);
+                            dayList.remove(Integer.valueOf(i));
                         }
 
                     }

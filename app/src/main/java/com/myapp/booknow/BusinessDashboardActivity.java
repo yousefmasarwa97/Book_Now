@@ -25,6 +25,7 @@ public class BusinessDashboardActivity extends AppCompatActivity {
     private Button Woking_hours_redirect_btn;
 
     private Button Editing_services_redirect_btn;
+    private Button Editing_providers_redirect_btn;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -38,15 +39,15 @@ public class BusinessDashboardActivity extends AppCompatActivity {
         textViewWelcome = findViewById(R.id.textViewWelcome);
         Woking_hours_redirect_btn = findViewById(R.id.Woking_hours_redirecting);
         Editing_services_redirect_btn = findViewById(R.id.editing_services_redirecting);
+        Editing_providers_redirect_btn = findViewById(R.id.editing_providers_redirecting);
 
-
-        if (currentUser != null && currentUser.getEmail() != null){
-            String welcomemsg = "Hello, " + currentUser.getEmail();
-            textViewWelcome.setText(welcomemsg);
-        }
-        else{
-            textViewWelcome.setText("Hello, User");
-        }
+//        if (currentUser != null && currentUser.getEmail() != null){
+//            String welcomemsg = "Hello, " + currentUser.getEmail();
+//            textViewWelcome.setText(welcomemsg);
+//        }
+//        else{
+//            textViewWelcome.setText("Hello, User");
+//        }
 
 
         Woking_hours_redirect_btn.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +66,14 @@ public class BusinessDashboardActivity extends AppCompatActivity {
             }
         });
 
+
+        Editing_providers_redirect_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BusinessDashboardActivity.this,ServiceProvidersManagementActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }
