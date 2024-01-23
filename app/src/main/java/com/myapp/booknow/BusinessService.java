@@ -1,12 +1,14 @@
 package com.myapp.booknow;
 
+import java.util.List;
+
 public class BusinessService {
     private String serviceId;
     private String businessId;
     private String name;
     private String description;
     private int duration;
-
+    private List<String> workingDays;//stores the days the service is available at the business.
 
     BusinessService(){
 
@@ -49,6 +51,14 @@ public class BusinessService {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<String> getWorkingDays() {
+        return workingDays;
+    }
+
+    public void setWorkingDays(List<String> workingDays) {
+        this.workingDays = workingDays;
     }
 
     public int getDuration() {

@@ -1,15 +1,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
     <!-- Input Fields for New Service -->
+
     <EditText
         android:id="@+id/serviceNameEditText_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Service Name" />
+        android:hint="Service Name"/>
 
     <EditText
         android:id="@+id/serviceDescriptionEditText_edit"
@@ -23,6 +25,17 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:hint="Duration (minutes)" />
+
+    <TextView
+        android:id="@+id/selectDay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:hint="Select available days"
+        android:padding="16dp"
+        android:textColor="#000000"
+        android:visibility="visible"
+        app:drawableEndCompat="@drawable/arrow_drop_down_24" />
 
     <Button
         android:id="@+id/saveeButton_edit"

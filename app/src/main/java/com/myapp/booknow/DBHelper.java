@@ -191,7 +191,7 @@ public class DBHelper {
 
 
     /**
-     * Fetches/refreshes the services, and gets them from databse.
+     * Fetches/refreshes the services, and gets them from database.
      * @param businessId id of the business associated with services we want to fetch.
      * @param onSuccessListener
      * @param onFailureListener
@@ -212,7 +212,6 @@ public class DBHelper {
     }
 
 
-
     /**
      * Handles any change/update in a service information (Name/Description/Duration).
      * @param service a BusinessService object.
@@ -224,7 +223,6 @@ public class DBHelper {
                 .addOnSuccessListener(onSuccessListener)
                 .addOnFailureListener(onFailureListener);
     }
-
 
 
     /**
@@ -241,7 +239,12 @@ public class DBHelper {
     }
 
 
-
+    /**
+     * Fetches business's (with businessId) info.
+     * @param businessId
+     * @param onSuccessListener
+     * @param onFailureListener
+     */
     public void fetchBusinessInfo(String businessId, OnSuccessListener<User> onSuccessListener, OnFailureListener onFailureListener) {
         db.collection("Users").document(businessId)
                 .get()
@@ -257,6 +260,12 @@ public class DBHelper {
     }
 
 
+    /**
+     * Fetches business's (with businessId) regular hours (scheduled hours).
+     * @param businessId
+     * @param onSuccessListener
+     * @param onFailureListener
+     */
     public void fetchBusinessRegularHours(String businessId, OnSuccessListener<Map<String, String>> onSuccessListener, OnFailureListener onFailureListener) {
         db.collection("BusinessRegularHours").document(businessId)
                 .get()
@@ -271,6 +280,9 @@ public class DBHelper {
                 })
                 .addOnFailureListener(onFailureListener);
     }
+
+
+
 
 
 
