@@ -9,7 +9,8 @@ import java.util.List;
 public class ServiceProvider {
     private String providerId;
     private String name;
-    private List<String> servicesOffered; // List of service IDs
+    private List<String> servicesOffered; // List of service names
+    private List<String> servicesOfferedIds;//List of service IDS
     private List<String> availableDays; // Days of the week they are available
     private String businessId;
     // Constructor
@@ -47,6 +48,14 @@ public class ServiceProvider {
 
     public void setServicesOffered(List<String> servicesOffered) {
         this.servicesOffered = servicesOffered;
+    }
+
+    public List<String> getServicesOfferedIds() {
+        return servicesOfferedIds;
+    }
+
+    public void setServicesOfferedIds(List<String> servicesOfferedIds) {
+        this.servicesOfferedIds = servicesOfferedIds;
     }
 
     public List<String> getAvailableDays() {

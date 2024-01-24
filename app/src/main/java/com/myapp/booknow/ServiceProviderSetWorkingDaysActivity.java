@@ -78,6 +78,8 @@ public class ServiceProviderSetWorkingDaysActivity extends AppCompatActivity {
                 List<String> selectedServiceNames = new ArrayList<>(Arrays.asList(selected_services.split(", ")));
                 provider.setServicesOffered(selectedServiceNames);
 
+                List<String> selectedServiceIds = new ArrayList<>(Arrays.asList(serviceIds));
+                provider.setServicesOfferedIds(selectedServiceIds);
 
                 List<String> availableDays = getSelectedDayNames();
                 provider.setAvailableDays(availableDays);
