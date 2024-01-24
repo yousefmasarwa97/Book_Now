@@ -15,9 +15,12 @@
         android:enableOnBackInvokedCallback="true">
 
 
+        <activity
+            android:name=".ServiceProviderSetWorkingDaysActivity"
+            />
 
         <activity
-            android:name=".ServiceProvidersManagementActivity"
+            android:name=".ServiceProviderSetNameAndServicesActivity"
             />
 
         <activity

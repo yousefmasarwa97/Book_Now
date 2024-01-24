@@ -70,7 +70,7 @@ public class BusinessDashboardActivity extends AppCompatActivity {
         Editing_providers_redirect_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(BusinessDashboardActivity.this,ServiceProvidersManagementActivity.class);
+                Intent intent = new Intent(BusinessDashboardActivity.this,ServiceProviderSetNameAndServicesActivity.class);
                 startActivity(intent);
             }
         });
