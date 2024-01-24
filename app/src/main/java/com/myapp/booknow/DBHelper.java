@@ -9,6 +9,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -282,7 +283,65 @@ public class DBHelper {
     }
 
 
+    public void addServiceProvider(ServiceProvider provider, OnSuccessListener<Void> onSuccessListener, OnFailureListener onFailureListener) {
+        String documentId = (provider.getProviderId() == null || provider.getProviderId().isEmpty())
+                ? db.collection("ServiceProviders").document().getId()
+                : provider.getProviderId();
 
+        provider.setProviderId(documentId); //
+
+        db.collection("ServiceProviders").document(documentId)
+                .set(provider)
+                .addOnSuccessListener(onSuccessListener)
+                .addOnFailureListener(onFailureListener);
+    }
+
+
+    public void fetchServiceProviders(String businessId, OnSuccessListener<List<ServiceProvider>> onSuccessListener, OnFailureListener onFailureListener) {
+        db.collection("ServiceProviders")
+                .whereEqualTo("businessId", businessId)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    List<ServiceProvider> providers = new ArrayList<>();
+                    for (DocumentSnapshot snapshot : queryDocumentSnapshots.getDocuments()) {
+                        ServiceProvider provider = snapshot.toObject(ServiceProvider.class);
+                        providers.add(provider);
+                    }
+                    onSuccessListener.onSuccess(providers);
+                })
+                .addOnFailureListener(onFailureListener);
+    }
+
+    public void getAvailableDaysForService(String serviceId , String businessId,OnSuccessListener<List<String>> onSuccessListener, OnFailureListener onFailureListener){
+        db.collection("BusinessServices")
+                .whereEqualTo("serviceId",serviceId)
+                .whereEqualTo("businessId",businessId)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots  -> {
+                    if (!queryDocumentSnapshots.isEmpty()){
+                        DocumentSnapshot serviceDoc = queryDocumentSnapshots.getDocuments().get(0);
+                        List<String> available_days_for_service = (List<String>) serviceDoc.get("workingDays");
+                        onSuccessListener.onSuccess(available_days_for_service);
+                    }else{//if there is no such service found
+                        onSuccessListener.onSuccess(Collections.emptyList());
+                    }
+
+
+                }).addOnFailureListener(onFailureListener);
+    }
+
+
+/**
+ * .addOnSuccessListener(documentSnapshot -> {
+ *                     if (documentSnapshot.exists()) {
+ *                         Map<String, String> businessHours = new HashMap<>();
+ *                         documentSnapshot.getData().forEach((key, value) -> businessHours.put(key,  value.toString()));
+ *                         onSuccessListener.onSuccess(businessHours);
+ *                     } else {
+ *                         onFailureListener.onFailure(new Exception("Business hours not found"));
+ *                     }
+ *                 })
+ */
 
 
 

@@ -11,16 +11,17 @@ public class ServiceProvider {
     private String name;
     private List<String> servicesOffered; // List of service IDs
     private List<String> availableDays; // Days of the week they are available
-
+    private String businessId;
     // Constructor
     ServiceProvider(){
         
     }
-    public ServiceProvider(String providerId, String name, List<String> servicesOffered, List<String> availableDays) {
+    public ServiceProvider(String providerId, String name, List<String> servicesOffered, List<String> availableDays, String businessId) {
         this.providerId = providerId;
         this.name = name;
         this.servicesOffered = servicesOffered;
         this.availableDays = availableDays;
+        this.businessId = businessId;
     }
 
     // Getters and Setters
@@ -55,6 +56,15 @@ public class ServiceProvider {
     public void setAvailableDays(List<String> availableDays) {
         this.availableDays = availableDays;
     }
+
+    public String getBusinessId() {
+        return businessId;
+    }
+
+    public void setBusinessId(String businessId) {
+        this.businessId = businessId;
+    }
+
 
 
 }

@@ -13,14 +13,21 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class ServiceProvidersManagementActivity extends AppCompatActivity {
 
@@ -41,7 +48,11 @@ public class ServiceProvidersManagementActivity extends AppCompatActivity {
     private ArrayList<Integer> serviceList;
     private Map<String, String> serviceNameToIdMap = new HashMap<>();
 
+    List<String> availableDaysForService;
+    private List<ServiceProvider> providersList;
 
+    private RecyclerView providersRecyclerView;
+    private ProviderAdapter providerAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,10 +63,11 @@ public class ServiceProvidersManagementActivity extends AppCompatActivity {
         tvDay = findViewById(R.id.select_available_days);
         tvService = findViewById(R.id.select_available_services);
         addProvider_btn = findViewById(R.id.addUpdateProviderButton);
+        providersRecyclerView = findViewById(R.id.providersRecyclerView);
+        providersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
 
-        String providerName =  providerNameEditText.getText().toString();
         serviceArray = null; // Initialize as null
         serviceList = new ArrayList<>();
 
@@ -143,10 +155,47 @@ public class ServiceProvidersManagementActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //add the provider to the providers collection in database
                 //fetch the providers and show them in the activity's recycleView
+                ServiceProvider provider = new ServiceProvider();
+                String providerName =  providerNameEditText.getText().toString();
+                provider.setName(providerName);
+                //provider.setAvailableDays(dayList);
+                List<String> serviceOffered = new ArrayList<>();
+                for (int i = 0; i < serviceArray.length; i++) {
+                    if (selectedServices[i]) { // Check if the service was selected
+                        serviceOffered.add(serviceArray[i]); // Add only selected services
+                    }
+                }
+                provider.setServicesOffered(serviceOffered);
+                List<String> availableDays = getSelectedDayNames();
+                provider.setAvailableDays(availableDays);
+
+                //set businessId
+                String businessId = getCurrentBusinessId();
+                provider.setBusinessId(businessId);
+
+                DBHelper dbHelper = new DBHelper();
+                dbHelper.addServiceProvider(provider,  aVoid -> {
+                            // Success handling. Perhaps refresh the list of services
+                            Toast.makeText(ServiceProvidersManagementActivity.this, "Provider added successfully", Toast.LENGTH_SHORT).show();
+                           // fetchProvidersAndSetupAdapter();  // fetching the providers
+                        },
+                        e -> {
+                            // Failure handling
+                            Toast.makeText(ServiceProvidersManagementActivity.this, "Failed to add provider", Toast.LENGTH_SHORT).show();
+                        });
             }
         });
+
+        fetchProvidersAndSetupAdapter();
     }
 
+    private List<String> getSelectedDayNames() {
+        List<String> selectedDayNames = new ArrayList<>();
+        for (Integer index : dayList) {
+            selectedDayNames.add(dayArray[index]);
+        }
+        return selectedDayNames;
+    }
 
 
 
@@ -197,7 +246,7 @@ public class ServiceProvidersManagementActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (serviceArray == null || serviceArray.length == 0) {//services are not yet loaded (list of services is empty)
                     Toast.makeText(ServiceProvidersManagementActivity.this,"error", Toast.LENGTH_SHORT).show();
-                    Log.e("ServiceProvidersManagement","SomeHow the business ID is null");
+                    Log.e("ServiceProvidersManagement","no services available");
                     return;
                 }
 
@@ -221,8 +270,10 @@ public class ServiceProvidersManagementActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         StringBuilder stringBuilder = new StringBuilder();
+                        Set<String> combinedAvailableDays = new HashSet<>(); // To store the intersection of available days
                         for (int j = 0; j < serviceList.size(); j++) {
-                            stringBuilder.append(serviceArray[serviceList.get(j)]);
+                            String selectedServiceName = serviceArray[serviceList.get(j)];
+                            stringBuilder.append(selectedServiceName);
                             if (j != serviceList.size() - 1) {
                                 stringBuilder.append(", ");
                             }
@@ -255,6 +306,29 @@ public class ServiceProvidersManagementActivity extends AppCompatActivity {
 
 
     }
+
+
+
+
+    private void fetchProvidersAndSetupAdapter() {
+        DBHelper dbHelper = new DBHelper();
+        String businessId = getCurrentBusinessId(); //gets the signed business ID
+        dbHelper.fetchServiceProviders(businessId, providers -> {
+            providerAdapter = new ProviderAdapter(providers);
+            providersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+            providersRecyclerView.setAdapter(providerAdapter);
+        }, e -> {
+            Toast.makeText(this, "Error fetching providers: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    private String getCurrentBusinessId() {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        return (currentUser != null) ? currentUser.getUid() : null;
+    }
+
+
 
 
 

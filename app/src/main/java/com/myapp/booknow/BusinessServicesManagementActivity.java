@@ -30,7 +30,7 @@ public class BusinessServicesManagementActivity extends AppCompatActivity {
     private Button addServiceButton;
     private RecyclerView servicesRecyclerView;
     private ServiceAdapter serviceAdapter;
-    private List<BusinessService> serviceItemList; // This should be populated from Firestore
+    private List<BusinessService> serviceItemList;// This should be populated from Firestore
 
     private TextView tvDay;
     boolean[] selectedDay;
