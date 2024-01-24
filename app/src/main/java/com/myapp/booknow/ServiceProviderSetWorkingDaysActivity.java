@@ -1,6 +1,7 @@
 package com.myapp.booknow;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -96,7 +97,9 @@ public class ServiceProviderSetWorkingDaysActivity extends AppCompatActivity {
                             Toast.makeText(ServiceProviderSetWorkingDaysActivity.this, "Failed to add provider", Toast.LENGTH_SHORT).show();
                         });
 
-                //finish();
+                //finish
+                Intent intent = new Intent(ServiceProviderSetWorkingDaysActivity.this,BusinessDashboardActivity.class);
+                startActivity(intent);
             }
         });
 
