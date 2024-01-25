@@ -331,18 +331,6 @@ public class DBHelper {
     }
 
 
-/**
- * .addOnSuccessListener(documentSnapshot -> {
- *                     if (documentSnapshot.exists()) {
- *                         Map<String, String> businessHours = new HashMap<>();
- *                         documentSnapshot.getData().forEach((key, value) -> businessHours.put(key,  value.toString()));
- *                         onSuccessListener.onSuccess(businessHours);
- *                     } else {
- *                         onFailureListener.onFailure(new Exception("Business hours not found"));
- *                     }
- *                 })
- */
-
 
 
 
