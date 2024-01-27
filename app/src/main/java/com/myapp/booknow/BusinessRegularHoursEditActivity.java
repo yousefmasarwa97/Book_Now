@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * This class handles the editing of a business schedule (working hours in general)
  */
-public class BusinessWorkingHoursActivity_2 extends AppCompatActivity {
+public class BusinessRegularHoursEditActivity extends AppCompatActivity {
 
     // TimePickers for each day
     TimePicker timePickerSundayOpen , timePickerSundayClose;
@@ -35,7 +35,7 @@ public class BusinessWorkingHoursActivity_2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_business_working_hours);
+        setContentView(R.layout.activity_business_regular_hours_edit);
 
         // Initializing TimePickers for each day
 

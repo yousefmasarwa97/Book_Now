@@ -2,16 +2,33 @@ package com.myapp.booknow;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -113,21 +130,7 @@ public class DBHelper {
     }
 
 
-    /**
-     * Sets a real schedule (TimeStamps) for business with 'businessId'.
-     * @param businessId the ID of the business
-     * @param hours a hashmap of the day-hours of the day (key-value as String-BusinessHours)
-     */
-    public void setBusinessHours(String businessId, Map<String, BusinessHours> hours) {
-        //The BusinessHours class comes to mirror the structure 'BusinessHours' collection in Firestore.
-        for (String day : hours.keySet()) {//for each day (for each key)
-            BusinessHours dayHours = hours.get(day);//take each day's hours (value)
-            db.collection("BusinessHours").document(businessId + "_" + day)//document name in DB
-                    .set(dayHours)//add to DB
-                    .addOnSuccessListener(unused -> Log.d("DBHelper", "Business hours updated for " + day))
-                    .addOnFailureListener(e -> Log.d("DBHelper", "Error updating business hours", e));
-        }
-    }
+
 
 
     /**
@@ -329,6 +332,208 @@ public class DBHelper {
 
                 }).addOnFailureListener(onFailureListener);
     }
+
+
+    /**
+     * Gets the working hours for business (businessId), on a specific day.
+     * @param businessId
+     * @param selectedDate
+     * @param onSuccessListener
+     * @param onFailureListener
+     */
+
+    public void fetchWorkingHours(String businessId, LocalDate selectedDate, OnSuccessListener<WorkingHours> onSuccessListener, OnFailureListener onFailureListener) {
+
+        Log.d("DBHelper", "fetchWorkingHours called with businessId: " + businessId + ", selectedDate: " + selectedDate);
+
+
+
+        // Convert LocalDate to LocalDateTime at the start and end of the day
+        LocalDateTime startOfDay = selectedDate.atStartOfDay();
+        LocalDateTime endOfDay = selectedDate.plusDays(1).atStartOfDay();
+
+        Log.d("DBHelper", "Before conversion - Start of day: " + startOfDay.toString() + ", End of day: " + endOfDay.toString());
+
+        // Convert LocalDateTime to java.util.Date
+        Date dateStart = Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
+        Date dateEnd = Date.from(endOfDay.atZone(ZoneId.systemDefault()).toInstant());
+
+
+        // Convert java.util.Date to java.sql.Timestamp
+        Timestamp dayStart = new Timestamp(dateStart);
+        Timestamp dayEnd = new Timestamp(dateEnd);
+
+        Log.d("DBHelper", "After conversion - Timestamp dayStart: " + dayStart.toString() + ", Timestamp dayEnd: " + dayEnd.toString());
+
+
+
+        Log.d("DBHelper", "Querying Firestore - Start: " + dayStart.toString() + ", End: " + dayEnd.toString());
+
+        // Check in BusinessSpecialHours collection first
+        db.collection("BusinessSpecialHours")
+                .whereEqualTo("businessId", businessId)
+                .whereGreaterThanOrEqualTo("openTime", dayStart)
+                .whereLessThan("openTime", dayEnd)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        // Found special hours
+                       // WorkingHours hours = queryDocumentSnapshots.getDocuments().get(0).toObject(WorkingHours.class);
+                        WorkingHours hours = queryDocumentSnapshots.getDocuments().get(0).toObject(WorkingHours.class);
+                        String openTimeString = hours.formatTimestamp(hours.getOpenTime());
+                        String closeTimeString = hours.formatTimestamp(hours.getCloseTime());
+                        Log.d("DBHelper", "Special hours found: " + hours.toString());
+                        onSuccessListener.onSuccess(hours);
+                    } else {
+                        // If not found, check in BusinessRegularHours
+                        fetchRegularHours(businessId, selectedDate, onSuccessListener, onFailureListener);
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    // Log error
+                    Log.d("DBHelper", "Error fetching hours", e);
+
+                    onFailureListener.onFailure(e);
+                });
+    }
+
+
+    public void fetchRegularHours(String businessId, LocalDate selectedDate, OnSuccessListener<WorkingHours> successListener, OnFailureListener failureListener) {
+
+        String dayOfWeek = selectedDate.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+        String formattedDayOfWeek = dayOfWeek.substring(0, 1).toUpperCase() + dayOfWeek.substring(1).toLowerCase();
+
+        db.collection("BusinessRegularHours")
+                .document(businessId)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document != null && document.exists()) {
+                            Map<String, Object> data = document.getData();
+                            if (data != null && data.containsKey(formattedDayOfWeek)) {
+                                Map<String, String> hoursData = (Map<String, String>) data.get(formattedDayOfWeek);
+                                try {
+                                    // Assume openTime and closeTime are in HH:mm format
+                                    String openTimeStr = hoursData.get("openTime");//Correct !!!
+                                    String closeTimeStr = hoursData.get("closeTime");//Correct !!!
+                                    Log.d("open time and close time in regular days : ",""+openTimeStr+"  "+closeTimeStr);//Correct Log
+                                    // Convert String times to Timestamps
+                                    WorkingHours workingHours = convertStringHoursToTimestamp(openTimeStr, closeTimeStr, selectedDate);//can create a new instance !!!
+                                    successListener.onSuccess(workingHours);
+                                } catch (Exception e) {
+                                    failureListener.onFailure(e);
+                                }
+                            } else {
+                                failureListener.onFailure(new Exception("No regular hours for " + dayOfWeek));
+                            }
+                        } else {
+                            failureListener.onFailure(new Exception("Document does not exist"));
+                        }
+                    } else {
+                        failureListener.onFailure(task.getException());
+                    }
+                });
+    }
+
+
+private WorkingHours convertStringHoursToTimestamp(String openTimeStr, String closeTimeStr, LocalDate selectedDate) {
+    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+    LocalTime openTime = LocalTime.parse(openTimeStr, timeFormatter);
+    LocalTime closeTime = LocalTime.parse(closeTimeStr, timeFormatter);
+
+    LocalDateTime openDateTime = LocalDateTime.of(selectedDate, openTime);
+    LocalDateTime closeDateTime = LocalDateTime.of(selectedDate, closeTime);
+
+    // Convert LocalDateTime to Instant (assuming system's default time zone)
+    ZoneId zoneId = ZoneId.systemDefault(); // Adjust the time zone as necessary
+    Instant openInstant = openDateTime.atZone(zoneId).toInstant();
+    Instant closeInstant = closeDateTime.atZone(zoneId).toInstant();
+
+    // Create Firebase Timestamps
+    Timestamp openTimestamp = new Timestamp(openInstant.getEpochSecond(), openInstant.getNano());
+    Timestamp closeTimestamp = new Timestamp(closeInstant.getEpochSecond(), closeInstant.getNano());
+
+    return new WorkingHours(openTimestamp, closeTimestamp);
+}
+
+
+    public void addOrUpdateSpecialHours(String businessId, LocalDate day, String openTimeStr, String closeTimeStr) {
+        Timestamp openTime = Utils.convertToTimestamp(day, openTimeStr);
+        Timestamp closeTime = Utils.convertToTimestamp(day, closeTimeStr);
+
+        String documentId = businessId + "_" + day.toString(); // Unique ID using businessId and day
+
+        Map<String, Object> specialHoursData = new HashMap<>();
+        specialHoursData.put("businessId", businessId);
+        specialHoursData.put("day", day.toString());
+        specialHoursData.put("openTime", openTime);
+        specialHoursData.put("closeTime", closeTime);
+
+        db.collection("BusinessSpecialHours").document(documentId)
+                .set(specialHoursData)
+                .addOnSuccessListener(aVoid -> {
+                    // Handle success
+                    System.out.println("Special hours updated successfully");
+                })
+                .addOnFailureListener(e -> {
+                    // Handle failure
+                    System.err.println("Error updating special hours: " + e.getMessage());
+                });
+    }
+
+
+    //--------------------------------------------------------------------------------------------//
+    /**
+     * static class to represent working hours for a business (only open time and close time without a business ID).
+     * Used in multiple activities in the app to show these hours on the screen.
+     */
+
+    public static class WorkingHours {
+        public Timestamp openTime;
+        public Timestamp closeTime;
+
+        public WorkingHours(){
+            //required for Firestore
+        }
+
+        public WorkingHours(Timestamp openTime, Timestamp closeTime) {
+            this.openTime = openTime;
+            this.closeTime = closeTime;
+        }
+
+
+        // Getters and setters
+
+        public Timestamp getOpenTime() {
+            return openTime;
+        }
+
+        public void setOpenTime(Timestamp openTime) {
+            this.openTime = openTime;
+        }
+
+        public Timestamp getCloseTime() {
+            return closeTime;
+        }
+
+        public void setCloseTime(Timestamp closeTime) {
+            this.closeTime = closeTime;
+        }
+
+
+        // Method to convert Timestamp to a readable String format, if needed
+        public String formatTimestamp(Timestamp timestamp) {
+            if (timestamp != null) {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                Date date = timestamp.toDate(); // Convert Timestamp to java.util.Date
+                return sdf.format(date); // Format Date to String
+            }
+            return null;
+        }
+    }
+
+    //--------------------------------------------------------------------------------------------//
 
 
 

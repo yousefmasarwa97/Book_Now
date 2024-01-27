@@ -26,6 +26,7 @@ public class BusinessDashboardActivity extends AppCompatActivity {
 
     private Button Editing_services_redirect_btn;
     private Button Editing_providers_redirect_btn;
+    private Button Edit_special_hours_btn;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -40,6 +41,7 @@ public class BusinessDashboardActivity extends AppCompatActivity {
         Woking_hours_redirect_btn = findViewById(R.id.Woking_hours_redirecting);
         Editing_services_redirect_btn = findViewById(R.id.editing_services_redirecting);
         Editing_providers_redirect_btn = findViewById(R.id.editing_providers_redirecting);
+        Edit_special_hours_btn = findViewById(R.id.SpecialHoursEdit);
 
 //        if (currentUser != null && currentUser.getEmail() != null){
 //            String welcomemsg = "Hello, " + currentUser.getEmail();
@@ -53,7 +55,7 @@ public class BusinessDashboardActivity extends AppCompatActivity {
         Woking_hours_redirect_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(BusinessDashboardActivity.this,BusinessWorkingHoursActivity_2.class);
+                Intent intent = new Intent(BusinessDashboardActivity.this, BusinessRegularHoursEditActivity.class);
                 startActivity(intent);
             }
         });
@@ -71,6 +73,15 @@ public class BusinessDashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(BusinessDashboardActivity.this,ServiceProviderSetNameAndServicesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Edit_special_hours_btn.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BusinessDashboardActivity.this,BusinessSpecialHoursEditActivity.class);
                 startActivity(intent);
             }
         });

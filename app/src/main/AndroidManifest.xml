@@ -5,93 +5,54 @@
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BookNow"
-        tools:targetApi="31"
-        android:enableOnBackInvokedCallback="true">
+        tools:targetApi="31">
 
-
+        <activity android:name=".BusinessSpecialHoursEditActivity"/>
         <activity
-            android:name=".ServiceProviderSetWorkingDaysActivity"
-            />
-
-        <activity
-            android:name=".ServiceProviderSetNameAndServicesActivity"
-            />
-
-        <activity
-            android:name=".ChooseDayandTimeActivity"
-            />
-
-
-        <activity
-            android:name=".ChooseServiceActivity"
-            />
-
-
-        <activity
-            android:name=".ShowBusinessActivity"
-
-            />
-
-        <activity
-            android:name=".BusinessServiceEditActivity"
-            />
-
-        <activity android:name=".BusinessServicesManagementActivity"
-            />
-
-        <activity
-            android:name=".BusinessWorkingHoursActivity_2"
-            />
-
-        <activity
-            android:name=".BusinessWorkingHoursActivity"
-            />
+            android:name=".TestDashboardActivity"
+            android:exported="false"
+            android:label="@string/title_activity_test_dashboard"
+            android:theme="@style/Theme.BookNow.NoActionBar" />
+        <activity android:name=".ServiceProviderSetWorkingDaysActivity" />
+        <activity android:name=".ServiceProviderSetNameAndServicesActivity" />
+        <activity android:name=".ChooseDayandTimeActivity" />
+        <activity android:name=".ChooseServiceActivity" />
+        <activity android:name=".ShowBusinessActivity" />
+        <activity android:name=".BusinessServiceEditActivity" />
+        <activity android:name=".BusinessServicesManagementActivity" />
+        <activity android:name=".BusinessRegularHoursEditActivity" />
 
         <activity
             android:name=".BusinessSetupActivity"
-            android:parentActivityName=".BusinessEmailVerificationActivity"
-            />
+            android:parentActivityName=".BusinessEmailVerificationActivity" />
         <activity
             android:name=".BusinessEmailVerificationActivity"
-            android:parentActivityName=".BusinessRegistrationActivity"
-            />
-
-        <activity
-            android:name=".BusinessDashboardActivity"
-            />
-
+            android:parentActivityName=".BusinessRegistrationActivity" />
+        <activity android:name=".BusinessDashboardActivity" />
         <activity
             android:name=".BusinessRegistrationActivity"
-            android:parentActivityName=".BusinessActivity"/>
-
-
-
-        <activity
-            android:name=".CustomerDashboardActivity"
-
-            />
-
+            android:parentActivityName=".BusinessActivity" />
+        <activity android:name=".CustomerDashboardActivity" />
         <activity
             android:name=".CustomerOtpVerificationActivity"
-            android:parentActivityName=".CustomerActivity"
-            />
-
+            android:parentActivityName=".CustomerActivity" />
         <activity
             android:name=".BusinessActivity"
             android:exported="false"
             android:label="@string/title_activity_business"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".CustomerActivity"
             android:exported="false"
             android:label="@string/title_activity_customer"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".SplashActivity"
             android:exported="true">

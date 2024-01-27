@@ -1,6 +1,9 @@
 package com.myapp.booknow;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CalendarView;
 
 import androidx.annotation.NonNull;
@@ -12,12 +15,14 @@ import java.util.Calendar;
 public class ChooseDayandTimeActivity extends AppCompatActivity {
 
     private CalendarView calendarView;
+    private Button nextButton;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_day_time);
 
         calendarView = findViewById(R.id.calendarView);
+        nextButton = findViewById(R.id.next_button_choose_day_time);
 
         // Set the minimum available date to today's date
         calendarView.setMinDate(System.currentTimeMillis() - 1000);
@@ -39,5 +44,7 @@ public class ChooseDayandTimeActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
 }
