@@ -96,10 +96,8 @@ public class ChooseDayandTimeActivity extends AppCompatActivity {
                     }
                 });
 
-               // nextButton.setEnabled(true);
+
                 // Fetch and display the current regular hours for the selected date
-
-
 
                 dbHelper.fetchWorkingHours(businessId, selectedDate, workingHours -> {
                     // Display the fetched hours on the screen
@@ -123,5 +121,17 @@ public class ChooseDayandTimeActivity extends AppCompatActivity {
         });
 
 
+
+        // Handling the next button (choose time slot)
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChooseDayandTimeActivity.this,TimeSlotSelectionActivity.class);
+                intent.putExtra("businessId",businessId);
+                intent.putExtra("serviceId",serviceId);
+                intent.putExtra("selectedDate",selectedDate);
+                startActivity(intent);
+            }
+        });
     }
 }
