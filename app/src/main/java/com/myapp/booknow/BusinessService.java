@@ -1,13 +1,21 @@
 package com.myapp.booknow;
 
+import com.google.firebase.firestore.PropertyName;
+
 import java.util.List;
 
 public class BusinessService {
+    @PropertyName("serviceId")
     private String serviceId;
+   @PropertyName("businessId")
     private String businessId;
+    @PropertyName("name")
     private String name;
+    @PropertyName("description\n")
     private String description;
+    @PropertyName("duration")
     private int duration;
+    @PropertyName("workingDays")
     private List<String> workingDays;//stores the days the service is available at the business.
 
     BusinessService(){

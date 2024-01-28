@@ -24,7 +24,7 @@ public class ChooseServiceActivity extends AppCompatActivity {
     private Spinner serviceSpinner;//Drop down list of services
     private DBHelper dbHelper;
     private String businessId;//to get the business ID from the pre. page
-
+    private String selectedServiceName,selectedServiceId;
     private Button nextButton;//button to go to the next page
 
 
@@ -43,14 +43,25 @@ public class ChooseServiceActivity extends AppCompatActivity {
         // Retrieve the business ID passed from the previous activity
         businessId = getIntent().getStringExtra("businessId");
 
+
         fetchAndDisplayServices();
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ChooseServiceActivity.this,ChooseDayandTimeActivity.class);
+                selectedServiceName = serviceSpinner.getSelectedItem().toString();
+                Log.d("ChooseService","The name of the selected service is : "+selectedServiceName);
 
-                startActivity(intent);
+                Log.d("ChooseService","The id of the selected service before calling fetch id function is :  "+selectedServiceId);
+
+                getSelectedServiceIdbyNameandProceed();//to get the id of the selected service
+
+                Log.d("ChooseService","The id of the selected service after calling fetch id function is :  "+selectedServiceId);
+
+//                Intent intent = new Intent(ChooseServiceActivity.this,ChooseDayandTimeActivity.class);
+//                intent.putExtra("businessId",businessId);
+//                intent.putExtra("serviceId",selectedServiceId);
+//                startActivity(intent);
             }
         });
 
@@ -79,6 +90,53 @@ public class ChooseServiceActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         serviceSpinner.setAdapter(adapter);
     }
+
+//    private void getSelectedServiceIdbyName(){
+//        dbHelper.fetchServiceIdByName(businessId, selectedServiceName, new OnSuccessListener<String>() {
+//            @Override
+//            public void onSuccess(String serviceId) {
+//                if (serviceId != null) {
+//                    //System.out.println("Found service ID: " + serviceId);
+//                    selectedServiceId = serviceId;
+//                    Log.d("ChooseService","the service name is : " + selectedServiceName + "  and the service id is : " + selectedServiceId);
+//                } else {
+//                    Log.d("ChooseService", "Service not found.");
+//                }
+//            }
+//        }, new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                Log.e("ChooseService", "Error fetching service ID: " + e.getMessage());
+//
+//            }
+//        });
+//    }
+
+    private void getSelectedServiceIdbyNameandProceed(){
+        dbHelper.fetchServiceIdByName(businessId, selectedServiceName, new OnSuccessListener<String>() {
+            @Override
+            public void onSuccess(String serviceId) {
+                if (serviceId != null) {
+                    selectedServiceId = serviceId;
+                    Log.d("ChooseService","the service name is : " + selectedServiceName + " and the service id is : " + selectedServiceId);
+
+                    // Now that we have the serviceId, proceed with creating the intent
+                    Intent intent = new Intent(ChooseServiceActivity.this, ChooseDayandTimeActivity.class);
+                    intent.putExtra("businessId", businessId);
+                    intent.putExtra("serviceId", selectedServiceId);
+                    startActivity(intent);
+                } else {
+                    Log.d("ChooseService", "Service not found.");
+                }
+            }
+        }, new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e("ChooseService", "Error fetching service ID: " + e.getMessage());
+            }
+        });
+    }
+
 
 
 }

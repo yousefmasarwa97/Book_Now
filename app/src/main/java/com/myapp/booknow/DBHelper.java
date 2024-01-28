@@ -2,25 +2,20 @@ package com.myapp.booknow;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
@@ -30,6 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  This class handles all the interactions with the database (Cloud Firestore database).
@@ -483,7 +479,92 @@ private WorkingHours convertStringHoursToTimestamp(String openTimeStr, String cl
     }
 
 
-    //--------------------------------------------------------------------------------------------//
+    /**
+     * Checks if a service is available on a given date.
+     * @param businessId The ID of the business offering the service.
+     * @param serviceId The ID of the service to check availability for.
+     * @param selectedDate The date for which to check service availability.
+     * @return true if the service is available on the selected date, false otherwise.
+     */
+    public void isServiceAvailable(String businessId, String serviceId, LocalDate selectedDate, ServiceAvailabilityCallback callback) {
+        Log.d("DBHelper","before calling the db , this is the passed serviceId : " +serviceId);
+        db.collection("BusinessServices")
+                .document(serviceId)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        Log.d("DBHelper","the document existis and this is the id :  "+documentSnapshot.getId());
+                        Map<String, Object> data = documentSnapshot.getData();
+                        if (data != null) {
+                            BusinessService service = new BusinessService();
+
+                            // Assuming 'name' and 'workingDays' are the fields in your Firestore document
+                            service.setName((String) data.get("name"));
+                            service.setWorkingDays((List<String>) data.get("workingDays"));
+
+                            Log.d("DBHelper","these are the days that are in workingDays array of the service");
+                            for(String day : service.getWorkingDays()){
+                                Log.d("DBHelper", day);
+                            }
+
+                            // Convert selectedDate to the day of week and check if it's in workingDays
+                            String dayOfWeek = selectedDate.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH).toUpperCase(Locale.ROOT);
+                            Log.d("DBHelper","this is  the string that converted date to string : "+ dayOfWeek);
+                            String formattedDay = dayOfWeek.substring(0, 1).toUpperCase() + dayOfWeek.substring(1).toLowerCase();
+                            if (service.getWorkingDays() != null && service.getWorkingDays().contains(formattedDay)) {
+                                callback.onResult(true); // The service is available on this day
+                            } else {
+                                callback.onResult(false); // The service is not available on this day
+                            }
+                        } else {
+                            Log.d("ServiceCheck", "Document data is null.");
+                            callback.onResult(false); // Document data is null, treat as not available
+                        }
+                    } else {
+                        Log.d("ServiceCheck", "Document does not exist.");
+                        callback.onResult(false); // Document does not exist, treat as not available
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    callback.onError(e); // Handle the error
+                    Log.e("ServiceCheck", "Error fetching document: " + e.getMessage());
+                });
+    }
+
+
+
+    /**
+     * Fetches the serviceId for a given service name and businessId.
+     *
+     * @param businessId The ID of the business offering the service.
+     * @param serviceName The name of the service.
+     * @param onSuccessListener Listener for successful retrieval of serviceId.
+     * @param onFailureListener Listener for handling errors.
+     */
+    public void fetchServiceIdByName(String businessId, String serviceName, OnSuccessListener<String> onSuccessListener, OnFailureListener onFailureListener) {
+        db.collection("BusinessServices")
+                .whereEqualTo("businessId", businessId)
+                .whereEqualTo("name", serviceName)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                            // Assuming that service names are unique within a business
+                            String serviceId = documentSnapshot.getId(); // Get the document ID, which is the serviceId
+                            onSuccessListener.onSuccess(serviceId);
+                            return; // Break after the first match
+                        }
+                    } else {
+                        // Handle the case where no services are found matching the criteria
+                        onSuccessListener.onSuccess(null);
+                    }
+                })
+                .addOnFailureListener(onFailureListener);
+    }
+
+    //----------------------------------------------------------------------------------------------------------------//
+
+
     /**
      * static class to represent working hours for a business (only open time and close time without a business ID).
      * Used in multiple activities in the app to show these hours on the screen.
@@ -533,7 +614,7 @@ private WorkingHours convertStringHoursToTimestamp(String openTimeStr, String cl
         }
     }
 
-    //--------------------------------------------------------------------------------------------//
+    //------------------------------------------------------------------------------------------------------------------//
 
 
 
