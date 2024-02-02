@@ -18,6 +18,8 @@ public class BusinessService {
     @PropertyName("workingDays")
     private List<String> workingDays;//stores the days the service is available at the business.
 
+    private List<String> providers;//stores the providers ids (providers that give this service)
+
     BusinessService(){
 
     }
@@ -77,5 +79,11 @@ public class BusinessService {
         this.duration = duration;
     }
 
+    public List<String> getProviders() {
+        return providers;
+    }
 
+    public void setProviders(List<String> providers) {
+        this.providers = providers;
+    }
 }

@@ -99,6 +99,11 @@ public class ServiceProviderSetWorkingDaysActivity extends AppCompatActivity {
                             Toast.makeText(ServiceProviderSetWorkingDaysActivity.this, "Failed to add provider", Toast.LENGTH_SHORT).show();
                         });
 
+
+                //add the provider (id) to the list of the providers of the chosen service (ServiceId).
+                Log.d("checkingProviderId",provider.getProviderId());//checking if the the provider's id is correct.
+                dbHelper.addProviderToServices(provider.getProviderId(),serviceIds);
+
                 //finish
                 Intent intent = new Intent(ServiceProviderSetWorkingDaysActivity.this,BusinessDashboardActivity.class);
                 startActivity(intent);

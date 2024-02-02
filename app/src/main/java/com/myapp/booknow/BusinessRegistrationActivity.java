@@ -65,8 +65,9 @@ public class BusinessRegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Navigate back to BusinessLoginActivity
-                Intent intent = new Intent(BusinessRegistrationActivity.this, BusinessActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(BusinessRegistrationActivity.this, BusinessActivity.class);
+//                startActivity(intent);
+                finish();// if clicked "back to login", finish this activity.
             }
         });
 

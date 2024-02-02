@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Calendar;
 
 public class ChooseDayandTimeActivity extends AppCompatActivity {
@@ -130,6 +131,7 @@ public class ChooseDayandTimeActivity extends AppCompatActivity {
                 intent.putExtra("businessId",businessId);
                 intent.putExtra("serviceId",serviceId);
                 intent.putExtra("selectedDate",selectedDate);
+
                 startActivity(intent);
             }
         });
