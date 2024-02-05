@@ -49,7 +49,7 @@
         android:layout_below="@+id/businessRecyclerView"
         android:layout_marginTop="45dp" />
 
-    
+
 
 
     <!-- Other UI elements here -->
