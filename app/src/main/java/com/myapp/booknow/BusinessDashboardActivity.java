@@ -27,6 +27,7 @@ public class BusinessDashboardActivity extends AppCompatActivity {
     private Button Editing_services_redirect_btn;
     private Button Editing_providers_redirect_btn;
     private Button Edit_special_hours_btn;
+    private Button appointment_list_btn;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -42,6 +43,7 @@ public class BusinessDashboardActivity extends AppCompatActivity {
         Editing_services_redirect_btn = findViewById(R.id.editing_services_redirecting);
         Editing_providers_redirect_btn = findViewById(R.id.editing_providers_redirecting);
         Edit_special_hours_btn = findViewById(R.id.SpecialHoursEdit);
+        appointment_list_btn = findViewById(R.id.appointment_list_btn);
 
 //        if (currentUser != null && currentUser.getEmail() != null){
 //            String welcomemsg = "Hello, " + currentUser.getEmail();
@@ -82,6 +84,15 @@ public class BusinessDashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(BusinessDashboardActivity.this,BusinessSpecialHoursEditActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        appointment_list_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BusinessDashboardActivity.this,AppointmentDateSelectionActivity.class);
                 startActivity(intent);
             }
         });

@@ -9,6 +9,7 @@ import java.time.LocalTime;
 public class Appointment {
 
     private String appointmentId;
+    private String businessName;
     private String businessId;
     private String serviceId;
     private String providerId;
@@ -55,6 +56,14 @@ public class Appointment {
 
     public void setAppointmentId(String appointmentId) {
         this.appointmentId = appointmentId;
+    }
+
+    public String getBusinessName() {
+        return businessName;
+    }
+
+    public void setBusinessName(String businessName) {
+        this.businessName = businessName;
     }
 
     public String getBusinessId() {

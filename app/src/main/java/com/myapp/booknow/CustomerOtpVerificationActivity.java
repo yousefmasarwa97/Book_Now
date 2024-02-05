@@ -2,6 +2,7 @@ package com.myapp.booknow;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,11 +48,14 @@ public class CustomerOtpVerificationActivity extends AppCompatActivity {
 
         otpInput = findViewById(R.id.otp);
         nextBtn = findViewById(R.id.next);
-        progressBar = findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.OtpProgressBar);
         resendOtpTextView = findViewById(R.id.textView);
 
         // Retrieve the phone number from the intent
         phoneNumber = getIntent().getStringExtra("phoneNumber");
+
+        setInProgress(true);///Should be deleted !
+
 
         sendOtp(phoneNumber,false);
 
@@ -105,6 +109,7 @@ public class CustomerOtpVerificationActivity extends AppCompatActivity {
 
     void setInProgress(boolean inProgress){
         if(inProgress){
+            Log.d("ProgressBarStatus ::","should be visible now !!!");
             progressBar.setVisibility(View.VISIBLE);
             nextBtn.setVisibility(View.GONE);
             //
@@ -113,6 +118,7 @@ public class CustomerOtpVerificationActivity extends AppCompatActivity {
             resendOtpTextView.setVisibility(View.GONE);
         }
         else{
+            Log.d("ProgressBarStatus ::","should be Invisible now !!!");
             progressBar.setVisibility(View.INVISIBLE);
             nextBtn.setVisibility(View.VISIBLE);
             //

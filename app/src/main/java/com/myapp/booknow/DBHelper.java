@@ -2,13 +2,17 @@ package com.myapp.booknow;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Transaction;
 
 import java.sql.Time;
@@ -904,15 +908,18 @@ private WorkingHours convertStringHoursToTimestamp(String openTimeStr, String cl
 
         Timestamp startTimeStamp = Utils.convertToTimestamp(selectedDate, times[0]);
         Timestamp endTimeStamp = Utils.convertToTimestamp(selectedDate, times[1]);
+        Timestamp dateStamp = Utils.localDateToTimestamp(selectedDate);//converting date to 'TimeStamp' to use in DB.
+
 
         Map<String, Object> appointment = new HashMap<>();
         appointment.put("businessId", businessId);
         appointment.put("customerId", customerId);
         appointment.put("serviceId", serviceId);
-        appointment.put("date", selectedDate.toString()); // Adjust as necessary for your date handling
+        appointment.put("date", dateStamp); // Adjust as necessary for your date handling
         appointment.put("startTime", startTimeStamp);
         appointment.put("endTime", endTimeStamp);
         appointment.put("status", "waiting");
+        
 
         // Use an appropriate document ID strategy: for a new appointment, generate a new ID; for updates, use the existing appointment's ID
         String documentId = db.collection("Appointments").document().getId(); // For new appointments
@@ -925,6 +932,78 @@ private WorkingHours convertStringHoursToTimestamp(String openTimeStr, String cl
     }
 
 
+
+
+
+
+//
+//    public void fetchUpcomingAppointmentsForCustomer(String customerId, FirestoreCallback<List<Appointment>> callback) {
+//        List<Appointment> appointments = new ArrayList<>();
+//        LocalDateTime now = LocalDateTime.now();
+//
+//        db.collection("Appointments")
+//                .whereEqualTo("customerId", customerId)
+//                // Assuming 'date' field in Firestore is stored as Timestamp
+//                .whereGreaterThanOrEqualTo("date", now.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
+//                .orderBy("date", Query.Direction.ASCENDING) // Ensure appointments are ordered by date
+//                .get()
+//                .addOnSuccessListener(queryDocumentSnapshots -> {
+//                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+//                        Appointment appointment = documentSnapshot.toObject(Appointment.class);
+//                        appointments.add(appointment);
+//                    }
+//                    callback.onSuccess(appointments);
+//                })
+//                .addOnFailureListener(e -> callback.onFailure(e));
+//    }
+
+
+
+
+    public void fetchUpcomingAppointmentsForCustomer(String customerId, FirestoreCallback<List<Appointment>> callback) {
+        List<Appointment> appointments = new ArrayList<>();
+        LocalDateTime now = LocalDateTime.now();
+        LocalDate ld = now.toLocalDate();
+        Timestamp nowTimestamp = Utils.localDateToTimestamp(ld);
+
+        db.collection("Appointments")
+                .whereEqualTo("customerId", customerId)
+                .whereEqualTo("status", "waiting")
+                .whereGreaterThanOrEqualTo("date", nowTimestamp)
+                .orderBy("date", Query.Direction.ASCENDING) //order by date
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                        Appointment appointment = new Appointment();
+
+                        appointment.setAppointmentId(documentSnapshot.getId());
+                        appointment.setBusinessId(documentSnapshot.getString("businessId"));
+                        appointment.setServiceId(documentSnapshot.getString("serviceId"));
+                        appointment.setProviderId(documentSnapshot.getString("providerId"));
+                        appointment.setCustomerId(documentSnapshot.getString("customerId"));
+                        appointment.setStatus(documentSnapshot.getString("status"));
+
+
+                        Timestamp dateTimestamp = documentSnapshot.getTimestamp("date");
+                        Timestamp startTimeStamp = documentSnapshot.getTimestamp("startTime");
+                        Timestamp endTimeStamp = documentSnapshot.getTimestamp("endTime");
+
+                        if (dateTimestamp != null) {
+                            appointment.setDate(dateTimestamp.toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                        }
+                        if (startTimeStamp != null) {
+                            appointment.setStartTime(startTimeStamp.toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalTime());
+                        }
+                        if (endTimeStamp != null) {
+                            appointment.setEndTime(endTimeStamp.toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalTime());
+                        }
+
+                        appointments.add(appointment);
+                    }
+                    callback.onSuccess(appointments);
+                })
+                .addOnFailureListener(e -> callback.onFailure(e));
+    }
 
 
 

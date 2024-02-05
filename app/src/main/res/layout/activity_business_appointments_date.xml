@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <CalendarView
+        android:id="@+id/calendarAppointments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"/>
+
+    <TextView
+        android:id="@+id/textViewSelectedDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/calendarAppointments"
+        android:text="Selected Date: None"
+        android:padding="16dp"/>
+
+    <LinearLayout
+        android:id="@+id/layoutHours"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewSelectedDate"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:visibility="visible">
+
+
+
+        <!-- Inputs for editing hours, if required -->
+        <!-- Example: TimePicker or EditText for open and close times -->
+
+        <!-- Save Button for updating special hours -->
+        <Button
+            android:id="@+id/see_appointments_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="See appointments"
+            android:layout_marginTop="16dp"
+            android:enabled="false"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

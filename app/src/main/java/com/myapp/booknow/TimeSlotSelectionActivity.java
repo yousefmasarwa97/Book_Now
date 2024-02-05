@@ -33,6 +33,7 @@ public class TimeSlotSelectionActivity extends AppCompatActivity {
     private TextView titleTextView;
     private ListView timeSlotsListView;
     private  String customerId;
+    private String businessName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +53,8 @@ public class TimeSlotSelectionActivity extends AppCompatActivity {
         String businessId = getIntent().getStringExtra("businessId");
         String serviceId = getIntent().getStringExtra("serviceId");
         LocalDate selectedDate = (LocalDate) getIntent().getSerializableExtra("selectedDate");//get the date from the prev. activity
+
+
 
         providerIds = new ArrayList<>();
 
@@ -118,6 +121,7 @@ public class TimeSlotSelectionActivity extends AppCompatActivity {
                                                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(DialogInterface dialog, int which) {
+
                                                         // Booking the appointment
                                                         dbHelper.bookOrUpdateAppointment(businessId, customerId, serviceId, selectedDate, selectedTimeSlot,
                                                                 aVoid -> {
