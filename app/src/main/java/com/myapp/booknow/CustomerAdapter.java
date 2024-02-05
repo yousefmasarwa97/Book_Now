@@ -30,7 +30,8 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.appoit
     public void onBindViewHolder(@NonNull appoitmentViewHolder holder, int position) {
 
         Appointment appointment = appointmentList.get(position);
-        holder.appNameTextView.setText(appointment.getAppointmentId()+" "+appointment.getDate().toString());
+        holder.appNameTextView.setText(appointment.getBusinessName()+" \n"
+                +appointment.getDate().toString() + "  "+ appointment.getStartTime().toString() + "-" + appointment.getEndTime().toString());
         //holder.appointmentDateTextView.setText(appointment.getDate().toString());
         // Set other appointment details to the holder as needed
     }

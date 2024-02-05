@@ -155,27 +155,14 @@ public class CustomerDashboardActivity extends AppCompatActivity {
         if (curr_user != null) {
             customer_id = curr_user.getUid();
         }
-        FirestoreCallback<List<Appointment>> callback = new FirestoreCallback<List<Appointment>>() {
-            @Override
-            public void onSuccess(List<Appointment> result) {
-                // Handle success
-                Log.d("on success000",result.toString());
-            }
 
-            @Override
-            public void onFailure(Exception e) {
-                // Handle failure
-                Log.d("custemor adapter",e.getMessage());
-            }
-        };
-
-
-        // Assuming fetchUpcomingAppointmentsForCustomer is made static
-       //  dbHelper.fetchUpcomingAppointmentsForCustomer(customer_id,callback);
 
         dbHelper.fetchUpcomingAppointmentsForCustomer(customer_id, new FirestoreCallback<List<Appointment>>() {
             @Override
             public void onSuccess(List<Appointment> result) {
+                for(Appointment appointment : result){
+                    Log.d("Check business names",appointment.toString()+" ");
+                }
                 appointmentList.clear();
                 appointmentList.addAll(result);
                 customerAdapter.notifyDataSetChanged();

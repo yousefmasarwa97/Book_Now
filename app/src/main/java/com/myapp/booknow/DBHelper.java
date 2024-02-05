@@ -901,37 +901,54 @@ private WorkingHours convertStringHoursToTimestamp(String openTimeStr, String cl
     }
 
 
-    public void bookOrUpdateAppointment(String businessId, String customerId, String serviceId, LocalDate selectedDate, String timeSlot, OnSuccessListener<Void> onSuccessListener, OnFailureListener onFailureListener) {
-        // Assuming Appointment is a class you've defined to model your appointments
-        String[] times = timeSlot.split(" - ");
-        if (times.length != 2) return; // Basic validation
+        public void bookOrUpdateAppointment(String businessId, String customerId, String serviceId, LocalDate selectedDate, String timeSlot, OnSuccessListener<Void> onSuccessListener, OnFailureListener onFailureListener) {
+            // Assuming Appointment is a class you've defined to model your appointments
+            String[] times = timeSlot.split(" - ");
+            if (times.length != 2) return; // Basic validation
 
-        Timestamp startTimeStamp = Utils.convertToTimestamp(selectedDate, times[0]);
-        Timestamp endTimeStamp = Utils.convertToTimestamp(selectedDate, times[1]);
-        Timestamp dateStamp = Utils.localDateToTimestamp(selectedDate);//converting date to 'TimeStamp' to use in DB.
-
-
-        Map<String, Object> appointment = new HashMap<>();
-        appointment.put("businessId", businessId);
-        appointment.put("customerId", customerId);
-        appointment.put("serviceId", serviceId);
-        appointment.put("date", dateStamp); // Adjust as necessary for your date handling
-        appointment.put("startTime", startTimeStamp);
-        appointment.put("endTime", endTimeStamp);
-        appointment.put("status", "waiting");
-        
-
-        // Use an appropriate document ID strategy: for a new appointment, generate a new ID; for updates, use the existing appointment's ID
-        String documentId = db.collection("Appointments").document().getId(); // For new appointments
-        // String documentId = existingAppointmentId; // For updates, use the existing appointment ID
-
-        db.collection("Appointments").document(documentId)
-                .set(appointment)
-                .addOnSuccessListener(onSuccessListener)
-                .addOnFailureListener(onFailureListener);
-    }
+            Timestamp startTimeStamp = Utils.convertToTimestamp(selectedDate, times[0]);
+            Timestamp endTimeStamp = Utils.convertToTimestamp(selectedDate, times[1]);
+            Timestamp dateStamp = Utils.localDateToTimestamp(selectedDate);//converting date to 'TimeStamp' to use in DB.
 
 
+            Map<String, Object> appointment = new HashMap<>();
+            appointment.put("businessId", businessId);
+            appointment.put("customerId", customerId);
+            appointment.put("serviceId", serviceId);
+            appointment.put("date", dateStamp); // Adjust as necessary for your date handling
+            appointment.put("startTime", startTimeStamp);
+            appointment.put("endTime", endTimeStamp);
+            appointment.put("status", "waiting");
+            getBusinessName(businessId, new FirestoreCallback<String>() {
+                @Override
+                public void onSuccess(String result) {
+                    appointment.put("businessName",result);
+
+                    String documentId = db.collection("Appointments").document().getId(); // For new appointments
+                    // String documentId = existingAppointmentId; // For updates, use the existing appointment ID
+
+                    db.collection("Appointments").document(documentId)
+                            .set(appointment)
+                            .addOnSuccessListener(onSuccessListener)
+                            .addOnFailureListener(onFailureListener);
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+                    Log.d("name adding DBH","Faile to add business name");
+                }
+            });
+
+
+            // Use an appropriate document ID strategy: for a new appointment, generate a new ID; for updates, use the existing appointment's ID
+//            String documentId = db.collection("Appointments").document().getId(); // For new appointments
+//            // String documentId = existingAppointmentId; // For updates, use the existing appointment ID
+//
+//            db.collection("Appointments").document(documentId)
+//                    .set(appointment)
+//                    .addOnSuccessListener(onSuccessListener)
+//                    .addOnFailureListener(onFailureListener);
+        }
 
 
 
@@ -960,21 +977,89 @@ private WorkingHours convertStringHoursToTimestamp(String openTimeStr, String cl
 
 
 
-    public void fetchUpcomingAppointmentsForCustomer(String customerId, FirestoreCallback<List<Appointment>> callback) {
-        List<Appointment> appointments = new ArrayList<>();
-        LocalDateTime now = LocalDateTime.now();
-        LocalDate ld = now.toLocalDate();
-        Timestamp nowTimestamp = Utils.localDateToTimestamp(ld);
+//    public void fetchUpcomingAppointmentsForCustomer(String customerId, FirestoreCallback<List<Appointment>> callback) {
+//        List<Appointment> appointments = new ArrayList<>();
+//        LocalDateTime now = LocalDateTime.now();
+//        LocalDate ld = now.toLocalDate();
+//        Timestamp nowTimestamp = Utils.localDateToTimestamp(ld);
+//
+//        db.collection("Appointments")
+//                .whereEqualTo("customerId", customerId)
+//                .whereEqualTo("status", "waiting")
+//                .whereGreaterThanOrEqualTo("date", nowTimestamp)
+//                .orderBy("date", Query.Direction.ASCENDING) //order by date
+//                .get()
+//                .addOnSuccessListener(queryDocumentSnapshots -> {
+//                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+//                        Appointment appointment = new Appointment();
+//
+//                        appointment.setAppointmentId(documentSnapshot.getId());
+//                        appointment.setBusinessId(documentSnapshot.getString("businessId"));
+//                        appointment.setServiceId(documentSnapshot.getString("serviceId"));
+//                        appointment.setProviderId(documentSnapshot.getString("providerId"));
+//                        appointment.setCustomerId(documentSnapshot.getString("customerId"));
+//                        appointment.setStatus(documentSnapshot.getString("status"));
+//
+//
+//
+//
+//                        Timestamp dateTimestamp = documentSnapshot.getTimestamp("date");
+//                        Timestamp startTimeStamp = documentSnapshot.getTimestamp("startTime");
+//                        Timestamp endTimeStamp = documentSnapshot.getTimestamp("endTime");
+//
+//                        if (dateTimestamp != null) {
+//                            appointment.setDate(dateTimestamp.toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+//                        }
+//                        if (startTimeStamp != null) {
+//                            appointment.setStartTime(startTimeStamp.toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalTime());
+//                        }
+//                        if (endTimeStamp != null) {
+//                            appointment.setEndTime(endTimeStamp.toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalTime());
+//                        }
+//
+//                        String businessId = documentSnapshot.getString("businessId");
+//                        getBusinessName(businessId, new FirestoreCallback<String>() {
+//                            @Override
+//                            public void onSuccess(String result) {
+//                                appointment.setBusinessName(result);
+//                            }
+//
+//                            @Override
+//                            public void onFailure(Exception e) {
+//                                Log.d("name adding DBH","Faile to add business name");
+//                            }
+//                        });
+//
+//
+//                        appointments.add(appointment);
+//                    }
+//                    callback.onSuccess(appointments);
+//                })
+//                .addOnFailureListener(e -> callback.onFailure(e));
+//    }
+public void fetchUpcomingAppointmentsForCustomer(String customerId, FirestoreCallback<List<Appointment>> callback) {
+    List<Appointment> appointments = new ArrayList<>();
+    LocalDateTime now = LocalDateTime.now();
+    LocalDate ld = now.toLocalDate();
+    Timestamp nowTimestamp = Utils.localDateToTimestamp(ld);
 
-        db.collection("Appointments")
-                .whereEqualTo("customerId", customerId)
-                .whereEqualTo("status", "waiting")
-                .whereGreaterThanOrEqualTo("date", nowTimestamp)
-                .orderBy("date", Query.Direction.ASCENDING) //order by date
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                        Appointment appointment = new Appointment();
+    db.collection("Appointments")
+            .whereEqualTo("customerId", customerId)
+            .whereEqualTo("status", "waiting")
+            .whereGreaterThanOrEqualTo("date", nowTimestamp)
+            .orderBy("date", Query.Direction.ASCENDING) //order by date
+            .get()
+            .addOnSuccessListener(queryDocumentSnapshots -> {
+                final int[] pendingBusinessNameFetches = {queryDocumentSnapshots.size()};
+
+                if (queryDocumentSnapshots.isEmpty()) {
+                    callback.onSuccess(appointments); // No appointments to process
+                    return;
+                }
+
+                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                    Appointment appointment = new Appointment();
+                    // Set all known fields here...
 
                         appointment.setAppointmentId(documentSnapshot.getId());
                         appointment.setBusinessId(documentSnapshot.getString("businessId"));
@@ -982,6 +1067,8 @@ private WorkingHours convertStringHoursToTimestamp(String openTimeStr, String cl
                         appointment.setProviderId(documentSnapshot.getString("providerId"));
                         appointment.setCustomerId(documentSnapshot.getString("customerId"));
                         appointment.setStatus(documentSnapshot.getString("status"));
+
+
 
 
                         Timestamp dateTimestamp = documentSnapshot.getTimestamp("date");
@@ -998,11 +1085,61 @@ private WorkingHours convertStringHoursToTimestamp(String openTimeStr, String cl
                             appointment.setEndTime(endTimeStamp.toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalTime());
                         }
 
-                        appointments.add(appointment);
+
+                    String businessId = documentSnapshot.getString("businessId");
+
+                    // Fetch business name for each appointment
+                    getBusinessName(businessId, new FirestoreCallback<String>() {
+                        @Override
+                        public void onSuccess(String businessName) {
+                            appointment.setBusinessName(businessName);
+                            appointments.add(appointment);
+
+                            // Decrement the counter and check if all fetches are done
+                            pendingBusinessNameFetches[0]--;
+                            if (pendingBusinessNameFetches[0] == 0) {
+                                callback.onSuccess(appointments);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Exception e) {
+                            Log.d("DBHelper", "Failed to add business name for businessId: " + businessId);
+                            // Handle the failure or consider decrementing the counter and checking as well
+                            pendingBusinessNameFetches[0]--;
+                            if (pendingBusinessNameFetches[0] == 0) {
+                                callback.onSuccess(appointments); // or consider callback.onFailure(e);
+                            }
+                        }
+                    });
+                }
+            })
+            .addOnFailureListener(callback::onFailure);
+}
+
+
+
+    public void getBusinessName(String businessId, FirestoreCallback<String> callback) {
+        db.collection("Users").document(businessId).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && task.getResult() != null) {
+                if (task.getResult().exists() && task.getResult().contains("name")) {
+                    String businessName = task.getResult().getString("name");
+                    if (businessName != null) {
+                        // Call onSuccess with the business name
+                        callback.onSuccess(businessName);
+                    } else {
+                        // The name field is missing or null, trigger onFailure
+                        callback.onFailure(new Exception("Business name field is missing or null."));
                     }
-                    callback.onSuccess(appointments);
-                })
-                .addOnFailureListener(e -> callback.onFailure(e));
+                } else {
+                    // Document does not exist or missing 'name' field
+                    callback.onFailure(new Exception("Document does not exist or is missing 'name' field."));
+                }
+            } else {
+                // Fetching the document failed
+                callback.onFailure(task.getException() != null ? task.getException() : new Exception("Failed to fetch document."));
+            }
+        });
     }
 
 
