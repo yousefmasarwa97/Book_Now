@@ -15,50 +15,50 @@
         tools:targetApi="31">
 
 
-        <activity android:name=".AppointmentDateSelectionActivity"/>
-        <activity android:name=".AppointmentListActivity"/>
-        <activity android:name=".TimeSlotSelectionActivity"/>
-        <activity android:name=".BusinessSpecialHoursEditActivity"/>
+        <activity android:name=".Utils.AppointmentDateSelectionActivity"/>
+        <activity android:name=".Utils.AppointmentListActivity"/>
+        <activity android:name=".Utils.TimeSlotSelectionActivity"/>
+        <activity android:name=".business.BusinessSpecialHoursEditActivity"/>
         <activity
-            android:name=".TestDashboardActivity"
+            android:name=".Utils.TestDashboardActivity"
             android:exported="false"
             android:label="@string/title_activity_test_dashboard"
             android:theme="@style/Theme.BookNow.NoActionBar" />
-        <activity android:name=".ServiceProviderSetWorkingDaysActivity" />
-        <activity android:name=".ServiceProviderSetNameAndServicesActivity" />
-        <activity android:name=".ChooseDayandTimeActivity" />
-        <activity android:name=".ChooseServiceActivity" />
-        <activity android:name=".ShowBusinessActivity" />
-        <activity android:name=".BusinessServiceEditActivity" />
-        <activity android:name=".BusinessServicesManagementActivity" />
-        <activity android:name=".BusinessRegularHoursEditActivity" />
+        <activity android:name=".Utils.ServiceProviderSetWorkingDaysActivity" />
+        <activity android:name=".Utils.ServiceProviderSetNameAndServicesActivity" />
+        <activity android:name=".business.ChooseDayandTimeActivity" />
+        <activity android:name=".business.ChooseServiceActivity" />
+        <activity android:name=".Utils.ShowBusinessActivity" />
+        <activity android:name=".business.BusinessServiceEditActivity" />
+        <activity android:name=".business.BusinessServicesManagementActivity" />
+        <activity android:name=".business.BusinessRegularHoursEditActivity" />
 
         <activity
-            android:name=".BusinessSetupActivity"
-            android:parentActivityName=".BusinessEmailVerificationActivity" />
+            android:name=".business.BusinessSetupActivity"
+            android:parentActivityName=".business.BusinessEmailVerificationActivity" />
         <activity
-            android:name=".BusinessEmailVerificationActivity"
-            android:parentActivityName=".BusinessRegistrationActivity" />
-        <activity android:name=".BusinessDashboardActivity" />
+            android:name=".business.BusinessEmailVerificationActivity"
+            android:parentActivityName=".business.BusinessRegistrationActivity" />
+        <activity android:name=".business.BusinessDashboardActivity" />
         <activity
-            android:name=".BusinessRegistrationActivity"
-            android:parentActivityName=".BusinessActivity" />
-        <activity android:name=".CustomerDashboardActivity" />
+            android:name=".business.BusinessRegistrationActivity"
+            android:parentActivityName=".business.BusinessActivity" />
+        <activity android:name=".Customer.CustomerDashboardActivity" />
         <activity
-            android:name=".CustomerOtpVerificationActivity"
-            android:parentActivityName=".CustomerActivity" />
+            android:name=".Customer.CustomerOtpVerificationActivity"
+            android:parentActivityName=".Customer.CustomerActivity" />
         <activity
-            android:name=".BusinessActivity"
+            android:name=".business.BusinessActivity"
             android:exported="false"
             android:label="@string/title_activity_business"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".CustomerActivity"
+            android:name=".Customer.CustomerActivity"
             android:exported="false"
             android:label="@string/title_activity_customer"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".Utils.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
