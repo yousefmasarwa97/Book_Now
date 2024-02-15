@@ -137,35 +137,35 @@ public class Appointment {
     //-----------------//
 
 
-    public Timestamp getDateStamp() {
-        return dateStamp;
-    }
-
-    public void setDateStamp(Timestamp dateStamp) {
-        this.dateStamp = dateStamp;
-        // Optionally, update the localDate field here if you are keeping it
-        // this.localDate = convertToLocalDate(dateStamp);
-    }
-
-    public Timestamp getStartTimeStamp() {
-        return startTimeStamp;
-    }
-
-    public void setStartTimeStamp(Timestamp startTimeStamp) {
-        this.startTimeStamp = startTimeStamp;
-        // Optionally, update the localStartTime field here if you are keeping it
-        // this.localStartTime = convertToLocalTime(startTimeStamp);
-    }
-
-    public Timestamp getEndTimeStamp() {
-        return endTimeStamp;
-    }
-
-    public void setEndTimeStamp(Timestamp endTimeStamp) {
-        this.endTimeStamp = endTimeStamp;
-        // Optionally, update the localEndTime field here if you are keeping it
-        // this.localEndTime = convertToLocalTime(endTimeStamp);
-    }
+//    public Timestamp getDateStamp() {
+//        return dateStamp;
+//    }
+//
+//    public void setDateStamp(Timestamp dateStamp) {
+//        this.dateStamp = dateStamp;
+//        // Optionally, update the localDate field here if you are keeping it
+//        // this.localDate = convertToLocalDate(dateStamp);
+//    }
+//
+//    public Timestamp getStartTimeStamp() {
+//        return startTimeStamp;
+//    }
+//
+//    public void setStartTimeStamp(Timestamp startTimeStamp) {
+//        this.startTimeStamp = startTimeStamp;
+//        // Optionally, update the localStartTime field here if you are keeping it
+//        // this.localStartTime = convertToLocalTime(startTimeStamp);
+//    }
+//
+//    public Timestamp getEndTimeStamp() {
+//        return endTimeStamp;
+//    }
+//
+//    public void setEndTimeStamp(Timestamp endTimeStamp) {
+//        this.endTimeStamp = endTimeStamp;
+//        // Optionally, update the localEndTime field here if you are keeping it
+//        // this.localEndTime = convertToLocalTime(endTimeStamp);
+//    }
 
 
 
