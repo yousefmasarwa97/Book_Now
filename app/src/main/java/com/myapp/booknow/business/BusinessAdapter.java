@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.myapp.booknow.R;
 import com.myapp.booknow.Utils.ShowBusinessActivity;
 import com.myapp.booknow.Utils.User;
@@ -39,6 +41,12 @@ public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.ViewHo
         User business = businessList.get(position);
         holder.businessName.setText(business.getName());
 
+
+        Glide.with(holder.itemView)
+                .load(business.getImageURL())
+                        .placeholder(R.drawable.business_icon)
+                                .error(R.drawable.ic_menu_gallery)//should change !!
+                                        .into(holder.businessLogo);
         //we can set other attributes !
         holder.itemView.setOnClickListener(new View.OnClickListener(){
 
@@ -58,10 +66,11 @@ public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.ViewHo
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView businessName; // and other views
-
+        public ImageView businessLogo;
         public ViewHolder(View view) {
             super(view);
             businessName = view.findViewById(R.id.businessName); // can replace with actual view ID
+            businessLogo = view.findViewById(R.id.businessLogo);
             // Initialize other views
         }
     }

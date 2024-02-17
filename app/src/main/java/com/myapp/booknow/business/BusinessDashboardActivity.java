@@ -32,6 +32,8 @@ public class BusinessDashboardActivity extends AppCompatActivity {
     private Button Edit_special_hours_btn;
     private Button appointment_list_btn;
 
+    private Button editBusinessProfile_btn;
+
     @SuppressLint("MissingInflatedId")
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class BusinessDashboardActivity extends AppCompatActivity {
         Editing_providers_redirect_btn = findViewById(R.id.editing_providers_redirecting);
         Edit_special_hours_btn = findViewById(R.id.SpecialHoursEdit);
         appointment_list_btn = findViewById(R.id.appointment_list_btn);
+        editBusinessProfile_btn = findViewById(R.id.editBusinessProfile);
 
 //        if (currentUser != null && currentUser.getEmail() != null){
 //            String welcomemsg = "Hello, " + currentUser.getEmail();
@@ -96,6 +99,16 @@ public class BusinessDashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(BusinessDashboardActivity.this, AppointmentDateSelectionActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        editBusinessProfile_btn.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BusinessDashboardActivity.this,EditBusinessProfile.class);
                 startActivity(intent);
             }
         });

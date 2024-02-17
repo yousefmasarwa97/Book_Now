@@ -6,51 +6,82 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!-- Add more fields for services, working days, hours, etc. -->
-
+    <!-- Setup Your Business Title -->
     <TextView
         android:id="@+id/setup_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Setup Your Buiseness"
-        android:textSize="45sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Setup Your Business"
+        android:textSize="30sp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp" />
 
+    <!-- Business Name EditText -->
     <EditText
         android:id="@+id/businessName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="24dp"
         android:hint="Business Name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/setup_text" />
 
+    <!-- Business Description EditText -->
     <EditText
         android:id="@+id/businessDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="12dp"
         android:hint="Business Description"
         android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/businessName" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/businessName" />
 
+    <!-- "Setup Business Logo/Photo" Text -->
+    <TextView
+        android:id="@+id/setup_photo_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Setup Business Logo/Photo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/businessDescription" />
+
+    <!-- Business Image ImageView -->
+    <ImageView
+        android:id="@+id/businessImageView"
+        android:layout_width="136dp"
+        android:layout_height="106dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/business_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/setup_photo_text" />
+
+    <!-- "Click to Add Photo" Text -->
+    <TextView
+        android:id="@+id/add_photo_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Click to Add Photo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/businessImageView" />
+
+    <!-- Submit Button -->
     <Button
         android:id="@+id/submitBusinessInfoButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="24dp"
         android:text="Submit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.465"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/businessDescription" />
+        app:layout_constraintTop_toBottomOf="@id/add_photo_text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

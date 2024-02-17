@@ -93,6 +93,11 @@ public class DBHelper {
                         User user = documentSnapshot.toObject(User.class);
                         if (user.getType().equals("Business")) {
                             user.setId(documentSnapshot.getId());
+
+                            // Update imageURL field with the appropriate photo URL
+                            String imageURL = documentSnapshot.getString("imageURL");
+                            user.setImageURL(imageURL);
+
                             businessList.add(user);
                         }
                     }

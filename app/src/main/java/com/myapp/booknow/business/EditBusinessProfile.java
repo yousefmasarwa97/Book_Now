@@ -24,11 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-
-/**
- * Responsible for handling the business setup page (first page after registration).
- */
-public class BusinessSetupActivity extends AppCompatActivity {
+public class EditBusinessProfile extends AppCompatActivity {
 
     private EditText businessNameEditText;
     private EditText businessDescriptionEditText;
@@ -43,10 +39,17 @@ public class BusinessSetupActivity extends AppCompatActivity {
 
     private String imageUrl;
 
+
+    TextView tv;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_setup);
+
+
+        tv = findViewById(R.id.setup_text);
+        tv.setText("Edit your data");
+
 
         businessNameEditText = findViewById(R.id.businessName);
         businessDescriptionEditText = findViewById(R.id.businessDescription);
@@ -68,6 +71,8 @@ public class BusinessSetupActivity extends AppCompatActivity {
 
         Button submitButton = findViewById(R.id.submitBusinessInfoButton);
         submitButton.setOnClickListener(view -> submitBusinessInfo());
+
+
     }
 
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -140,7 +145,7 @@ public class BusinessSetupActivity extends AppCompatActivity {
                             .update("setupCompleted", true)
                             .addOnSuccessListener(aVoid1 -> {
                                 // Redirect to dashboard
-                                Intent intent = new Intent(BusinessSetupActivity.this, BusinessDashboardActivity.class);
+                                Intent intent = new Intent(EditBusinessProfile.this, BusinessDashboardActivity.class);
                                 startActivity(intent);
                                 finish();
                             });
@@ -149,7 +154,6 @@ public class BusinessSetupActivity extends AppCompatActivity {
                     // Handle failure
                 });
     }
-
 
 
 

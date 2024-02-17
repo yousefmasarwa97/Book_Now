@@ -14,7 +14,7 @@
         android:theme="@style/Theme.BookNow"
         tools:targetApi="31">
 
-
+        <activity android:name=".business.EditBusinessProfile"/>
         <activity android:name=".Utils.AppointmentDateSelectionActivity"/>
         <activity android:name=".Utils.AppointmentListActivity"/>
         <activity android:name=".Utils.TimeSlotSelectionActivity"/>

@@ -29,7 +29,7 @@ public class User {
     private String description;//for businsses only
     private boolean setupCompleted;//for businesses only
 
-
+    private String imageURL;
 
 
 
@@ -136,6 +136,14 @@ public class User {
 
     public void setSetupCompleted(boolean setupCompleted) {
         this.setupCompleted = setupCompleted;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public Map<String,Object> toMap(){
