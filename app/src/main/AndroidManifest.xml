@@ -69,6 +69,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" />
+        <activity android:name="com.myapp.booknow.Customer.C_Dashboard" />
     </application>
 
 </manifest>

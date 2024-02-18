@@ -146,7 +146,8 @@ public class CustomerOtpVerificationActivity extends AppCompatActivity {
                     dbHelper.addCustomer(userID,phoneNumber);
 
                     //redirect to the customer dashboard
-                    Intent intent = new Intent(CustomerOtpVerificationActivity.this, CustomerDashboardActivity.class);
+                    //Intent intent = new Intent(CustomerOtpVerificationActivity.this, CustomerDashboardActivity.class);
+                    Intent intent = new Intent(CustomerOtpVerificationActivity.this, C_Dashboard.class);
                     intent.putExtra("phoneNumber", phoneNumber);
                     startActivity(intent);
                 }else{

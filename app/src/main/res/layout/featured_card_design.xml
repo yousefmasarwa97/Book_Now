@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="160dp"
+    android:layout_height="300dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="2dp"
+    app:cardElevation="8dp"
+    android:layout_margin="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:orientation="vertical">
+
+        <!-- Business image/logo  -->
+        <ImageView
+            android:id="@+id/featured_image"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:src="@drawable/barber_example"
+            android:scaleType="centerCrop"/>
+
+
+        <!-- Business title TextView -->
+        <TextView
+            android:id="@+id/featured_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Barbershop"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:fontFamily="@font/brandon1"/>
+
+
+        <!-- Business description TextView -->
+        <TextView
+            android:id="@+id/featured_descreption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Come and get the best haircuts"
+            android:fontFamily="@font/brandon1"
+            android:textColor="@color/lightgrey"
+            android:textSize="12dp"/>
+
+
+        <!-- Business Status TextView -->
+        <TextView
+            android:id="@+id/business_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Open"
+            android:textColor="@color/green"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            />
+
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
