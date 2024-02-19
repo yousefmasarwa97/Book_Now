@@ -29,45 +29,62 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.appoit
     @NonNull
     @Override
     public appoitmentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.customer_adapter_view, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.upcoming_appointments_card_design, parent, false);
         return new appoitmentViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull appoitmentViewHolder holder, int position) {
 
-        Appointment appointment = appointmentList.get(position);
-        holder.appNameTextView.setText(appointment.getBusinessName()+" \n"
-                +appointment.getDate().toString() + "  "+ appointment.getStartTime().toString() + "-" + appointment.getEndTime().toString());
-        //holder.appointmentDateTextView.setText(appointment.getDate().toString());
-        // Set other appointment details to the holder as needed
+        Appointment appointment = appointmentList.get(position);//the appointment object
 
-        holder.editappButton.setOnClickListener(v -> {
-            try {
-                Intent intent = new Intent(v.getContext(), TimeSlotSelectionActivity.class);
-                intent.putExtra("business name", appointment.getBusinessName());
-                v.getContext().startActivity(intent);
-            }catch (Exception e){
-               // Log.e("ServiceAdapter", "Error starting EditServiceActivity", e);
-            }
+        //----------setting the values to be shown on the components for each appointment object in the recyclerview-------//
 
-        });
+        holder.businessTitle.setText(appointment.getBusinessName());
 
-        // Handle delete service
-        holder.deleteappButton.setOnClickListener(v -> {
-            String serviceId = appointment.getServiceId();
-            DBHelper dbHelper = new DBHelper();
-            dbHelper.deleteappoitment(serviceId,
-                    aVoid -> {
-                        // Success handling. Perhaps refresh the list of services
-                        Toast.makeText(v.getContext(), "appoitment deleted successfully", Toast.LENGTH_SHORT).show();
-                        //((BusinessServicesManagementActivity) v.getContext()).fetchServices();
-                    },
-                    e -> {
-                        // Failure handling
-                        Toast.makeText(v.getContext(), "Error deleting service", Toast.LENGTH_SHORT).show();
-                    });
-        });
+        holder.day.setText(appointment.getDate().toString());
+
+        holder.time.setText(appointment.getStartTime().toString() + "-" + appointment.getEndTime().toString());
+
+
+
+
+
+
+
+
+
+
+
+        //------------Buttons to edit/delete the appointment----------------//
+
+
+//        holder.editappButton.setOnClickListener(v -> {
+//            try {
+//                Intent intent = new Intent(v.getContext(), TimeSlotSelectionActivity.class);
+//                intent.putExtra("business name", appointment.getBusinessName());
+//                v.getContext().startActivity(intent);
+//            }catch (Exception e){
+//               // Log.e("ServiceAdapter", "Error starting EditServiceActivity", e);
+//            }
+//
+//        });
+//
+//        // Handle delete service
+//        holder.deleteappButton.setOnClickListener(v -> {
+//            String serviceId = appointment.getServiceId();
+//            DBHelper dbHelper = new DBHelper();
+//            dbHelper.deleteappoitment(serviceId,
+//                    aVoid -> {
+//                        // Success handling. Perhaps refresh the list of services
+//                        Toast.makeText(v.getContext(), "appoitment deleted successfully", Toast.LENGTH_SHORT).show();
+//                        //((BusinessServicesManagementActivity) v.getContext()).fetchServices();
+//                    },
+//                    e -> {
+//                        // Failure handling
+//                        Toast.makeText(v.getContext(), "Error deleting service", Toast.LENGTH_SHORT).show();
+//                    });
+//        });
     }
 
     @Override
@@ -76,14 +93,19 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.appoit
     }
 
     public static class appoitmentViewHolder extends RecyclerView.ViewHolder {
-        TextView appNameTextView;
-        ImageView editappButton, deleteappButton;
+        TextView businessTitle,day,time;
+        ImageView businessLogo;
+
 
         public appoitmentViewHolder(View itemView) {
             super(itemView);
-            appNameTextView = itemView.findViewById(R.id.appoitmentNameTextView);
-            editappButton = itemView.findViewById(R.id.editappButton);
-            deleteappButton = itemView.findViewById(R.id.deleteapp);
+
+            businessLogo = itemView.findViewById(R.id.appointment_business_image);
+            businessTitle = itemView.findViewById(R.id.appointment_business_title);
+            day = itemView.findViewById(R.id.appointment_business_day);
+            time = itemView.findViewById(R.id.appointment_business_time);
+
+
         }
     }
 }

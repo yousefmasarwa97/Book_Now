@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.myapp.booknow.Customer.C_Dashboard;
 import com.myapp.booknow.Customer.CustomerDashboardActivity;
 import com.myapp.booknow.FirestoreCallback;
 import com.myapp.booknow.R;
@@ -128,7 +129,7 @@ public class TimeSlotSelectionActivity extends AppCompatActivity {
                                                                     Toast.makeText(TimeSlotSelectionActivity.this, "Appointment booked successfully!", Toast.LENGTH_SHORT).show();
 
                                                                     // Go back to CustomerDashboardAct
-                                                                    Intent intent = new Intent(TimeSlotSelectionActivity.this, CustomerDashboardActivity.class);
+                                                                    Intent intent = new Intent(TimeSlotSelectionActivity.this, C_Dashboard.class);
                                                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                                                     startActivity(intent);
                                                                     finish(); // Optional, to finish the current activity

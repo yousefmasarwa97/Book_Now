@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.myapp.booknow.FirestoreCallback;
 import com.myapp.booknow.R;
 import com.myapp.booknow.Utils.Appointment;
@@ -23,12 +25,24 @@ import java.util.List;
 
 public class C_Dashboard extends AppCompatActivity {
 
+    //Attributes :
+    //--------Data Base----------//
     private DBHelper dbHelper;
-    RecyclerView businessesRecycler; // A recyclerView to view businesses list
-    private List<User> businesses;// list of businesses to show
-    private BusinessAdapter business_adapter;
 
-    private RecyclerView recyclerView_app; // A recyclerView to view the upcoming appointments
+
+    //-------Businesses Design--------//
+    private RecyclerView businessesRecycler; // A recyclerView to view businesses list
+    private List<User> businesses;// list of businesses (objects) to show
+    private BusinessAdapter business_adapter; // adapter to adapt the business objects to the view
+
+
+    //-------Appointments Design---------//
+    private RecyclerView appointmentsRecycler; // A recyclerView to view the upcoming appointments
+
+    private List<Appointment> appointmentList; // List of appointments objects
+    private CustomerAdapter customerAdapter; // adapter for appointments
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -41,12 +55,15 @@ public class C_Dashboard extends AppCompatActivity {
 
         // Hooks
         businessesRecycler = findViewById(R.id.featured_recycler);
+        appointmentsRecycler = findViewById(R.id.appointments_recycler);
 
 
-
-        businessesRecycler();//fetches businesses
+        businessesRecycler(); //fetches businesses
+        appointmentsRecycler(); //fetches appointments
 
     }
+
+
 
     private void businessesRecycler() {
 
@@ -59,7 +76,7 @@ public class C_Dashboard extends AppCompatActivity {
             @Override
             public void onSuccess(List<User> result) {
                 for(User business : result){
-                    Log.d("Check businesses (RecyclerView)",business.toString()+" ");
+                    Log.d("Check businesses (RecyclerView) ",business.toString()+" ");
 
                     businesses.clear();
                     businesses.addAll(result);
@@ -70,8 +87,8 @@ public class C_Dashboard extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Exception e) {
-                Log.d("Checking businesses (RecyclerView)",e.getMessage());
+            public void onFailure(Exception e) {//error fetching businesses
+                Log.d("Checking businesses (RecyclerView) ",e.getMessage());
             }
         });
 
@@ -79,8 +96,56 @@ public class C_Dashboard extends AppCompatActivity {
 
         businessesRecycler.setAdapter(business_adapter);
 
-        GradientDrawable gradient = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, new int[]
-        {0xffeff400,0xffaff600});
+
 
     }
+
+
+    private void appointmentsRecycler() {
+        appointmentsRecycler.setHasFixedSize(true);
+        appointmentsRecycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+
+        appointmentList = new ArrayList<>();
+
+        //getting the curr customer id
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser curr_user = mAuth.getCurrentUser();
+        String customer_id = null;
+        if (curr_user != null) {
+            customer_id = curr_user.getUid();
+        }
+
+
+        dbHelper.fetchUpcomingAppointmentsForCustomer(customer_id, new FirestoreCallback<List<Appointment>>() {
+            @Override
+            public void onSuccess(List<Appointment> result) {
+                for(Appointment appointment : result){
+                    Log.d("Check appointments (RecyclerView) ",appointment.toString()+" ");
+                }
+                appointmentList.clear();
+                appointmentList.addAll(result);
+                customerAdapter.notifyDataSetChanged();
+                Log.d("Check appointments (RecyclerView) size :",""+result.size());
+            }
+
+            @Override
+            public void onFailure(Exception e) {//error fetching appointments
+                Log.d("Check appointments (RecyclerView) ",e.getMessage());
+
+            }
+        });
+
+        //setting the appointments adapter to the recycle and binding it with the list of appointments
+        customerAdapter = new CustomerAdapter(appointmentList);
+        appointmentsRecycler.setAdapter(customerAdapter);
+
+
+
+    }
+
+
 }
+
+
+
+

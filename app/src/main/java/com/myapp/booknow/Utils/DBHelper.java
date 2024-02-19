@@ -12,7 +12,6 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.Transaction;
 import com.myapp.booknow.FirestoreCallback;
-import com.myapp.booknow.HelperClasses.HomeAdapter.FeaturedHelperClass;
 import com.myapp.booknow.ServiceAvailabilityCallback;
 import com.myapp.booknow.business.BusinessRegularHours;
 import com.myapp.booknow.business.BusinessService;

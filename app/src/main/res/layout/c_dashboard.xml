@@ -91,7 +91,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
-                    android:background="@color/banner_background"
+                    android:background="@color/banner_background_light"
                     android:orientation="vertical">
 
                     <TextView
@@ -116,7 +116,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/featured_recycler"
                     android:layout_width="244dp"
-                    android:layout_height="309dp"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="-3dp"
                     android:layout_toRightOf="@+id/featured_background"
                     android:background="@color/home_background" />
@@ -153,8 +153,9 @@
                 </RelativeLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/appointments_recycler"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"/>
+                    android:layout_height="match_parent"/>
 
 
             </LinearLayout>

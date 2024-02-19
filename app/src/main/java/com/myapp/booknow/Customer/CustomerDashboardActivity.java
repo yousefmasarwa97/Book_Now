@@ -127,7 +127,7 @@ public class CustomerDashboardActivity extends AppCompatActivity {
         dbHelper = new DBHelper();
         fetchBusinesses();
         //
-         fetchappointments();
+        fetchappointments();
 
     }
 
