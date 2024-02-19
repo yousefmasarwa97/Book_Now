@@ -12,6 +12,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.Transaction;
 import com.myapp.booknow.FirestoreCallback;
+import com.myapp.booknow.HelperClasses.HomeAdapter.FeaturedHelperClass;
 import com.myapp.booknow.ServiceAvailabilityCallback;
 import com.myapp.booknow.business.BusinessRegularHours;
 import com.myapp.booknow.business.BusinessService;
@@ -105,6 +106,41 @@ public class DBHelper {
 
                 }).addOnFailureListener(e -> Log.d("DBHelper","Error fetching businesses",e));
     }
+
+    /**
+     * Executes a query to get the businesses from the database.
+     * @param callback FirestoreCallback interface to handle success or failure.
+     */
+    public void fetchBusinesses(FirestoreCallback<List<User>> callback) {
+        db.collection("Users").whereEqualTo("type", "Business")
+                .whereEqualTo("setupCompleted", true)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        List<User> businessList = new ArrayList<>();
+                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                            User user = documentSnapshot.toObject(User.class);
+                            if ("Business".equals(user.getType())) {
+                                user.setId(documentSnapshot.getId());
+
+                                // Update imageURL field with the appropriate photo URL
+                                String imageURL = documentSnapshot.getString("imageURL");
+                                user.setImageURL(imageURL);
+                                //set the description
+                                String desc = documentSnapshot.getString("description");
+                                user.setDescription(desc);
+
+                                businessList.add(user);
+                            }
+                        }
+                        callback.onSuccess(businessList);
+                    } else {
+                        callback.onFailure(task.getException());
+                    }
+                });
+    }
+
+
 
 
     /**
