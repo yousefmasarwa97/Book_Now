@@ -85,8 +85,8 @@
 
                 <LinearLayout
                     android:id="@+id/featured_background"
-                    android:layout_width="170dp"
-                    android:layout_height="280dp"
+                    android:layout_width="140dp"
+                    android:layout_height="300dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
@@ -102,20 +102,22 @@
                         android:text="All Featured Businesses"
                         android:textAllCaps="true"
                         android:textColor="@color/colorAccent"
-                        android:textSize="25sp" />
+                        android:textSize="20sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:text="Businesses description" />
+                        android:text="Scroll to the right to see all the businesses you can book an apppointment at"
+                        android:textColor="@color/lightgrey"/>
 
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/featured_recycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_width="244dp"
+                    android:layout_height="309dp"
+                    android:layout_marginLeft="-3dp"
                     android:layout_toRightOf="@+id/featured_background"
                     android:background="@color/home_background" />
 
