@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ public class B_Login extends AppCompatActivity {
 
     private com.google.android.material.textfield.TextInputEditText editTextEmail, editTextPassword;
     private Button signInButton,forgetPasswordButton;
+    ImageView backButton;
     private TextView registerTextView;
 
     private FirebaseAuth mAuth;
@@ -39,12 +41,13 @@ public class B_Login extends AppCompatActivity {
         signInButton = findViewById(R.id.login_business_button);
         forgetPasswordButton = findViewById(R.id.forget_pass_button);
         registerTextView = findViewById(R.id.create_new_business_account);
+        backButton = findViewById(R.id.business_login_back_button);
 
 
         registerTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(B_Login.this, BusinessRegistrationActivity.class);
+                Intent intent = new Intent(B_Login.this, B_Register.class);
                 startActivity(intent);
             }
         });
@@ -76,6 +79,14 @@ public class B_Login extends AppCompatActivity {
                             Toast.makeText(B_Login.this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
+        });
+
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
         });
 
     }

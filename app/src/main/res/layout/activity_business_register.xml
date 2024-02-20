@@ -8,23 +8,24 @@
     tools:context=".business.B_Login"
     android:background="@color/lightwhite"
     android:padding="30dp">
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/business_login_back_button"
+            android:id="@+id/business_register_back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/baseline_arrow_back_24"
-            android:padding="5dp"/>
+            android:padding="5dp"
+            android:background="@drawable/back_icon_selector" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome"
+            android:text="Register"
             android:textColor="@color/black"
             android:textSize="40sp"
             android:fontFamily="@font/muli_black"
@@ -33,37 +34,40 @@
             android:layout_gravity="center"/>
 
 
-            
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginTop="80dp">
 
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="LOGIN TO CONTINUE"
-                android:textSize="17sp"
+                android:text="Please enter your information"
                 android:padding="5dp"
+                android:textAllCaps="true"
+                android:textSize="17sp"
                 android:fontFamily="@font/muli_black"/>
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="Enter Email Adress"
-                android:layout_marginTop="20dp"
                 app:hintTextColor="@color/black"
                 app:boxStrokeColor="@color/black"
                 app:boxStrokeWidthFocused="2dp"
+                android:layout_marginTop="20dp"
                 app:startIconDrawable="@drawable/baseline_person_24"
                 app:startIconTint="@color/black"
                 app:endIconMode="clear_text"
                 app:endIconTint="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/email_edit_text"
+                    android:id="@+id/business_register_email_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/muli"
@@ -72,6 +76,7 @@
 
 
             </com.google.android.material.textfield.TextInputLayout>
+
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -88,7 +93,7 @@
                 app:endIconTint="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/password_edit_text"
+                    android:id="@+id/business_register_password_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/muli"
@@ -99,43 +104,52 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-            <RelativeLayout
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-                
-                <Button
-                    android:id="@+id/forget_pass_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="FORGET PASSWORD"
-                    android:background="#00000000"
-                    android:textColor="@color/black"
-                    android:layout_alignParentRight="true"/>
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Confirm Password"
+                app:hintTextColor="@color/black"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidthFocused="2dp"
+                app:startIconDrawable="@drawable/baseline_lock_24"
+                app:startIconTint="@color/black"
+                app:endIconMode="password_toggle"
+                app:endIconTint="@color/black">
 
-            </RelativeLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/password_confirmation_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/muli"
+                    android:textColor="@color/black"
+                    android:inputType="textPassword"/>
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
 
 
             <Button
-                android:id="@+id/login_business_button"
+                android:id="@+id/register_business_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="LOGIN"
+                android:text="REGISTER"
                 android:background="@color/black"
                 android:textColor="@color/white"
                 app:backgroundTint="@null"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="10dp"/>
 
 
-            <Button
-                android:id="@+id/create_new_business_account"
-                android:layout_width="wrap_content"
+            <ProgressBar
+                android:id="@+id/register_business_progress_bar"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="CREATE A NEW BUSINESS ACCOUNT"
-                android:background="#00000000"
-                android:textColor="@color/black"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="30dp"
+                android:visibility="invisible"/>
+
 
 
 
