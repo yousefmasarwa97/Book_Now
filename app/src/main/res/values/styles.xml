@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
+
+        <!-- Theme customization here. -->
+        <item name="colorPrimary">@color/home_background</item>
+
+    </style>
+
+
+    <style name="BlackButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@color/black</item>
+    </style>
+
+
+</resources>

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.myapp.booknow.Customer.CustomerActivity;
+import com.myapp.booknow.business.B_Login;
 import com.myapp.booknow.business.BusinessActivity;
 
 /**
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         businessButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, BusinessActivity.class);
+                Intent intent = new Intent(MainActivity.this, B_Login.class);
                 startActivity(intent);
             }
         });

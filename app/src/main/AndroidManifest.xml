@@ -13,12 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BookNow"
         tools:targetApi="31">
-
-        <activity android:name=".business.EditBusinessProfile"/>
-        <activity android:name=".Utils.AppointmentDateSelectionActivity"/>
-        <activity android:name=".Utils.AppointmentListActivity"/>
-        <activity android:name=".Utils.TimeSlotSelectionActivity"/>
-        <activity android:name=".business.BusinessSpecialHoursEditActivity"/>
+        <activity
+            android:name=".business.B_Login"
+            android:exported="false" />
+        <activity android:name=".business.EditBusinessProfile" />
+        <activity android:name=".Utils.AppointmentDateSelectionActivity" />
+        <activity android:name=".Utils.AppointmentListActivity" />
+        <activity android:name=".Utils.TimeSlotSelectionActivity" />
+        <activity android:name=".business.BusinessSpecialHoursEditActivity" />
         <activity
             android:name=".Utils.TestDashboardActivity"
             android:exported="false"
@@ -32,7 +34,6 @@
         <activity android:name=".business.BusinessServiceEditActivity" />
         <activity android:name=".business.BusinessServicesManagementActivity" />
         <activity android:name=".business.BusinessRegularHoursEditActivity" />
-
         <activity
             android:name=".business.BusinessSetupActivity"
             android:parentActivityName=".business.BusinessEmailVerificationActivity" />
@@ -69,7 +70,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" />
-        <activity android:name="com.myapp.booknow.Customer.C_Dashboard" />
+        <activity android:name=".Customer.C_Dashboard" />
     </application>
 
 </manifest>
