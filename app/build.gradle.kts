@@ -79,5 +79,6 @@ dependencies {
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
     implementation("com.google.firebase:firebase-storage")
     implementation("com.google.android.material:material:1.1.0")
+    implementation ("com.hbb20:ccp:2.5.2")
 
 }
