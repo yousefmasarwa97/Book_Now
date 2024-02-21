@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Customer.VerifyOTP"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="30dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/exit_otp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_close_24"
+            android:padding="5dp"
+            android:background="@drawable/back_icon_selector"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CODE VERIFICATION"
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/muli_black"
+            android:layout_marginTop="100dp"
+            android:includeFontPadding="false"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/otp_phone_number_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter one time password sent to \n +972525129525"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/muli_black"
+            android:includeFontPadding="false"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp"/>
+
+        <com.chaos.view.PinView
+            android:id="@+id/pin_view_otp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:itemCount="6"
+            app:itemWidth="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            app:lineColor="@color/colorAccent"
+            style="@style/PinWidget.PinView"
+            android:inputType="number"
+            android:cursorVisible="true"
+            app:cursorColor="@color/black"
+            app:hideLineWhenFilled="true"
+            app:itemRadius="5dp"/>
+
+
+        <Button
+            android:id="@+id/otp_verify_code_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="VERIFY CODE"
+            android:background="@color/black"
+            android:textColor="@color/white"
+            app:backgroundTint="@null"
+            android:layout_marginTop="20dp"/>
+
+
+        <TextView
+            android:id="@+id/resend_verification_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:text="Resend verification code"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"/>
+
+
+        <ProgressBar
+            android:id="@+id/otp_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:visibility="visible"/>
+
+
+
+
+    </LinearLayout>
+
+
+
+</ScrollView>

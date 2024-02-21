@@ -55,7 +55,7 @@ public class C_Login extends AppCompatActivity {
                 // Checking if the number is valid -> go to OTP verification page
                 if (isValidPhoneNumber(phoneNumber)) {
                     Log.d("CHECK isValidPhoneNumber","is the number valid ? :: "+isValidPhoneNumber(phoneNumber));
-                    Intent intent = new Intent(C_Login.this, CustomerOtpVerificationActivity.class);// Go to the OTP verification to let the user insert the sent code
+                    Intent intent = new Intent(C_Login.this, VerifyOTP.class);// Go to the OTP verification to let the user insert the sent code
                     intent.putExtra("phoneNumber", phoneNumber); // Get the phone number as Extra ,, to send OTP to it
                     startActivity(intent);
                 }
