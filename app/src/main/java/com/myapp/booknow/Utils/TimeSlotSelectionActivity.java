@@ -18,7 +18,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.myapp.booknow.Customer.C_Dashboard;
-import com.myapp.booknow.Customer.CustomerDashboardActivity;
 import com.myapp.booknow.FirestoreCallback;
 import com.myapp.booknow.R;
 

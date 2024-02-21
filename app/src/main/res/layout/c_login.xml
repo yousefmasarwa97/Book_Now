@@ -56,7 +56,8 @@
                     app:ccp_showFullName="false"
                     app:ccp_showPhoneCode="true"
                     app:ccp_showNameCode="false"
-                    android:layout_centerVertical="true">
+                    android:layout_centerVertical="true"
+                    app:ccp_defaultNameCode="IL">
 
                 </com.hbb20.CountryCodePicker>
 
@@ -76,12 +77,12 @@
                 app:endIconTint="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/email_edit_text"
+                    android:id="@+id/phone_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/muli"
                     android:textColor="@color/black"
-                    android:inputType="text"/>
+                    android:inputType="phone"/>
 
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -108,7 +109,7 @@
 
 
             <Button
-                android:id="@+id/create_new_business_account"
+                android:id="@+id/login_as_business"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" LOGIN AS A BUSINESS"

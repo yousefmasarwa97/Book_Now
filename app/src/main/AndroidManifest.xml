@@ -45,25 +45,13 @@
             android:parentActivityName=".business.BusinessEmailVerificationActivity" />
         <activity
             android:name=".business.BusinessEmailVerificationActivity"
-            android:parentActivityName=".business.BusinessRegistrationActivity" />
+             />
         <activity android:name=".business.BusinessDashboardActivity" />
-        <activity
-            android:name=".business.BusinessRegistrationActivity"
-            android:parentActivityName=".business.BusinessActivity" />
-        <activity android:name=".Customer.CustomerDashboardActivity" />
+
         <activity
             android:name=".Customer.CustomerOtpVerificationActivity"
-            android:parentActivityName=".Customer.CustomerActivity" />
-        <activity
-            android:name=".business.BusinessActivity"
-            android:exported="false"
-            android:label="@string/title_activity_business"
-            android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".Customer.CustomerActivity"
-            android:exported="false"
-            android:label="@string/title_activity_customer"
-            android:parentActivityName=".MainActivity" />
+             />
+
         <activity
             android:name=".Utils.SplashActivity"
             android:exported="true">
@@ -73,9 +61,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true" />
         <activity android:name=".Customer.C_Dashboard" />
     </application>
 

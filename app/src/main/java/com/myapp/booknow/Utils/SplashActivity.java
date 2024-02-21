@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.myapp.booknow.Customer.C_Login;
 import com.myapp.booknow.MainActivity;
 import com.myapp.booknow.R;
 
@@ -21,7 +22,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                Intent intent = new Intent(SplashActivity.this, C_Login.class);
                 startActivity(intent);
                 finish();
             }

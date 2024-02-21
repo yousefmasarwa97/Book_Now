@@ -129,7 +129,7 @@ public class B_Register extends AppCompatActivity {
                                                     }
                                                 });
                                     }
-                                    //redirect to waiting page (until user clicks on verification link sent by email!)
+                                    // Redirect to waiting page (until user clicks on verification link sent by email!)
                                     Intent intent = new Intent(B_Register.this, BusinessEmailVerificationActivity.class);
                                     startActivity(intent);
                                 }
