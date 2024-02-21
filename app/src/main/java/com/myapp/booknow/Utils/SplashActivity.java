@@ -6,7 +6,6 @@ import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.myapp.booknow.Customer.C_Login;
-import com.myapp.booknow.MainActivity;
 import com.myapp.booknow.R;
 
 /**
