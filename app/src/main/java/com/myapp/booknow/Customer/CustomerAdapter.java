@@ -18,6 +18,9 @@ import com.myapp.booknow.Utils.TimeSlotSelectionActivity;
 
 import java.util.List;
 
+/**
+ * Adapter class to adapt and bind list of customer's appointments to a recycler view
+ */
 public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.appoitmentViewHolder> {
 
     private List<Appointment> appointmentList;

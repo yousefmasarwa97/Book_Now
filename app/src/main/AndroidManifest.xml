@@ -48,10 +48,11 @@
             android:parentActivityName=".business.BusinessEmailVerificationActivity" />
         <activity android:name=".business.BusinessEmailVerificationActivity" />
         <activity android:name=".business.BusinessDashboardActivity" />
-        <activity android:name=".Customer.CustomerOtpVerificationActivity" />
         <activity
             android:name=".Utils.SplashActivity"
-            android:exported="true">
+            android:theme="@style/SplashTheme"
+            android:exported="true"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
