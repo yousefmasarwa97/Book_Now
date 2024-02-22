@@ -1,5 +1,6 @@
 package com.myapp.booknow.Customer;
 
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -38,11 +39,11 @@ public class C_Dashboard extends AppCompatActivity {
 
 
     //-----Search Box-------//
-    EditText searchText;
+    private EditText searchText;
 
     //-----Search results recyclerView------//
-    RecyclerView searchResultsRecyclerView;
-    SearchResultsListAdapter searchAdapter;
+    private RecyclerView searchResultsRecyclerView;
+    private SearchResultsListAdapter searchAdapter;
 
 
     //-------Businesses Design--------//
@@ -57,6 +58,8 @@ public class C_Dashboard extends AppCompatActivity {
     private List<Appointment> appointmentList; // List of appointments objects
     private CustomerAdapter customerAdapter; // adapter for appointments
 
+    private TextView viewAll;
+
 
 
     @Override
@@ -70,6 +73,7 @@ public class C_Dashboard extends AppCompatActivity {
 
         //
         searchText = findViewById(R.id.search_text);
+        viewAll = findViewById(R.id.view_all);
 
         businessesRecycler = findViewById(R.id.featured_recycler);
         appointmentsRecycler = findViewById(R.id.appointments_recycler);
@@ -82,7 +86,7 @@ public class C_Dashboard extends AppCompatActivity {
         searchResultsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
-
+        //--------------------------------------------------------------------------------------//
 
         // Listener for the search bar :
         searchText.addTextChangedListener(new TextWatcher() {
@@ -114,6 +118,17 @@ public class C_Dashboard extends AppCompatActivity {
                 }
             }
         });
+
+
+        // Listener for "view all"
+        viewAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),viewUpcomingAppointments.class);
+                startActivity(intent);
+            }
+        });
+
 
 
         businessesRecycler(); //fetches businesses

@@ -289,6 +289,15 @@ public class DBHelper {
                 .addOnFailureListener(onFailureListener);
     }
 
+    public void cancelAppointment(String appointmentId, OnSuccessListener<Void> onSuccessListener, OnFailureListener onFailureListener) {
+        db.collection("Appointments").document(appointmentId)
+                .delete()
+                .addOnSuccessListener(onSuccessListener)
+                .addOnFailureListener(onFailureListener);
+    }
+
+
+
     /**
      * Fetches business's (with businessId) info.
      * @param businessId
