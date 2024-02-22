@@ -13,6 +13,10 @@ import com.myapp.booknow.R;
 
 import java.util.List;
 
+/**
+ * Adapts and binds list of appointments to a recyclerView
+ * each element's design is as the design of service_item.xml (same design for service item and appointment item to be shown in a recyclerView)
+ */
 public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.AppointmentViewHolder>{
 
     private List<Appointment> appointmentList;
@@ -34,7 +38,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
     @Override
     public void onBindViewHolder(@NonNull AppointmentViewHolder holder, int position) {
         Appointment appointmentItem = appointmentList.get(position);
-        holder.appointmentNameTextView.setText(appointmentItem.getAppointmentId());//change to information about info
+        holder.appointmentNameTextView.setText(appointmentItem.getAppointmentId());//change to information about appointment
 
         // Handle edit appointment
        // holder.editAppointmentButton.setOnClickListener();

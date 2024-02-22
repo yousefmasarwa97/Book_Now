@@ -1,6 +1,7 @@
 package com.myapp.booknow.business;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,9 @@ public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.ViewHo
         holder.businessName.setText(business.getName());
         holder.businessDescription.setText(business.getDescription());
 
+        //----------------------------//
+        //----------------------------//
+
         Glide.with(holder.itemView)
                 .load(business.getImageURL())
                         .placeholder(R.drawable.business_icon)
@@ -52,6 +56,8 @@ public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.ViewHo
 
             @Override
             public void onClick(View v) {
+                Log.d("CHECKING IF BUSINESS INFO ARE CORRECT !!!! :: ","Name = " + business.getName() + "and description is = "+ business.getDescription()
+                +" and imageURL= " + business.getImageURL());
                 Intent intent = new Intent(v.getContext(), ShowBusinessActivity.class);
                 intent.putExtra("businessId",business.getId());
                 v.getContext().startActivity(intent);

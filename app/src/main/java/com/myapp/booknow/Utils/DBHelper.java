@@ -1185,6 +1185,31 @@ public void fetchUpcomingAppointmentsForCustomer(String customerId, FirestoreCal
     }
 
 
+    public void getBusinessiamgeURL(String businessId, FirestoreCallback<String> callback) {
+        db.collection("Users").document(businessId).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && task.getResult() != null) {
+                if (task.getResult().exists() && task.getResult().contains("imageURL")) {
+                    String businessiamgeURL = task.getResult().getString("imageURL");
+                    if (businessiamgeURL != null) {
+                        // Call onSuccess with the business name
+                        callback.onSuccess(businessiamgeURL);
+                    } else {
+                        // The name field is missing or null, trigger onFailure
+                        callback.onFailure(new Exception("Business imageURL field is missing or null."));
+                    }
+                } else {
+                    // Document does not exist or missing 'name' field
+                    callback.onFailure(new Exception("Document does not exist or is missing 'imageURL' field."));
+                }
+            } else {
+                // Fetching the document failed
+                callback.onFailure(task.getException() != null ? task.getException() : new Exception("Failed to fetch document."));
+            }
+        });
+    }
+
+
+
 
     //----------------------------------------------------------------------------------------------------------------//
 

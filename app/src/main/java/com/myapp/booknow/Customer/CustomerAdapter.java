@@ -1,6 +1,7 @@
 package com.myapp.booknow.Customer;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.myapp.booknow.FirestoreCallback;
 import com.myapp.booknow.Utils.Appointment;
 import com.myapp.booknow.Utils.DBHelper;
 import com.myapp.booknow.R;
@@ -22,6 +25,8 @@ import java.util.List;
  * Adapter class to adapt and bind list of customer's appointments to a recycler view
  */
 public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.appoitmentViewHolder> {
+
+    DBHelper dbHelper;
 
     private List<Appointment> appointmentList;
 
@@ -49,6 +54,30 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.appoit
 
         holder.time.setText(appointment.getStartTime().toString() + "-" + appointment.getEndTime().toString());
 
+        String businessId = appointment.getBusinessId();
+
+        //now we want the image URL that is connected with the business id that is associated with the appointment
+        //so we need to call data base
+
+        dbHelper = new DBHelper();
+
+
+        //getting the business log (image URL) and binding it with the imageView in case of call success, and logging the error in case of failure
+        dbHelper.getBusinessiamgeURL(businessId, new FirestoreCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Glide.with(holder.itemView)
+                        .load(result)
+                        .placeholder(R.drawable.business_icon)
+                        .error(R.drawable.ic_menu_gallery)//should change !!
+                        .into(holder.businessLogo);
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                Log.e("Appointments adapter image URL",e.getMessage());
+            }
+        });
 
 
 
