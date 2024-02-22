@@ -2,8 +2,13 @@ package com.myapp.booknow.Customer;
 
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,15 +24,25 @@ import com.myapp.booknow.Utils.Appointment;
 import com.myapp.booknow.Utils.DBHelper;
 import com.myapp.booknow.Utils.User;
 import com.myapp.booknow.business.BusinessAdapter;
+import com.myapp.booknow.business.SearchResultsListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class C_Dashboard extends AppCompatActivity {
 
     //Attributes :
     //--------Data Base----------//
     private DBHelper dbHelper;
+
+
+    //-----Search Box-------//
+    EditText searchText;
+
+    //-----Search results recyclerView------//
+    RecyclerView searchResultsRecyclerView;
+    SearchResultsListAdapter searchAdapter;
 
 
     //-------Businesses Design--------//
@@ -53,9 +68,52 @@ public class C_Dashboard extends AppCompatActivity {
 
         dbHelper = new DBHelper();
 
-        // Hooks
+        //
+        searchText = findViewById(R.id.search_text);
+
         businessesRecycler = findViewById(R.id.featured_recycler);
         appointmentsRecycler = findViewById(R.id.appointments_recycler);
+
+        // Search results recycler :
+
+        searchResultsRecyclerView = findViewById(R.id.search_results_recycler);
+        searchAdapter = new SearchResultsListAdapter(new ArrayList<>());
+        searchResultsRecyclerView.setAdapter(searchAdapter);
+        searchResultsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+
+
+        // Listener for the search bar :
+        searchText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // not used here
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // filtering the data based on user's input
+                List<User> filtered_businesses = filterData(s.toString());// list of filtered businesses based on user input
+                searchAdapter.setBusinesses(filtered_businesses);
+                if(s.toString().isEmpty()){
+                    searchResultsRecyclerView.setVisibility(View.GONE);
+                }
+               // searchAdapter.notifyDataSetChanged();// Notify adapter that the data set has changed
+                else{
+                    searchResultsRecyclerView.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.toString().isEmpty()) {
+                    searchText.clearFocus();
+                }else{
+                    searchText.requestFocus();
+                }
+            }
+        });
 
 
         businessesRecycler(); //fetches businesses
@@ -141,6 +199,31 @@ public class C_Dashboard extends AppCompatActivity {
 
 
 
+    }
+
+
+    // Method to filter data based on the user's input
+    private List<User> filterData(String userInput){
+        // Filtering logic :
+        // 1)Iterate through the original list of businesses
+        // 2)Check if the business name contains the user input
+        // 3)If it matches add the business to the filtered list
+        // 4)Return the filtered list
+
+        List<User> filteredList = new ArrayList<>();
+
+        String query = userInput.toLowerCase(Locale.getDefault());
+
+        Log.d("FilterData", "User input: " + query);
+
+        for(User business : businesses){
+            if(business.getName().toLowerCase(Locale.getDefault()).contains(query)){
+                filteredList.add(business);
+            }
+        }
+
+        Log.d("FilterData", "Filtered list size: " + filteredList.size());
+        return filteredList;
     }
 
 
