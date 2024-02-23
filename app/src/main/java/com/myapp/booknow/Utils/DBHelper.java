@@ -296,6 +296,20 @@ public class DBHelper {
                 .addOnFailureListener(onFailureListener);
     }
 
+    public void getCustomerPhoneNumber(String customerId, FirestoreCallback<String> callback) {
+        db.collection("Users").document(customerId)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String phoneNumber = documentSnapshot.getString("phone");
+                        callback.onSuccess(phoneNumber);
+                    } else {
+                        callback.onFailure(new Exception("Customer document not found"));
+                    }
+                })
+                .addOnFailureListener(callback::onFailure);
+    }
+
 
 
     /**

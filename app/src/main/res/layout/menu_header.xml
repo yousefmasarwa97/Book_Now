@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:background="@color/lightwhite">
+
+    <TextView
+        android:id="@+id/menu_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Check the businesses and book appointments !"
+        android:fontFamily="@font/brandon"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"/>
+
+
+    <TextView
+        android:id="@+id/book_now"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BookNow"
+        android:fontFamily="@font/brandon1"
+        android:textSize="25sp"
+        android:layout_above="@+id/menu_text"
+        android:layout_marginLeft="15dp"
+        android:textColor="@color/black"/>
+
+    <ImageView
+        android:id="@+id/profile_image"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:src="@drawable/baseline_person_24"
+        android:layout_above="@+id/book_now"
+        android:layout_marginBottom="40dp"
+        app:tint="@color/lightgrey" />
+
+
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NAEL ABORAYA"
+        android:layout_toRightOf="@+id/profile_image"
+        android:layout_above="@+id/book_now"
+        android:layout_marginBottom="50dp"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/muli_black"/>
+
+    <TextView
+        android:id="@+id/user_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/book_now"
+        android:layout_marginBottom="30dp"
+        android:layout_toRightOf="@+id/profile_image"
+        android:fontFamily="@font/muli_black"
+        android:text="+972525129525"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+
+
+
+</RelativeLayout>

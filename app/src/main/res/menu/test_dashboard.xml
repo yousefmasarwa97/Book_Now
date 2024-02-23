@@ -1,9 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/baseline_arrow_back_24"
+            android:title="HOME" />
+
+        <item
+            android:id="@+id/my_profile"
+            android:icon="@drawable/baseline_arrow_back_24"
+            android:title="MY PROFILE" />
+
+        <item
+            android:id="@+id/my_upcoming_appointments"
+            android:icon="@drawable/baseline_arrow_back_24"
+            android:title="MY UPCOMING APPOINTMENTS" />
+
+
+        <item
+            android:id="@+id/my_previous_appointments"
+            android:icon="@drawable/baseline_arrow_back_24"
+            android:title="MY PREVIOUS APPOINTMENTS" />
+
+
+        <item
+            android:id="@+id/categories"
+            android:icon="@drawable/baseline_arrow_back_24"
+            android:title="BUSINESS CATEGORIES" />
+
+
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/baseline_arrow_back_24"
+            android:title="LOGOUT" />
+
+
+
+    </group>
+
+
+
+
+
 </menu>

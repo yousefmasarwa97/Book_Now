@@ -17,4 +17,12 @@
         <item name="android:statusBarColor">@android:color/white</item> <!-- desired background color -->
     </style>
 
+    <style name="navigationTheme">
+
+        <!-- color of text + icon when selected -->
+        <item name ="colorPrimary">@color/home_background</item>
+        <!-- background color when selected -->
+        <item name ="colorControlHighlight">@color/lightgrey</item>
+    </style>
+
 </resources>
