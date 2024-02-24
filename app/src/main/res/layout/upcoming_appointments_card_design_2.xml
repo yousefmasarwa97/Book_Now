@@ -56,6 +56,23 @@
             android:textSize="17dp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/appointment_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/appointment_business_day"
+            android:layout_toLeftOf="@+id/cancel_appointment"
+            android:textSize="15dp"
+            android:text="waiting"
+            android:layout_below="@+id/appointment_business_title"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="50dp"
+            android:textColor="@color/colorPrimaryDark"
+            />
+
+
+
+
         <ImageView
             android:id="@+id/cancel_appointment"
             android:layout_width="wrap_content"

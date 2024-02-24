@@ -20,29 +20,29 @@ import com.myapp.booknow.Utils.DBHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class viewUpcomingAppointments extends AppCompatActivity {
+public class viewAppointmentsHistory extends AppCompatActivity {
 
     private DBHelper dbHelper;
-    private RecyclerView upcomingAppointmentsRecyler;// A recyclerView to view the upcoming appointments
+    private RecyclerView appointmentsHistoryRecycler;// A recyclerView to view the upcoming appointments
     private List<Appointment> appointmentList; // List of appointments objects
-    private UpcomingAppointmentsAdapter upcomingAdapter; // adapter for appointments
+    private AppointmentsHistoryAdapter historyAdapter; // adapter for appointments
 
 
     private ImageView backIcon;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_view_upcoming_appointments);
+        setContentView(R.layout.activity_view_appointments_history);
+
 
         dbHelper = new DBHelper();
 
-        upcomingAppointmentsRecyler = findViewById(R.id.upcoming_appointments_recycler);
+        appointmentsHistoryRecycler = findViewById(R.id.appointments_history_recycler);
 
-        backIcon = findViewById(R.id.upcoming_appointments_back_icon);
-
-
+        backIcon = findViewById(R.id.appointments_history_back_icon);
 
         backIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,17 +52,13 @@ public class viewUpcomingAppointments extends AppCompatActivity {
         });
 
 
-
-
         appointmentsRecycler(); //fetches appointments
-
 
     }
 
-
     private void appointmentsRecycler() {
-        upcomingAppointmentsRecyler.setHasFixedSize(true);
-        upcomingAppointmentsRecyler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        appointmentsHistoryRecycler.setHasFixedSize(true);
+        appointmentsHistoryRecycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
 
         appointmentList = new ArrayList<>();
 
@@ -75,7 +71,7 @@ public class viewUpcomingAppointments extends AppCompatActivity {
         }
 
 
-        dbHelper.fetchUpcomingAppointmentsForCustomer(customer_id, new FirestoreCallback<List<Appointment>>() {
+        dbHelper.fetchAppointmentsHistoryForCustomer(customer_id, new FirestoreCallback<List<Appointment>>() {
             @Override
             public void onSuccess(List<Appointment> result) {
                 for(Appointment appointment : result){
@@ -83,7 +79,7 @@ public class viewUpcomingAppointments extends AppCompatActivity {
                 }
                 appointmentList.clear();
                 appointmentList.addAll(result);
-                upcomingAdapter.notifyDataSetChanged();
+                historyAdapter.notifyDataSetChanged();
                 Log.d("Check appointments (RecyclerView) size :",""+result.size());
             }
 
@@ -95,11 +91,10 @@ public class viewUpcomingAppointments extends AppCompatActivity {
         });
 
         //setting the appointments adapter to the recycle and binding it with the list of appointments
-        upcomingAdapter = new UpcomingAppointmentsAdapter(appointmentList);
-        upcomingAppointmentsRecyler.setAdapter(upcomingAdapter);
+        historyAdapter = new AppointmentsHistoryAdapter(appointmentList);
+        appointmentsHistoryRecycler.setAdapter(historyAdapter);
 
 
 
     }
-
 }

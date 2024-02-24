@@ -1,15 +1,17 @@
 package com.myapp.booknow.Customer;
 
-import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -17,20 +19,19 @@ import com.myapp.booknow.FirestoreCallback;
 import com.myapp.booknow.Utils.Appointment;
 import com.myapp.booknow.Utils.DBHelper;
 import com.myapp.booknow.R;
-import com.myapp.booknow.Utils.TimeSlotSelectionActivity;
 
 import java.util.List;
 
 /**
  * Adapter class to adapt and bind list of customer's appointments to a recycler view
  */
-public class UpcomingAppointmentsAdapter extends RecyclerView.Adapter<UpcomingAppointmentsAdapter.appoitmentViewHolder> {
+public class AppointmentsHistoryAdapter extends RecyclerView.Adapter<AppointmentsHistoryAdapter.appoitmentViewHolder> {
 
     private DBHelper dbHelper;
 
     private List<Appointment> appointmentList;
 
-    public UpcomingAppointmentsAdapter(List<Appointment> appointmentList) {
+    public AppointmentsHistoryAdapter(List<Appointment> appointmentList) {
         this.appointmentList = appointmentList;
     }
 
@@ -80,35 +81,23 @@ public class UpcomingAppointmentsAdapter extends RecyclerView.Adapter<UpcomingAp
         });
 
 
+        // setting the status
+        String appointmentStatus = appointment.getStatus();
+        if (appointmentStatus != null) {
+            if (appointmentStatus.equalsIgnoreCase("cancelled")) {
+                holder.status.setText(appointmentStatus);
+                holder.status.setTextColor(Color.parseColor("#D11A2A"));// appears red
+            } else if(appointmentStatus.equalsIgnoreCase("completed")) {
+                holder.status.setText(appointmentStatus);
+                holder.status.setTextColor(Color.parseColor("#008000"));// appears green
+            } else {
+                holder.status.setVisibility(View.GONE);
+            }
+        }
 
 
+            holder.delete.setVisibility(View.INVISIBLE);
 
-
-
-
-
-
-        //------------Buttons to cancel the appointment----------------//
-
-
-
-
-        // Handle delete service
-        holder.cancelAppointment.setOnClickListener(v -> {
-            String appointmentId = appointment.getAppointmentId(); // should change to getAppointmentID !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            Log.d("appointmentIDCHECK---","appointmentId variable holds the value : "+appointmentId);
-            DBHelper dbHelper = new DBHelper();
-            dbHelper.cancelAppointment(appointmentId,
-                    aVoid -> {
-                        // Success handling. Perhaps refresh the list of services
-                        Toast.makeText(v.getContext(), "Appointment canceled successfully", Toast.LENGTH_SHORT).show();
-                        //((BusinessServicesManagementActivity) v.getContext()).fetchServices();
-                    },
-                    e -> {
-                        // Failure handling
-                        Toast.makeText(v.getContext(), "Error canceling the appointment", Toast.LENGTH_SHORT).show();
-                    });
-        });
     }
 
     @Override
@@ -117,9 +106,8 @@ public class UpcomingAppointmentsAdapter extends RecyclerView.Adapter<UpcomingAp
     }
 
     public static class appoitmentViewHolder extends RecyclerView.ViewHolder {
-        TextView businessTitle,day,time;
-        ImageView businessLogo, cancelAppointment;
-
+        TextView businessTitle,day,time,status;
+        ImageView businessLogo,delete;
 
         public appoitmentViewHolder(View itemView) {
             super(itemView);
@@ -128,7 +116,9 @@ public class UpcomingAppointmentsAdapter extends RecyclerView.Adapter<UpcomingAp
             businessTitle = itemView.findViewById(R.id.appointment_business_title);
             day = itemView.findViewById(R.id.appointment_business_day);
             time = itemView.findViewById(R.id.appointment_business_time);
-            cancelAppointment = itemView.findViewById(R.id.cancel_appointment);
+            status = itemView.findViewById(R.id.appointment_status);
+            delete = itemView.findViewById(R.id.cancel_appointment);
+
 
 
         }

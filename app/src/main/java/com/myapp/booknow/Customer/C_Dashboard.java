@@ -405,6 +405,11 @@ public class C_Dashboard extends AppCompatActivity implements NavigationView.OnN
         else if(itemId == R.id.log_out){
             showLogoutConfirmationDialog();
         }
+        else if(itemId == R.id.my_previous_appointments){
+            if(!isCurrentPage(viewAppointmentsHistory.class)){
+                startActivity(new Intent(this, viewAppointmentsHistory.class));
+            }
+        }
 
 
 
