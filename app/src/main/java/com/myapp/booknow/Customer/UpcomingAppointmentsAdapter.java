@@ -102,7 +102,8 @@ public class UpcomingAppointmentsAdapter extends RecyclerView.Adapter<UpcomingAp
                     aVoid -> {
                         // Success handling. Perhaps refresh the list of services
                         Toast.makeText(v.getContext(), "Appointment canceled successfully", Toast.LENGTH_SHORT).show();
-                        //((BusinessServicesManagementActivity) v.getContext()).fetchServices();
+                        appointmentList.remove(appointment);
+                        notifyDataSetChanged();
                     },
                     e -> {
                         // Failure handling

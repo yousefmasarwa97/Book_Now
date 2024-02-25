@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,15 +30,17 @@ import java.util.List;
 
 public class TimeSlotSelectionActivity extends AppCompatActivity {
 
-    List<String> providerIds;
+    private List<String> providerIds;
     private DBHelper dbHelper;
     private TextView titleTextView;
     private ListView timeSlotsListView;
     private  String customerId;
     private String businessName;
+    private ImageView backButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_time_slot_selection);
 
         //Getting the customer Id (can replace it with getExtra and retrieve it from the prev. activity)!!!
@@ -58,8 +62,9 @@ public class TimeSlotSelectionActivity extends AppCompatActivity {
 
         providerIds = new ArrayList<>();
 
-        titleTextView = findViewById(R.id.titleTextView);
+        titleTextView = findViewById(R.id.appointmet_time);
         timeSlotsListView = findViewById(R.id.timeSlotsListView);
+        backButton = findViewById(R.id.time_slots_back_icon);
 
 
         Log.d("TimeSlotsSelectionTest", "the businessId is ::::-> " + businessId);
@@ -67,6 +72,13 @@ public class TimeSlotSelectionActivity extends AppCompatActivity {
         Log.d("TimeSlotsSelectionTest", "the selected date_string is ::::-> " + selectedDate);
 
         generateAndDisplayTimeSlots(businessId, serviceId, selectedDate);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
     }

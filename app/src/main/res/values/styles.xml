@@ -9,7 +9,7 @@
     </style>
 
 
-    <style name="BlackButton" parent="Widget.AppCompat.Button">
+    <style name="BlackButton">
         <item name="android:background">@color/black</item>
     </style>
 

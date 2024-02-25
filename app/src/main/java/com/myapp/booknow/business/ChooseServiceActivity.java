@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -28,14 +30,17 @@ public class ChooseServiceActivity extends AppCompatActivity {
     private String selectedServiceName,selectedServiceId;
     private Button nextButton;//button to go to the next page
 
+    private ImageView backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_choose_service);
 
         serviceSpinner = findViewById(R.id.serviceSpinner);
-        nextButton = findViewById(R.id.Next_button_choose_service);
+        nextButton = findViewById(R.id.next_button_choose_service);
+        backButton = findViewById(R.id.service_back_icon);
 
        // String id = "example"; // must change to the business id given from the last page (didn't do it yet , must be implemented using putExtra)
 
@@ -47,6 +52,12 @@ public class ChooseServiceActivity extends AppCompatActivity {
 
         fetchAndDisplayServices();
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

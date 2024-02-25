@@ -82,5 +82,8 @@ dependencies {
     implementation("com.hbb20:ccp:2.5.2")// Not the latest version ,, this dependency is used to enable using the country code picker in the app.
     implementation("com.googlecode.libphonenumber:libphonenumber:8.13.30") // The latest libphonenumber version (Release) ,, this dependency is used to check whether a ph number is valid or not.
     implementation("io.github.chaosleung:pinview:1.4.4")// (check the version),, This dependency is used for OTP PIN view design
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+
+
 
 }

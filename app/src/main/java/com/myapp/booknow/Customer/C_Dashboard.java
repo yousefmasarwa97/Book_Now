@@ -28,6 +28,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
@@ -45,9 +46,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class C_Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
+public class C_Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-    private static final float END_SCALE = 0.7f;
+    private static final float END_SCALE = 0.7f;// For sliding animation (navigation view)
     public static final int NAV_HOME_ID = R.id.nav_home;
 
     //Drawer menu :
@@ -456,6 +457,7 @@ public class C_Dashboard extends AppCompatActivity implements NavigationView.OnN
         startActivity(new Intent(this, C_Login.class));
         finish();
     }
+
 
 
 }

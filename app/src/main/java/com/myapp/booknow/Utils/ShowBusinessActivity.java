@@ -4,13 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+import com.myapp.booknow.Customer.C_Dashboard;
+import com.myapp.booknow.FirestoreCallback;
 import com.myapp.booknow.R;
 import com.myapp.booknow.business.BusinessService;
 import com.myapp.booknow.business.ChooseServiceActivity;
@@ -28,17 +33,21 @@ import java.util.TreeMap;
 public class ShowBusinessActivity extends AppCompatActivity {
 
     private TextView tvBusinessName, tvBusinessDescription, tvBusinessServices, tvBusinessHours;
-    private Button BookAppointmentButton;
+    private Button bookAppointmentButton;
+    private ImageView businessLogo,backButton;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_business);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.business_information);
 
-        tvBusinessName = findViewById(R.id.tvBusinessName);
-        tvBusinessDescription = findViewById(R.id.tvBusinessDescription);
-        tvBusinessServices = findViewById(R.id.tvBusinessServices);
-        tvBusinessHours = findViewById(R.id.tvBusinessHours);
-        BookAppointmentButton = findViewById(R.id.btnBookAppointment);
+        tvBusinessName = findViewById(R.id.business_name);
+        tvBusinessDescription = findViewById(R.id.description_content);
+        tvBusinessServices = findViewById(R.id.services_content);
+        tvBusinessHours = findViewById(R.id.working_hours_content);
+        bookAppointmentButton = findViewById(R.id.booking_appointment_btn);
+        businessLogo = findViewById(R.id.business_image);
+        backButton = findViewById(R.id.business_info_back_icon);
 
         String businessId = getIntent().getStringExtra("businessId");
         if(businessId != null){
@@ -51,7 +60,7 @@ public class ShowBusinessActivity extends AppCompatActivity {
             finish();  // Closes the current activity and returns to the previous one
         }
 
-        BookAppointmentButton.setOnClickListener(new View.OnClickListener(){
+        bookAppointmentButton.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
@@ -59,6 +68,16 @@ public class ShowBusinessActivity extends AppCompatActivity {
                 intent.putExtra("businessId",businessId);
                 Log.d("ShowBusiness","the putExtra (businessId from ShowbusinessActicity) is:  " + businessId);//FOR TESTING
                 startActivity(intent);
+            }
+        });
+
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ShowBusinessActivity.this, C_Dashboard.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -74,8 +93,24 @@ public class ShowBusinessActivity extends AppCompatActivity {
         fetchServices(businessId , dbHelper);
         fetchHours(businessId , dbHelper);
         fetchBusinessInfo(businessId , dbHelper);
+        fetchBusinessImage(businessId,dbHelper);
 
+    }
 
+    private void fetchBusinessImage(String businessId, DBHelper dbHelper) {
+        dbHelper.getBusinessiamgeURL(businessId, new FirestoreCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Glide.with(getApplicationContext())
+                        .load(result)
+                        .into(businessLogo);
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+        });
     }
 
 

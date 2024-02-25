@@ -1,17 +1,39 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:gravity="center">
+    android:padding="16dp">
 
+    <ImageView
+        android:id="@+id/service_back_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_arrow_back_24"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/back_icon_selector"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SERVICE"
+        android:fontFamily="@font/muli_black"
+        android:textSize="25sp"
+        android:layout_marginTop="85dp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="140dp"
         android:text="Please Choose a service"
-        android:textSize="20dp"
+        android:fontFamily="@font/muli_black"
+        android:textSize="16sp"
         />
 
     <Spinner
@@ -22,10 +44,15 @@
         android:layout_marginBottom="20dp"/>
 
     <Button
-        android:id="@+id/Next_button_choose_service"
+        android:id="@+id/next_button_choose_service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Next" />
+        android:layout_below="@+id/working_hours_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/black"
+        android:textColor="@color/white"
+        app:backgroundTint="@null"
+        android:text="NEXT"/>
 
 
 </LinearLayout>

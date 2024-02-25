@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,11 +38,14 @@ public class ChooseDayandTimeActivity extends AppCompatActivity {
     private TextView textViewOpenTime, textViewCloseTime;//added
     private LinearLayout layoutHours;//added
 
+    private ImageView backButton;
+
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_choose_day_time);
 
         businessId = getIntent().getStringExtra("businessId");
@@ -52,6 +57,7 @@ public class ChooseDayandTimeActivity extends AppCompatActivity {
         textViewCloseTime = findViewById(R.id.textViewCloseTime);
         layoutHours = findViewById(R.id.layoutHours);
         nextButton = findViewById(R.id.buttonGotoTimeSlotsSelection);
+        backButton = findViewById(R.id.date_back_icon);
 
         // Set the minimum available date to today's date
         calendarView.setMinDate(System.currentTimeMillis() - 1000);
@@ -62,7 +68,12 @@ public class ChooseDayandTimeActivity extends AppCompatActivity {
         // Set the maximum date to two months from now
         calendarView.setMaxDate(calendar.getTimeInMillis());
 
-
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
