@@ -21,13 +21,19 @@ BookNow is an Android application designed to facilitate booking and managing ap
 
 ### Customer UX
 <div style="display: flex; justify-content: space-around;">
-    <img src="ScreenShots/customerScreenShots/Customer_Login.png" alt="Customer Dashboard" width="400"/>
-    <img src="ScreenShots/customerScreenShots/C_Dashboard1.png" alt="Booking Appointment" width="400"/>
-</div>
-<div style="display: flex; justify-content: space-around;">
+    <img src="ScreenShots/customerScreenShots/Customer_Login.png" alt="Customer Login" width="400"/>
+    <img src="ScreenShots/customerScreenShots/C_Dashboard1.png" alt="Booking Dashboard" width="400"/>
     <img src="ScreenShots/customerScreenShots/C_Dashboard2.png" alt="Customer Dashboard" width="400"/>
-    <img src="ScreenShots/customerScreenShots/C_Dashboard3.png" alt="Booking Appointment" width="400"/>
+    <img src="ScreenShots/customerScreenShots/C_Dashboard3.png" alt="Booking Dashboard" width="400"/>
+    <img src="ScreenShots/customerScreenShots/C_Dashboard4.png" alt="Booking Dashboard" width="400"/>
+    <img src="ScreenShots/customerScreenShots/C_Dashboard5.png" alt="Booking Dashboard" width="400"/>
+    <img src="ScreenShots/customerScreenShots/C_Dashboard6.png" alt="Booking Dashboard" width="400"/>
+    <img src="ScreenShots/customerScreenShots/C_Dashboard7.png" alt="Booking Dashboard" width="400"/>
+    <img src="ScreenShots/customerScreenShots/C_Dashboard8.png" alt="Booking Dashboard" width="400"/>
+    <img src="ScreenShots/customerScreenShots/C_Dashboard9.png" alt="Booking Dashboard" width="400"/>
+    <img src="ScreenShots/customerScreenShots/C_Dashboard10.png" alt="Booking Dashboard" width="400"/>
 </div>
+
 
 ### Business UX
 ![Business Dashboard](/screenshots/business_dashboard.png)
