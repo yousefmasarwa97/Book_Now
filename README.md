@@ -23,7 +23,7 @@ BookNow is an Android application designed to facilitate booking and managing ap
 
 ## Screenshots
 
-### Customer UX
+### Customer UI
 <div style="display: flex; justify-content: space-around;">
     <img src="ScreenShots/customerScreenShots/Customer_Login.png" alt="Customer Login" width="400"/>
     <img src="ScreenShots/customerScreenShots/C_Dashboard1.png" alt="Booking Dashboard" width="400"/>
@@ -39,8 +39,10 @@ BookNow is an Android application designed to facilitate booking and managing ap
 </div>
 
 
-### Business UX
-![Business Dashboard](/screenshots/business_dashboard.png)
+### Business UI
+<div style="display: flex; justify-content: space-around;">
+    <img src="ScreenShots/businessScreenShots/B_Dashboard.png" alt="Business Dashboard" width="400"/>
+</div>
 
 ## Architecture
 
@@ -72,3 +74,4 @@ For detailed UML diagrams and more screen shots, please visit the [Wiki](/wiki).
 - [Nael Aboraya](https://github.com/naelaboraya)
 - [Yousef Masarwa](https://github.com/yousefmasarwa)
 - [Mohammed Khateb](https://github.com/khatebMo)
+- [Ibrahem Hurani](https://github.com/IbrahemHurani)
