@@ -7,7 +7,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.GradientDrawable;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -29,8 +29,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -80,13 +78,18 @@ public class C_Dashboard extends AppCompatActivity implements NavigationView.OnN
 
     //-------Appointments Design---------//
     private RecyclerView appointmentsRecycler; // A recyclerView to view the upcoming appointments
-
     private List<Appointment> appointmentList; // List of appointments objects
     private CustomerAdapter customerAdapter; // adapter for appointments
 
-    private TextView viewAll;
+    //-------Categories Design---------//
+    private RecyclerView categoriesRecycler;// A recyclerView to view all the categories
+    private List<Category> categories;// List of categories (strings)
+    private CategoryAdapter categoryAdapter;// Adapter for categories // must implement!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+    //---------------------------------//
+    private TextView appointments_viewAll;
 
+    private TextView categories_viewall;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -102,10 +105,12 @@ public class C_Dashboard extends AppCompatActivity implements NavigationView.OnN
 
         //
         searchText = findViewById(R.id.search_text);
-        viewAll = findViewById(R.id.view_all);
+        appointments_viewAll = findViewById(R.id.view_all);
+        categories_viewall = findViewById(R.id.view_all_2);
 
         businessesRecycler = findViewById(R.id.featured_recycler);
         appointmentsRecycler = findViewById(R.id.appointments_recycler);
+        categoriesRecycler = findViewById(R.id.categories_recycler);
 
         // Search results recycler :
 
@@ -165,11 +170,20 @@ public class C_Dashboard extends AppCompatActivity implements NavigationView.OnN
         });
 
 
-        // Listener for "view all"
-        viewAll.setOnClickListener(new View.OnClickListener() {
+        // Listener for "view all" (appointments)
+        appointments_viewAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),viewUpcomingAppointments.class);
+                startActivity(intent);
+            }
+        });
+
+        // Listener for "view all" (categories)
+        categories_viewall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), viewCategories.class);
                 startActivity(intent);
             }
         });
@@ -178,6 +192,7 @@ public class C_Dashboard extends AppCompatActivity implements NavigationView.OnN
 
         businessesRecycler(); //fetches businesses
         appointmentsRecycler(); //fetches appointments
+        categoriesRecycler();// fetches categories
 
     }
 
@@ -281,6 +296,32 @@ public class C_Dashboard extends AppCompatActivity implements NavigationView.OnN
         customerAdapter = new CustomerAdapter(appointmentList);
         appointmentsRecycler.setAdapter(customerAdapter);
 
+
+
+    }
+
+    private void categoriesRecycler(){
+        categoriesRecycler.setHasFixedSize(true);
+        categoriesRecycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+
+        categories = new ArrayList<>();
+
+        // This time is not like previous lists, we set it manually instead of fetching from DB.
+        categories.add(new Category("Health",R.drawable.category_health,Color.parseColor("#D8F3DC")));
+        categories.add(new Category("Beauty",R.drawable.category_beauty, Color.parseColor("#F5F5DC")));
+        categories.add(new Category("Barbershops",R.drawable.category_barbershops,Color.parseColor("#333333"),Color.parseColor("#FFFFFF")));
+        categories.add(new Category("Home Services",R.drawable.category_home,Color.parseColor("#ffff7a")));
+        categories.add(new Category("Legal\n and\n Financial",R.drawable.category_legal_financial,Color.parseColor("#fcfcfd")));
+        categories.add(new Category("Fitness\n and\n Recreation",R.drawable.category_fitness_2,Color.parseColor("#CCE5FF")));
+        categories.add(new Category("Education & Learning", R.drawable.category_education,Color.parseColor("#FFD1DC")));
+        categories.add(new Category("Pet Care Services", R.drawable.category_pets_service,Color.parseColor("#D2B48C")));
+        categories.add(new Category("Shopping\nand\nRetail",R.drawable.category_shopping,Color.parseColor("#FFFFE0")));
+        categories.add(new Category("Travelinging\nand\nHospitality",R.drawable.category_traveling,Color.parseColor("#87CEEB")));
+        categories.add(new Category("Entertainment\nand\nEvents",R.drawable.category_enertainment_2,Color.parseColor("#ffa600")));
+
+        categoryAdapter = new CategoryAdapter(categories);
+
+        categoriesRecycler.setAdapter(categoryAdapter);
 
 
     }
@@ -409,6 +450,11 @@ public class C_Dashboard extends AppCompatActivity implements NavigationView.OnN
         else if(itemId == R.id.my_previous_appointments){
             if(!isCurrentPage(viewAppointmentsHistory.class)){
                 startActivity(new Intent(this, viewAppointmentsHistory.class));
+            }
+        }
+        else if(itemId == R.id.categories){
+            if(!isCurrentPage(viewCategories.class)){
+                startActivity(new Intent(this, viewCategories.class));
             }
         }
 
