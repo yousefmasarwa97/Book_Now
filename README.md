@@ -1,3 +1,4 @@
+<img src="ScreenShots/logo.png" alt="BookNow Logo"/>
 # BookNow
 
 BookNow is an Android application designed to facilitate booking and managing appointments for both businesses and customers. It provides customers with a platform to discover featured businesses, browse services, view available time slots, and book appointments hassle-free. On the other hand, it empowers businesses to showcase their services, manage their schedules, and efficiently handle customer appointments.
