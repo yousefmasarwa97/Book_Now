@@ -16,6 +16,11 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.List;
 
+/**
+ * Adapter to bind the list of categories to a design list (like RecyclerView)
+ * used in "Business Categories"/"view all categories" page
+ */
+
 public class CategoryAdapter2 extends RecyclerView.Adapter<CategoryAdapter2.CategoryViewHolder> {
     private List<Category> categories;
 
@@ -44,7 +49,7 @@ public class CategoryAdapter2 extends RecyclerView.Adapter<CategoryAdapter2.Cate
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), showCategoryBusinesses.class);
-                intent.putExtra("businessId",category.getName());// take the name of the category to the new redirected page
+                intent.putExtra("categoryName",category.getName());// take the name of the category to the new redirected page
                 v.getContext().startActivity(intent);
             }
         });

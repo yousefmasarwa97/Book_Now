@@ -10,14 +10,14 @@ public class Category {
     private int backgroundColor; // the back ground to assign to the card view
     private int nameTextColor; // the color of the category title
 
-    public Category(String name, int logoResourceId, int backgroundColor) {
+    public Category(String name, String nameDesign, int logoResourceId, int backgroundColor) {
         this.name = name;
         this.logoResourceId = logoResourceId;
         this.backgroundColor = backgroundColor;
         this.nameTextColor = DEFAULT_TEXT_COLOR;
     }
 
-    public Category(String name, int logoResourceId, int backgroundColor, int nameTextColor) {
+    public Category(String name, String nameDesign, int logoResourceId, int backgroundColor, int nameTextColor) {
         this.name = name;
         this.logoResourceId = logoResourceId;
         this.backgroundColor = backgroundColor;

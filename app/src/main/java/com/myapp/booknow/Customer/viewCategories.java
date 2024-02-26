@@ -52,7 +52,7 @@ public class viewCategories extends AppCompatActivity {
 
 
 
-        categoriesRecycler(); //fetches appointments
+        categoriesRecycler(); //fetches categories
 
 
     }
@@ -65,18 +65,17 @@ public class viewCategories extends AppCompatActivity {
         categories = new ArrayList<>();
 
         // This time is not like previous lists, we set it manually instead of fetching from DB.
-        categories.add(new Category("Health",R.drawable.category_health, Color.parseColor("#D8F3DC")));
-        categories.add(new Category("Beauty",R.drawable.category_beauty, Color.parseColor("#F5F5DC")));
-        categories.add(new Category("Barbershops",R.drawable.category_barbershops,Color.parseColor("#333333"),Color.parseColor("#FFFFFF")));
-        categories.add(new Category("Home Services",R.drawable.category_home,Color.parseColor("#ffff7a")));
-        categories.add(new Category("Legal\n and\n Financial",R.drawable.category_legal_financial,Color.parseColor("#fcfcfd")));
-        categories.add(new Category("Fitness\n and\n Recreation",R.drawable.category_fitness_2,Color.parseColor("#CCE5FF")));
-        categories.add(new Category("Education & Learning", R.drawable.category_education,Color.parseColor("#FFD1DC")));
-        categories.add(new Category("Pet Care Services", R.drawable.category_pets_service,Color.parseColor("#D2B48C")));
-        categories.add(new Category("Shopping\nand\nRetail",R.drawable.category_shopping,Color.parseColor("#FFFFE0")));
-        categories.add(new Category("Travelinging\nand\nHospitality",R.drawable.category_traveling,Color.parseColor("#87CEEB")));
-        categories.add(new Category("Entertainment\nand\nEvents",R.drawable.category_enertainment_2,Color.parseColor("#ffa600")));
-
+        categories.add(new Category("Health","Health",R.drawable.category_health,Color.parseColor("#D8F3DC")));
+        categories.add(new Category("Beauty","Beauty",R.drawable.category_beauty, Color.parseColor("#F5F5DC")));
+        categories.add(new Category("Barbershops","Barbershops",R.drawable.category_barbershops,Color.parseColor("#333333"),Color.parseColor("#FFFFFF")));
+        categories.add(new Category("Home Services","Home Services",R.drawable.category_home,Color.parseColor("#ffff7a")));
+        categories.add(new Category("Legal and Financial","Legal\n and\n Financial",R.drawable.category_legal_financial,Color.parseColor("#fcfcfd")));
+        categories.add(new Category("Fitness and Recreation","Fitness\n and\n Recreation",R.drawable.category_fitness_2,Color.parseColor("#CCE5FF")));
+        categories.add(new Category("Education and Learning","Education & Learning", R.drawable.category_education,Color.parseColor("#FFD1DC")));
+        categories.add(new Category("Pet Care Services","Pet Care Services", R.drawable.category_pets_service,Color.parseColor("#D2B48C")));
+        categories.add(new Category("Shopping and Retail","Shopping\nand\nRetail",R.drawable.category_shopping,Color.parseColor("#FFFFE0")));
+        categories.add(new Category("Traveling and Hospitality","Travelinging\nand\nHospitality",R.drawable.category_traveling,Color.parseColor("#87CEEB")));
+        categories.add(new Category("Entertainment and Events","Entertainment\nand\nEvents",R.drawable.category_enertainment_2,Color.parseColor("#ffa600")));
         categoryAdapter = new CategoryAdapter2(categories);
 
         categoriesRecycler.setAdapter(categoryAdapter);

@@ -46,7 +46,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), showCategoryBusinesses.class);
-                intent.putExtra("businessId",category.getName());// take the name of the category to the new redirected page
+                intent.putExtra("categoryName",category.getName());// take the name of the category to the new redirected page
                 v.getContext().startActivity(intent);
             }
         });

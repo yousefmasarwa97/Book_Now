@@ -141,7 +141,37 @@ public class DBHelper {
     }
 
 
+    public void fetchBusinessesByCategory(String categoryName, FirestoreCallback<List<User>> callback){
+        db.collection("Users").whereEqualTo("type","Business")
+                .whereEqualTo("category",categoryName)
+                .get()
+                .addOnCompleteListener(task->{
+                    if(task.isSuccessful()){
+                        List<User> businessList = new ArrayList<>();
+                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                            User user = documentSnapshot.toObject(User.class);
+                            if ("Business".equals(user.getType())){
+                                // set the values : name , imageURL, description, status
+                                user.setId(documentSnapshot.getId());
+                                String name = documentSnapshot.getString("name");
+                                user.setName(name);
+                                String imageURL = documentSnapshot.getString("imageURL");
+                                user.setImageURL(imageURL);
+                                String desc = documentSnapshot.getString("description");
+                                user.setDescription(desc);
 
+                                businessList.add(user);
+
+                            }
+
+                        }
+                        callback.onSuccess(businessList);
+                    }
+                    else {
+                        callback.onFailure(task.getException());
+                    }
+                });
+    }
 
     /**
      * Adds a customer with userId , and phoneNumber to Users collection.

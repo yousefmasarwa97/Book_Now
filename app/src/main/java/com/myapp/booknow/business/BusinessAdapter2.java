@@ -22,18 +22,18 @@ import java.util.List;
  * This adapter handles the layout and binding of business data
  * to the views defined in the ViewHolder.
  */
-public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.ViewHolder> {
+public class BusinessAdapter2 extends RecyclerView.Adapter<BusinessAdapter2.ViewHolder> {
 
     private List<User> businessList;
 
-    public BusinessAdapter(List<User> businessList) {
+    public BusinessAdapter2(List<User> businessList) {
         this.businessList = businessList;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.featured_card_design, parent, false);
+                .inflate(R.layout.featured_card_design_2, parent, false);
         return new ViewHolder(view);
     }
 
@@ -48,16 +48,16 @@ public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.ViewHo
 
         Glide.with(holder.itemView)
                 .load(business.getImageURL())
-                        .placeholder(R.drawable.business_icon)
-                                .error(R.drawable.ic_menu_gallery)//should change !!
-                                        .into(holder.businessLogo);
+                .placeholder(R.drawable.business_icon)
+                .error(R.drawable.ic_menu_gallery)//should change !!
+                .into(holder.businessLogo);
         //we can set other attributes !
         holder.itemView.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
                 Log.d("CHECKING IF BUSINESS INFO ARE CORRECT !!!! :: ","Name = " + business.getName() + "and description is = "+ business.getDescription()
-                +" and imageURL= " + business.getImageURL());
+                        +" and imageURL= " + business.getImageURL());
                 Intent intent = new Intent(v.getContext(), ShowBusinessActivity.class);
                 intent.putExtra("businessId",business.getId());
                 v.getContext().startActivity(intent);
@@ -74,12 +74,14 @@ public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.ViewHo
         public TextView businessName; // and other views
         public TextView businessDescription;
         public ImageView businessLogo;
+        public TextView businessStatus;
+
         public ViewHolder(View view) {
             super(view);
-
             businessName = view.findViewById(R.id.featured_title); // can replace with actual view ID
             businessLogo = view.findViewById(R.id.featured_image);
             businessDescription = view.findViewById(R.id.featured_descreption);
+            businessStatus = view.findViewById(R.id.business_status);
             // Initialize other views
         }
     }

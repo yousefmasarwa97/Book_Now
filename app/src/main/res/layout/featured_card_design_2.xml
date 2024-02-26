@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="8dp"
+    android:layout_margin="10dp"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:orientation="vertical">
+
+        <!-- Business image/logo  -->
+        <ImageView
+            android:id="@+id/featured_image"
+            android:layout_width="110dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/barber_example"
+            android:scaleType="centerCrop"/>
+
+
+        <!-- Business title TextView -->
+        <TextView
+            android:id="@+id/featured_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Barbershop"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:fontFamily="@font/brandon1"
+            android:layout_toRightOf="@id/featured_image"
+            android:layout_marginLeft="30dp"/>
+
+
+        <!-- Business description TextView -->
+        <TextView
+            android:id="@+id/featured_descreption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Come and get the best haircuts"
+            android:fontFamily="@font/brandon1"
+            android:textColor="@color/lightgrey"
+            android:textSize="12dp"
+            android:layout_toRightOf="@id/featured_image"
+            android:layout_below="@id/featured_title"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"/>
+
+
+        <!-- Business Status TextView -->
+        <TextView
+            android:id="@+id/business_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Open"
+            android:textColor="@color/green"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/featured_image"
+            android:layout_below="@id/featured_descreption"
+            android:layout_marginLeft="30dp"
+
+            />
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

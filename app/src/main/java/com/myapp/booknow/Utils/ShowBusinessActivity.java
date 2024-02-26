@@ -75,8 +75,8 @@ public class ShowBusinessActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ShowBusinessActivity.this, C_Dashboard.class);
-                startActivity(intent);
+//                Intent intent = new Intent(ShowBusinessActivity.this, C_Dashboard.class);
+//                startActivity(intent);
                 finish();
             }
         });
