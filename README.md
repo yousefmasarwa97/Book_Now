@@ -20,7 +20,14 @@ BookNow is an Android application designed to facilitate booking and managing ap
 ## Screenshots
 
 ### Customer UX
-![Customer Dashboard](ScreenShots/customerScreenShots/C_Dashboard1.png)
+<div style="display: flex; justify-content: space-around;">
+    <img src="ScreenShots/customerScreenShots/Customer_Login.png" alt="Customer Dashboard" width="400"/>
+    <img src="ScreenShots/customerScreenShots/C_Dashboard1.png" alt="Booking Appointment" width="400"/>
+</div>
+<div style="display: flex; justify-content: space-around;">
+    <img src="ScreenShots/customerScreenShots/C_Dashboard2.png" alt="Customer Dashboard" width="400"/>
+    <img src="ScreenShots/customerScreenShots/C_Dashboard3.png" alt="Booking Appointment" width="400"/>
+</div>
 
 ### Business UX
 ![Business Dashboard](/screenshots/business_dashboard.png)
