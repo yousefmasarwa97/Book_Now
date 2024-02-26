@@ -66,6 +66,13 @@ BookNow employs Firebase Authentication to securely authenticate and verify user
 
 ## Development Diagrams and Additional Resources
 
+- [Initiative Document](development_documents/Initiative_document.pdf)
+- [Document of Requirements](development_documents/Document_of_requirements.pdf)
+- [UML Diagrams](development_documents/UML_diagrams.pdf)
+
+
+
+
 For detailed UML diagrams and more screen shots, please visit the [Wiki](https://github.com/naelaboraya/BookNow/wiki).
 
 
