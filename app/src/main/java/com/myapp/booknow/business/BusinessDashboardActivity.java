@@ -284,6 +284,10 @@ public class BusinessDashboardActivity extends AppCompatActivity
             Intent edit_offer= new Intent(BusinessDashboardActivity.this, EditSpecialOffers.class);
             startActivity(edit_offer);
 
+        }else if (item_id == R.id.account) {
+            Intent account= new Intent(BusinessDashboardActivity.this, BusinessSetupActivity.class);
+            startActivity(account);
+
         }
 
 
