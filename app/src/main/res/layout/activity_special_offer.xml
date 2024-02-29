@@ -1,0 +1,58 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="?attr/dividerVertical"
+    >
+
+    <!--     Input Fields for New Service -->
+    <EditText
+        android:id="@+id/offerNameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="offer Name" />
+
+    <EditText
+        android:id="@+id/editofferdescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="edit offer description" />
+
+    <EditText
+        android:id="@+id/special_offers_duration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Duration (days)"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/selectDaysManagment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:drawableEnd="@drawable/arrow_drop_down_24"
+        android:hint="Select available days"
+        android:padding="10dp"
+        android:textColor="#000000"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/addoffer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add offer"
+        />
+
+    <!--    &lt;!&ndash; RecyclerView for Displaying List of Services &ndash;&gt;-->
+    <!--    <androidx.recyclerview.widget.RecyclerView-->
+    <!--        android:id="@+id/servicesRecyclerView"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        android:layout_marginTop="16dp"-->
+    <!--        android:layout_weight="1"-->
+    <!--        android:visibility="visible" />-->
+
+
+
+</LinearLayout>

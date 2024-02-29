@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view"
+    >
+
+    <!--    <group android:checkableBehavior="single">-->
+
+    <item
+        android:id="@+id/account"
+        android:icon="@drawable/baseline_person_24"
+        android:title="@string/profile"
+        android:visible="true"
+        app:actionViewClass="android.widget.Toolbar" />
+
+    <item
+        android:id="@+id/working_hours"
+        android:icon="@drawable/edit"
+        android:title="@string/editworkinghours"
+        app:actionViewClass="android.widget.Toolbar" />
+    <item
+        android:id="@+id/edit_service"
+        android:icon="@drawable/edit"
+        android:title="@string/editservice" />
+
+    <item
+        android:id="@+id/service_provider"
+        android:icon="@drawable/edit"
+        android:title="@string/editserviceprovider" />
+
+
+    <item
+        android:id="@+id/specific_dates"
+        android:icon="@drawable/change"
+        android:title="@string/changespecificdatehours" />
+
+    <item
+        android:id="@+id/special_offers"
+        android:icon="@drawable/ic_menu_camera"
+        android:title="@string/managespecialoffers" />
+
+
+
+    <!--        <item-->
+    <!--            android:id="@+id/nav_send"-->
+    <!--            android:icon="@drawable/ic_menu_send"-->
+    <!--            android:title="@string/menu_send" />-->
+    <item
+        android:id="@+id/log_out"
+        android:icon="@drawable/baseline_logout_24"
+        android:title="@string/logout"
+        />
+
+    <!--</group>-->
+
+</menu>
+
+
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<menu xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    xmlns:tools="http://schemas.android.com/tools"-->
+    <!--    tools:showIn="navigation_view">-->
+
+    <!--    <group android:checkableBehavior="single">-->
+    <!--        <item-->
+    <!--            android:id="@+id/nav_home"-->
+    <!--            android:icon="@drawable/ic_menu_camera"-->
+    <!--            android:title="@string/menu_home" />-->
+    <!--        <item-->
+    <!--            android:id="@+id/nav_gallery"-->
+    <!--            android:icon="@drawable/ic_menu_gallery"-->
+    <!--            android:title="@string/menu_gallery" />-->
+    <!--        <item-->
+    <!--            android:id="@+id/nav_slideshow"-->
+    <!--            android:icon="@drawable/ic_menu_slideshow"-->
+    <!--            android:title="@string/menu_slideshow" />-->
+    <!--    </group>-->
+    <!--</menu>-->

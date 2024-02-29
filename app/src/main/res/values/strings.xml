@@ -23,4 +23,13 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="s1">hello\n</string>
+    <string name="copyright">user\n</string>
+    <string name="logout">logout\n</string>
+    <string name="managespecialoffers">manage special hours</string>
+    <string name="changespecificdatehours">change specific dates</string>
+    <string name="editserviceprovider">edit service provider</string>
+    <string name="editservice">edit service</string>
+    <string name="editworkinghours">edit working hours</string>
+    <string name="profile">profile</string>
 </resources>
