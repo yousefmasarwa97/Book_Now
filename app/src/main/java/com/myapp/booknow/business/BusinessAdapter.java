@@ -76,7 +76,6 @@ public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.ViewHo
         public ImageView businessLogo;
         public ViewHolder(View view) {
             super(view);
-
             businessName = view.findViewById(R.id.featured_title); // can replace with actual view ID
             businessLogo = view.findViewById(R.id.featured_image);
             businessDescription = view.findViewById(R.id.featured_descreption);
