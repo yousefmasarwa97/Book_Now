@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -38,6 +39,7 @@ public class BusinessSetupActivity extends AppCompatActivity {
 
 
     private ImageView businessImageView;
+    private ImageView backButton;
 
     private TextView tvAddPhoto;
 
@@ -56,8 +58,16 @@ public class BusinessSetupActivity extends AppCompatActivity {
 
         businessImageView = findViewById(R.id.businessImageView);
         tvAddPhoto = findViewById(R.id.add_photo_text);
+        backButton=findViewById(R.id.setup_back_icon);
 
         tvAddPhoto.setClickable(true);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         tvAddPhoto.setOnClickListener(view -> {
             // Open gallery to select an image

@@ -26,6 +26,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,8 +37,8 @@ import com.myapp.booknow.Utils.Appointment;
 import com.myapp.booknow.Utils.AppointmentAdapter;
 import com.myapp.booknow.R;
 import com.myapp.booknow.Utils.DBHelper;
+import com.myapp.booknow.Utils.ServiceAdapter;
 import com.myapp.booknow.Utils.ServiceProviderSetNameAndServicesActivity;
-import com.myapp.booknow.Utils.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +58,7 @@ public class BusinessDashboardActivity extends AppCompatActivity
     private AppointmentAdapter appointmentAdapter;
     //    private offersAdapter offersAdapter;
     private List<Appointment> appointmentList;
+    private List<BusinessService> specialOffers ;
     private DBHelper dbHelper;
     public ImageView menu_button;
     private TextView textViewWelcome;
@@ -64,6 +67,7 @@ public class BusinessDashboardActivity extends AppCompatActivity
     private static final String TAG = "HotSpotsFragment";
     private MapView mapView;
     private GoogleMap map;
+    private ServiceAdapter serviceAdapter;
 
 
     @SuppressLint("MissingInflatedId")
@@ -155,44 +159,41 @@ public class BusinessDashboardActivity extends AppCompatActivity
 
 
 
-//    private void specialOffers_recycle() {
-//
-//        specialOffers_recycle.setHasFixedSize(true);
-//        specialOffers_recycle.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-//
-//        specialOffers = new ArrayList<BusinessSpecialOffers>();
-//
-//        dbHelper.fetchSpecialOfeer(new FirestoreCallback<List<BusinessSpecialOffers>>() {
-//            public void onSuccess(List<User> result) {
-//                for(BusinessSpecialOffers offers : result){
-//                    Log.d("Check businesses (RecyclerView) ",offers.toString()+" ");
-//
-//                    specialOffers.clear();
-//                    specialOffers.addAll(result);
-//                    specialOffers.notifyAll();
-//                    Log.d("Check businesses (RecyclerView) size : ",""+result.size());
-//
-//                }
-//            }
+    private void specialOffers_recycle() {
+        specialOffers_recycle.setHasFixedSize(true);
+        specialOffers_recycle.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser curr_user = mAuth.getCurrentUser();
+        String businessId = null;
+        if (curr_user != null) {
+            businessId = curr_user.getUid();
+        }
 
+        specialOffers = new ArrayList<BusinessService>();
 
+        dbHelper.fetchBusinessServices(businessId,
+                new OnSuccessListener<List<BusinessService>>() {
+                    @Override
+                    public void onSuccess(List<BusinessService> result) {
+                        for (BusinessService businessService : result) {
+                            Log.d("AppointmentListCheck", "appointment = " + businessService.toString());
+                        }
 
-//            @Override
-//            public void onSuccess(List<BusinessSpecialOffers> result) {
-//
-//            }
-
-//            @Override
-//            public void onFailure(Exception e) {//error fetching businesses
-//                Log.d("Checking businesses (RecyclerView) ",e.getMessage());
-//            }
-//        });
-
-//        business_adapter = new BusinessAdapter(businesses);
-//
-//        businessesRecycler.setAdapter(business_adapter);
-
-
+                        specialOffers.clear();
+                        specialOffers.addAll(result);
+                        serviceAdapter.notifyDataSetChanged();
+                        Log.d("appointmentsList", "Number of appointments fetched: " + result.size());
+                    }
+                },
+                new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Handle failure
+                    }
+                });
+        serviceAdapter=new ServiceAdapter(specialOffers);
+        specialOffers_recycle.setAdapter(serviceAdapter);
+    }
 
 
     private void appointmentsRecycler_B() {
@@ -234,6 +235,8 @@ public class BusinessDashboardActivity extends AppCompatActivity
                     }
                 }
         );
+        appointmentAdapter=new AppointmentAdapter(appointmentList);
+        appointmentsRecycler_B.setAdapter(appointmentAdapter);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -284,7 +287,8 @@ public class BusinessDashboardActivity extends AppCompatActivity
             Intent edit_offer= new Intent(BusinessDashboardActivity.this, EditSpecialOffers.class);
             startActivity(edit_offer);
 
-        }else if (item_id == R.id.account) {
+        }
+        else if (item_id == R.id.account) {
             Intent account= new Intent(BusinessDashboardActivity.this, BusinessSetupActivity.class);
             startActivity(account);
 
@@ -295,6 +299,5 @@ public class BusinessDashboardActivity extends AppCompatActivity
         return true;
 
 
-    }
 }
-
+}

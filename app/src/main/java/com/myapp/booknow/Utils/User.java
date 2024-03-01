@@ -1,6 +1,7 @@
 package com.myapp.booknow.Utils;
 
 import com.google.firebase.firestore.PropertyName;
+import com.myapp.booknow.business.BusinessSpecialOffers;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -31,6 +32,8 @@ public class User {
 
     private String imageURL;
 
+    private String specialOffer;
+
 
 
 
@@ -49,6 +52,7 @@ public class User {
         this.address = "";
         this.businessHours = "";
         this.description = "";
+        this.specialOffer ="";
     }
 
 
@@ -61,6 +65,7 @@ public class User {
         this.phone = phone;
         this.address = address;
         this.businessHours = businessHours;
+        this.specialOffer = specialOffer;
     }
 
     @PropertyName("userID")
@@ -153,6 +158,7 @@ public class User {
         result.put("name", name);
         result.put("email", email);
         result.put("phone", phone);
+        result.put("specialoffer",specialOffer);
         //if there is other fields... we can add here !
 
 

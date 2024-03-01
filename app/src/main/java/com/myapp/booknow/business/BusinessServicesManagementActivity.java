@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ public class BusinessServicesManagementActivity extends AppCompatActivity {
 
     private TextView tvDay;
     boolean[] selectedDay;
+    private ImageView backButton;
     ArrayList<Integer> dayList = new ArrayList<>();
     String[] dayArray = {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
 
@@ -50,6 +52,7 @@ public class BusinessServicesManagementActivity extends AppCompatActivity {
         serviceDescriptionEditText = findViewById(R.id.serviceDescriptionEditText);
         serviceDurationEditText = findViewById(R.id.serviceDurationEditText);
         addServiceButton = findViewById(R.id.addServiceButton);
+        backButton = findViewById(R.id.service_back_icon);
 
 
 
@@ -142,6 +145,12 @@ public class BusinessServicesManagementActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addNewService();
+            }
+        });
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 

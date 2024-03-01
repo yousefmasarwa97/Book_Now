@@ -1,7 +1,9 @@
 package com.myapp.booknow.business;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -29,6 +31,7 @@ public class BusinessRegularHoursEditActivity extends AppCompatActivity {
     TimePicker timePickerThursdayOpen, timePickerThursdayClose;
     TimePicker timePickerFridayOpen, timePickerFridayClose;
     TimePicker timePickerSaturdayOpen, timePickerSaturdayClose;
+    private ImageView backButton;
 
 
 
@@ -40,7 +43,7 @@ public class BusinessRegularHoursEditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_business_regular_hours_edit);
 
         // Initializing TimePickers for each day
-
+        backButton=findViewById(R.id.hours_back_icon);
         timePickerSundayOpen = findViewById(R.id.timePickerSundayOpen);
         timePickerSundayClose = findViewById(R.id.timePickerSundayClose);
 
@@ -61,6 +64,13 @@ public class BusinessRegularHoursEditActivity extends AppCompatActivity {
 
         timePickerSaturdayOpen = findViewById(R.id.timePickerSaturdayOpen);
         timePickerSaturdayClose = findViewById(R.id.timePickerSaturdayClose);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
         //handling "save" button

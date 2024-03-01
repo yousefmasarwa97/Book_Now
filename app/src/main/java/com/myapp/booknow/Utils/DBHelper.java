@@ -15,6 +15,7 @@ import com.myapp.booknow.FirestoreCallback;
 import com.myapp.booknow.ServiceAvailabilityCallback;
 import com.myapp.booknow.business.BusinessRegularHours;
 import com.myapp.booknow.business.BusinessService;
+import com.myapp.booknow.business.BusinessSpecialOffers;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -110,6 +111,7 @@ public class DBHelper {
                             appointment.setBusinessId(documentSnapshot.getString("businessId"));
                             appointment.setServiceId(documentSnapshot.getString("serviceId"));
                             appointment.setProviderId(documentSnapshot.getString("providerId"));
+
                             appointment.setCustomerId(documentSnapshot.getString("customerId"));
                             appointment.setStatus(documentSnapshot.getString("status"));
 
@@ -130,7 +132,12 @@ public class DBHelper {
                 });
     }
 
-
+    public void updateSpecialOffers (BusinessSpecialOffers specialOffers, OnSuccessListener  onSuccessListener, OnFailureListener onFailureListener){
+        db.collection("SpecialOffers").document(specialOffers.getOfferId())
+                .set(specialOffers)
+                .addOnSuccessListener(onSuccessListener)
+                .addOnFailureListener(onFailureListener);
+    }
 
 
     /**

@@ -1,28 +1,51 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
+
+    <ImageView
+        android:id="@+id/service_back_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_arrow_back_24"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/back_icon_selector"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SERVICE EDITOR"
+        android:fontFamily="@font/muli_black"
+        android:textSize="25sp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"/>
     <!-- Input Fields for New Service -->
     <EditText
         android:id="@+id/serviceNameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Service Name" />
+        android:hint="Service Name"
+        android:fontFamily="@font/muli_black"/>
 
     <EditText
         android:id="@+id/serviceDescriptionEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Service Description" />
+        android:hint="Service Description"
+        android:fontFamily="@font/muli_black"/>
 
     <EditText
         android:id="@+id/serviceDurationEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:hint="Duration (minutes)" />
+        android:hint="Duration (minutes)"
+        android:fontFamily="@font/muli_black"/>
 
     <TextView
         android:id="@+id/selectDaysManagment"
@@ -33,13 +56,20 @@
         android:hint="Select available days"
         android:padding="10dp"
         android:textColor="#000000"
-        android:visibility="visible" />
+        android:visibility="visible"
+        android:fontFamily="@font/muli_black"
+        android:textSize="16sp"
+        />
 
     <Button
         android:id="@+id/addServiceButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Service" />
+        android:layout_marginTop="20dp"
+        android:background="@color/black"
+        android:textColor="@color/white"
+        app:backgroundTint="@null"
+        android:text="ADD SERVICE" />
 
     <!-- RecyclerView for Displaying List of Services -->
     <androidx.recyclerview.widget.RecyclerView
@@ -51,3 +81,12 @@
         android:layout_marginTop="16dp" />
 
 </LinearLayout>
+
+
+
+
+
+
+
+
+
