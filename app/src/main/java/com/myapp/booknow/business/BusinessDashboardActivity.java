@@ -80,7 +80,7 @@ public class BusinessDashboardActivity extends AppCompatActivity
         dbHelper = new DBHelper();
 
         appointmentsRecycler_B = findViewById(R.id.appointments_recycler);
-        specialOffers_recycle = findViewById(R.id.featured_recycler);
+        specialOffers_recycle = findViewById(R.id.offer_recycle);
 
         appointmentList = new ArrayList<>();
         appointmentAdapter = new AppointmentAdapter(appointmentList);
@@ -119,7 +119,7 @@ public class BusinessDashboardActivity extends AppCompatActivity
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        //specialOffers_recycle();
+        specialOffers_recycle();
         appointmentsRecycler_B();
     }
 
@@ -176,8 +176,8 @@ public class BusinessDashboardActivity extends AppCompatActivity
                 new OnSuccessListener<List<BusinessSpecialOffers>>() {
                     @Override
                     public void onSuccess(List<BusinessSpecialOffers> result) {
-                        for (BusinessSpecialOffers businessService : result) {
-                            Log.d("AppointmentListCheck", "appointment = " + businessService.toString());
+                        for (BusinessSpecialOffers businessoffer : result) {
+                            Log.d("AppointmentListCheck", "appointment = " + businessoffer.toString());
                         }
 
                         specialOffers.clear();

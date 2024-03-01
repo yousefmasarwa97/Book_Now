@@ -121,19 +121,11 @@
                         android:background="@color/banner_background_light"
                         android:orientation="vertical">
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="100dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="50dp"
-                            android:text="SPECIAL OFFERS"
-                            android:textAllCaps="true"
-                            android:textColor="@color/colorAccent"
-                            android:src="@drawable/special_offer"
-                            android:textSize="20sp" />
+
 
                         <androidx.recyclerview.widget.RecyclerView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/offer_recycle"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:text="@string/s1"
@@ -181,7 +173,16 @@
 
 
                 </LinearLayout>
-
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="59dp"-->
+<!--                    android:layout_marginLeft="10dp"-->
+<!--                    android:layout_marginTop="0dp"-->
+<!--                    android:text="SPECIAL OFFERS"-->
+<!--                    android:textAllCaps="true"-->
+<!--                    android:textColor="@color/colorAccent"-->
+<!--                    android:src="@drawable/special_offer"-->
+<!--                    android:textSize="20sp" />-->
                 <!--                <fragment-->
                 <!--                    android:id="@+id/map"-->
                 <!--                    android:name="com.google.android.gms.maps.SupportMapFragment"-->
