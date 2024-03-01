@@ -6,12 +6,14 @@ import java.util.List;
 
 public class BusinessSpecialOffers {
 
-    @PropertyName("oferrId")
+    @PropertyName("offerId")
     private String offerId;
     @PropertyName("businessId")
     private String businessId;
     @PropertyName("name")
     private String name;
+    @PropertyName("imageURL")
+    private String imageURL;
     @PropertyName("description\n")
     private String description;
     @PropertyName("duration")
@@ -20,7 +22,7 @@ public class BusinessSpecialOffers {
     private List<String> workingDays;//stores the days the service is available at the business.
 
     private List<String> providers;//stores the providers ids (providers that give this service)
-
+    public BusinessSpecialOffers(){}
     public BusinessSpecialOffers(String businessId, String description, int duration){
 
     }
@@ -78,6 +80,13 @@ public class BusinessSpecialOffers {
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public List<String> getProviders() {

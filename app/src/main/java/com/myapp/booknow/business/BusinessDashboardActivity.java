@@ -182,7 +182,7 @@ public class BusinessDashboardActivity extends AppCompatActivity
 
                         specialOffers.clear();
                         specialOffers.addAll(result);
-                        serviceAdapter.notifyDataSetChanged();
+                        offerAdapter.notifyDataSetChanged();
                         Log.d("appointmentsList", "Number of appointments fetched: " + result.size());
                     }
                 },
@@ -192,8 +192,8 @@ public class BusinessDashboardActivity extends AppCompatActivity
                         // Handle failure
                     }
                 });
-        serviceAdapter=new ServiceAdapter(specialOffers);
-        specialOffers_recycle.setAdapter(serviceAdapter);
+        offerAdapter=new SpecialOfferAdapter(specialOffers);
+        specialOffers_recycle.setAdapter(offerAdapter);
     }
 
 

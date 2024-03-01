@@ -51,16 +51,16 @@ public class SpecialOfferAdapter extends RecyclerView.Adapter<SpecialOfferAdapte
                 .load(offer.getImageURL())
                 .placeholder(R.drawable.business_icon)
                 .error(R.drawable.ic_menu_gallery)//should change !!
-                .into(holder.businessLogo);
+                .into(holder.offerLogo);
         //we can set other attributes !
         holder.itemView.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-                Log.d("CHECKING IF BUSINESS INFO ARE CORRECT !!!! :: ","Name = " + business.getName() + "and description is = "+ business.getDescription()
-                        +" and imageURL= " + business.getImageURL());
+                Log.d("CHECKING IF BUSINESS INFO ARE CORRECT !!!! :: ","Name = " + offer.getName() + "and description is = "+ offer.getDescription()
+                        +" and imageURL= " + offer.getImageURL());
                 Intent intent = new Intent(v.getContext(), ShowBusinessActivity.class);
-                intent.putExtra("businessId",business.getId());
+                intent.putExtra("businessId",offer.getOfferId());
                 v.getContext().startActivity(intent);
             }
         });
@@ -68,7 +68,7 @@ public class SpecialOfferAdapter extends RecyclerView.Adapter<SpecialOfferAdapte
 
     @Override
     public int getItemCount() {
-        return businessList.size();
+        return offersList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -85,8 +85,8 @@ public class SpecialOfferAdapter extends RecyclerView.Adapter<SpecialOfferAdapte
     }
 
 
-    public void setBusinesses(List<User> businesses) {
-        this.businessList = businesses;
+    public void setBusinesses(List<BusinessSpecialOffers> offers) {
+        this.offersList = offers;
     }
 
 
