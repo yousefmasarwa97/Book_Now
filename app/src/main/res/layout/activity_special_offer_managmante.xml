@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".business.specialOfferManagmante">
+
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@drawable/special_offer"
+        >
+
+        <ImageView
+            android:id="@+id/service_back_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_arrow_back_24"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/back_icon_selector"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SPECIAL OFFER EDITOR"
+            android:fontFamily="@font/muli_black"
+            android:textSize="25sp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:textColor="@color/black"/>
+        <!--     Input Fields for New Service -->
+        <EditText
+            android:id="@+id/offerNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/muli_black"
+            android:hint="offer Name" />
+
+        <EditText
+            android:id="@+id/editofferdescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/muli_black"
+            android:hint="edit offer description" />
+
+        <EditText
+            android:id="@+id/special_offers_duration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Duration (days)"
+            android:fontFamily="@font/muli_black"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/selectDaysManagment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:drawableEnd="@drawable/arrow_drop_down_24"
+            android:hint="Select available days"
+            android:padding="10dp"
+            android:textColor="#000000"
+            android:fontFamily="@font/muli_black"
+            android:visibility="visible" />
+        <ImageView
+            android:id="@+id/businessImageView"
+            android:layout_width="136dp"
+            android:layout_height="106dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/prod"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/setup_photo_text" />
+
+        <!-- "Click to Add Photo" Text -->
+        <TextView
+            android:id="@+id/add_photo_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Click to Add Photo"
+            android:fontFamily="@font/muli_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/businessImageView" />
+
+        <Button
+            android:id="@+id/addoffer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add offer"
+            android:background="@color/black"
+            app:backgroundTint="@null"
+            />
+
+        <!--    &lt;!&ndash; RecyclerView for Displaying List of Services &ndash;&gt;-->
+        <!--    <androidx.recyclerview.widget.RecyclerView-->
+        <!--        android:id="@+id/servicesRecyclerView"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="0dp"-->
+        <!--        android:layout_marginTop="16dp"-->
+        <!--        android:layout_weight="1"-->
+        <!--        android:visibility="visible" />-->
+
+
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

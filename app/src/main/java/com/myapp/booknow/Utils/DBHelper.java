@@ -1392,6 +1392,78 @@ public void fetchUpcomingAppointmentsForCustomer(String customerId, FirestoreCal
         });
     }
 
+    /**
+     *
+     * //---------------------------------------------SPECIAL OFFERS----------------------------------------------------//
+     *
+     */
+    public void addBusinessoffer(BusinessSpecialOffers offers, OnSuccessListener<Void> onSuccessListener, OnFailureListener onFailureListener) {
+//        db.collection("BusinessServices").document(service.getServiceId())
+//                .set(service)
+//                .addOnSuccessListener(onSuccessListener)
+//                .addOnFailureListener(onFailureListener);
+
+        String documentId = (offers.getOfferId() == null || offers.getOfferId().isEmpty())
+                ? db.collection("BusinessOFFERS").document().getId()
+                : offers.getOfferId();
+
+        offers.setofferId(documentId); // Set the generated ID back to the service object
+
+        db.collection("BusinessOFFERS").document(documentId)
+                .set(offers)
+                .addOnSuccessListener(onSuccessListener)
+                .addOnFailureListener(onFailureListener);
+    }
+
+
+    /**
+     * Fetches/refreshes the services, and gets them from database.
+     * @param businessId id of the business associated with services we want to fetch.
+     * @param onSuccessListener
+     * @param onFailureListener
+     */
+    public void fetchBusinessoffer(String businessId, OnSuccessListener<List<BusinessSpecialOffers>> onSuccessListener, OnFailureListener onFailureListener) {
+        db.collection("BusinessOFFERS")
+                .whereEqualTo("businessId", businessId)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    List<BusinessSpecialOffers> offers = new ArrayList<>();
+                    for (DocumentSnapshot snapshot : queryDocumentSnapshots.getDocuments()) {
+                        BusinessSpecialOffers offer = snapshot.toObject(BusinessSpecialOffers.class);
+                        offers.add(offer);
+                    }
+                    onSuccessListener.onSuccess(offers);
+                })
+                .addOnFailureListener(onFailureListener);
+    }
+
+
+    /**
+     * Handles any change/update in a service information (Name/Description/Duration).
+     * @param offer a BusinessService object.
+     * The Id should be associated with the service object itself.
+     */
+    public void updateBusinessoffer (BusinessSpecialOffers offer ,OnSuccessListener  onSuccessListener, OnFailureListener onFailureListener){
+        db.collection("BusinessOFFERS").document(offer.getOfferId())
+                .set(offer)
+                .addOnSuccessListener(onSuccessListener)
+                .addOnFailureListener(onFailureListener);
+    }
+
+
+    /**
+     * Deletes the service with id : 'serviceId' from database.
+     * @param offerID the id of the service.
+     * @param onSuccessListener
+     * @param onFailureListener
+     */
+    public void deleteBusinessoffer(String offerID, OnSuccessListener<Void> onSuccessListener, OnFailureListener onFailureListener) {
+        db.collection("BusinessOFFERS").document(offerID)
+                .delete()
+                .addOnSuccessListener(onSuccessListener)
+                .addOnFailureListener(onFailureListener);
+    }
+
 
 
 

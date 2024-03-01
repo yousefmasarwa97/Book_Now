@@ -39,6 +39,7 @@ import com.myapp.booknow.R;
 import com.myapp.booknow.Utils.DBHelper;
 import com.myapp.booknow.Utils.ServiceAdapter;
 import com.myapp.booknow.Utils.ServiceProviderSetNameAndServicesActivity;
+import com.myapp.booknow.Utils.SpecialOfferAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +59,7 @@ public class BusinessDashboardActivity extends AppCompatActivity
     private AppointmentAdapter appointmentAdapter;
     //    private offersAdapter offersAdapter;
     private List<Appointment> appointmentList;
-    private List<BusinessService> specialOffers ;
+    private List<BusinessSpecialOffers> specialOffers ;
     private DBHelper dbHelper;
     public ImageView menu_button;
     private TextView textViewWelcome;
@@ -67,7 +68,7 @@ public class BusinessDashboardActivity extends AppCompatActivity
     private static final String TAG = "HotSpotsFragment";
     private MapView mapView;
     private GoogleMap map;
-    private ServiceAdapter serviceAdapter;
+    private SpecialOfferAdapter offerAdapter;
 
 
     @SuppressLint("MissingInflatedId")
@@ -169,13 +170,13 @@ public class BusinessDashboardActivity extends AppCompatActivity
             businessId = curr_user.getUid();
         }
 
-        specialOffers = new ArrayList<BusinessService>();
+        specialOffers = new ArrayList<BusinessSpecialOffers>();
 
-        dbHelper.fetchBusinessServices(businessId,
-                new OnSuccessListener<List<BusinessService>>() {
+        dbHelper.fetchBusinessoffer(businessId,
+                new OnSuccessListener<List<BusinessSpecialOffers>>() {
                     @Override
-                    public void onSuccess(List<BusinessService> result) {
-                        for (BusinessService businessService : result) {
+                    public void onSuccess(List<BusinessSpecialOffers> result) {
+                        for (BusinessSpecialOffers businessService : result) {
                             Log.d("AppointmentListCheck", "appointment = " + businessService.toString());
                         }
 
@@ -284,7 +285,7 @@ public class BusinessDashboardActivity extends AppCompatActivity
             startActivity(edit_specific_dates);
 
         }else if (item_id == R.id.special_offers) {
-            Intent edit_offer= new Intent(BusinessDashboardActivity.this, EditSpecialOffers.class);
+            Intent edit_offer= new Intent(BusinessDashboardActivity.this, specialOfferManagmante.class);
             startActivity(edit_offer);
 
         }
