@@ -1,6 +1,7 @@
 package com.myapp.booknow.Utils;
 
 import com.google.firebase.firestore.Exclude;
+import com.google.firebase.firestore.PropertyName;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -13,7 +14,10 @@ public class Appointment {
     private String businessId;
     private String serviceId;
     private String providerId;
+    private String customerName;
     private String customerId;
+    @PropertyName("imageURL")
+    private String imageURL;
     @Exclude
     private LocalDate date; // For the date of the appointment
    @Exclude
@@ -89,7 +93,12 @@ public class Appointment {
     public void setProviderId(String providerId) {
         this.providerId = providerId;
     }
-
+    public String getCustomername() {
+        return customerName;
+    }
+    public void setCustomername(String customername) {
+        this.customerName = customername;
+    }
     public String getCustomerId() {
         return customerId;
     }
@@ -128,6 +137,13 @@ public class Appointment {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
 
@@ -177,6 +193,8 @@ public class Appointment {
                 ", serviceId='" + serviceId + '\'' +
                 ", providerId='" + providerId + '\'' +
                 ", customerId='" + customerId + '\'' +
+                ", customername='" + customerName + '\'' +
+                ", customerimage='" + imageURL + '\'' +
                 ", date=" + (date != null ? date.toString() : "null") +
                 ", startTime=" + (startTime != null ? startTime.toString() : "null") +
                 ", endTime=" + (endTime != null ? endTime.toString() : "null") +

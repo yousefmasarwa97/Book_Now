@@ -42,7 +42,7 @@
         android:id="@+id/user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="NAEL ABORAYA"
+        android:text="Customer"
         android:layout_toRightOf="@+id/profile_image"
         android:layout_above="@+id/book_now"
         android:layout_marginBottom="50dp"

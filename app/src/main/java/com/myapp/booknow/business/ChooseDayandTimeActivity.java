@@ -29,6 +29,7 @@ public class ChooseDayandTimeActivity extends AppCompatActivity {
 
 
     private String businessId , serviceId;
+
     private CalendarView calendarView;
     private Button nextButton;
 
@@ -145,6 +146,7 @@ public class ChooseDayandTimeActivity extends AppCompatActivity {
                 intent.putExtra("businessId",businessId);
                 intent.putExtra("serviceId",serviceId);
                 intent.putExtra("selectedDate",selectedDate);
+
 
                 startActivity(intent);
             }

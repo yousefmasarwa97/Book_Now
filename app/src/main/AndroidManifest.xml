@@ -14,6 +14,9 @@
         android:theme="@style/Theme.BookNow"
         tools:targetApi="31">
         <activity
+            android:name=".Customer.C_profile"
+            android:exported="false" />
+        <activity
             android:name=".business.specialOfferManagmante"
             android:exported="false" />
         <activity

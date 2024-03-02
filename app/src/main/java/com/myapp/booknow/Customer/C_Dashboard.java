@@ -444,6 +444,11 @@ public class C_Dashboard extends AppCompatActivity implements NavigationView.OnN
                 startActivity(new Intent(this, viewUpcomingAppointments.class));
             }
         }
+        else if(itemId == R.id.profile_IMG){
+            if (!isCurrentPage(C_profile.class)) {
+                startActivity(new Intent(this, C_profile.class));
+            }
+        }
         else if(itemId == R.id.log_out){
             showLogoutConfirmationDialog();
         }

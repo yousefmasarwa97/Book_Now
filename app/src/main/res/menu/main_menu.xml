@@ -6,6 +6,13 @@
     <group android:checkableBehavior="single">
 
         <item
+            android:id="@+id/profile_IMG"
+            android:icon="@drawable/profile_icon"
+            android:iconTint="@color/lightgrey"
+            android:title="update profile" />
+
+
+        <item
             android:id="@+id/nav_home"
             android:icon="@drawable/baseline_home_24"
             android:iconTint="@color/lightgrey"

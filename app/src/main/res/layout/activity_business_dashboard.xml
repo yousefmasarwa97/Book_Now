@@ -139,7 +139,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="101dp"
+                    android:layout_height="350dp"
                     android:layout_marginTop="30dp"
                     android:orientation="vertical"
                     android:padding="20dp">
@@ -168,8 +168,8 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/appointments_recycler"
-                        android:layout_width="315dp"
-                        android:layout_height="72dp" />
+                        android:layout_width="match_parent"
+                        android:layout_height="247dp" />
 
 
                 </LinearLayout>

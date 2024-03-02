@@ -111,6 +111,7 @@ public class DBHelper {
                             appointment.setBusinessId(documentSnapshot.getString("businessId"));
                             appointment.setServiceId(documentSnapshot.getString("serviceId"));
                             appointment.setProviderId(documentSnapshot.getString("providerId"));
+                            appointment.setCustomername(documentSnapshot.getString("customerName"));
 
                             appointment.setCustomerId(documentSnapshot.getString("customerId"));
                             appointment.setStatus(documentSnapshot.getString("status"));
@@ -1064,9 +1065,14 @@ private WorkingHours convertStringHoursToTimestamp(String openTimeStr, String cl
             }
         });
     }
+//    public void bookappointmentforcustomer(String UrImg, String customerName,String businessId){
+//        db.collection("Appointments").document(businessId)
+//
+//    }
 
 
-        public void bookOrUpdateAppointment(String businessId, String customerId, String serviceId, LocalDate selectedDate, String timeSlot, OnSuccessListener<Void> onSuccessListener, OnFailureListener onFailureListener) {
+
+        public void bookOrUpdateAppointment(String customerName,String UrImg,String businessId, String customerId, String serviceId, LocalDate selectedDate, String timeSlot, OnSuccessListener<Void> onSuccessListener, OnFailureListener onFailureListener) {
             // Assuming Appointment is a class you've defined to model your appointments
             String[] times = timeSlot.split(" - ");
             if (times.length != 2) return; // Basic validation
@@ -1076,7 +1082,12 @@ private WorkingHours convertStringHoursToTimestamp(String openTimeStr, String cl
             Timestamp dateStamp = Utils.localDateToTimestamp(selectedDate);//converting date to 'TimeStamp' to use in DB.
 
 
+
             Map<String, Object> appointment = new HashMap<>();
+
+
+            appointment.put("CustomerName",customerName);
+            appointment.put("customer image",UrImg);
             appointment.put("businessId", businessId);
             appointment.put("customerId", customerId);
             appointment.put("serviceId", serviceId);
@@ -1463,6 +1474,80 @@ public void fetchUpcomingAppointmentsForCustomer(String customerId, FirestoreCal
                 .addOnSuccessListener(onSuccessListener)
                 .addOnFailureListener(onFailureListener);
     }
+
+
+    public void update_name_and_image(String customerid,String name,String image, FirestoreCallback<List<Appointment>> callback) {
+
+        List<Appointment> appointments = new ArrayList<>();//List of appointments
+        LocalDate S=LocalDate.now().atStartOfDay().toLocalDate();
+
+        // Correct conversion
+//        Timestamp startTimestamp = Utils.localDateToTimestamp(S);
+//        Timestamp endTimestamp = Utils.localDateToTimestamp(S.plusDays(7));
+
+        db.collection("Appointments")
+                .whereEqualTo("customerId", customerid)
+                //.whereGreaterThanOrEqualTo("date", startTimestamp)
+                //.whereLessThan("date", endTimestamp)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                        //Appointment appointment = documentSnapshot.toObject(Appointment.class);/////cehck if not NULL !!!!!
+                        Appointment appointment = new Appointment();
+                        if (documentSnapshot.exists()) {
+
+//
+//                            // Directly using Timestamp from Firestore
+//                            Timestamp DATE = documentSnapshot.getTimestamp("date");
+//                            Timestamp START = documentSnapshot.getTimestamp("startTime");
+//                            Timestamp END = documentSnapshot.getTimestamp("endTime");
+//
+//                            LocalDate local_date = Utils.timestampToLocalDate(DATE);
+//                            // LocalTime local_start = Utils.timestampToLocalTime(START);
+//                            //LocalTime local_end = Utils.timestampToLocalTime(END);
+//
+//
+//                            // If they don't, we'll need to adjust them accordingly
+//                            appointment.setDate(local_date); // Adjust if your setDate expects a different type
+//                            // appointment.setStartTime(local_start); // Adjust if your setStartTime expects a different type
+//                            //appointment.setEndTime(local_end); // Adjust if your setEndTime expects a different type
+
+                            // Set other fields as necessary
+                            appointment.setAppointmentId(documentSnapshot.getId());
+                            appointment.setBusinessId(documentSnapshot.getString("businessId"));
+                            appointment.setServiceId(documentSnapshot.getString("serviceId"));
+                            appointment.setProviderId(documentSnapshot.getString("providerId"));
+                            appointment.setCustomername(documentSnapshot.getString("customerName"));
+                            appointment.setCustomername(name);
+                            appointment.setImageURL(image);
+
+                            appointment.setCustomerId(documentSnapshot.getString("customerId"));
+                            appointment.setStatus(documentSnapshot.getString("status"));
+
+                            // Now, 'appointment' is populated with the data from the documentSnapshot
+                        }
+
+
+                        appointments.add(appointment);
+                    }
+                    if (callback != null) {
+                        callback.onSuccess(appointments);
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    if (callback != null) {
+                        callback.onFailure(e);
+                    }
+                });
+    }
+//    public void update_name_and_image(String customerid,String name,String image){
+////        Map<String, Object> customerupdate = new HashMap<>();
+////        customerupdate.put("CustomerName",name);
+////        customerupdate.put("customer image",image);
+//        db.collection("Appointments").whereEqualTo()
+////                .addOnSuccessListener(onSuccessListener)
+////                .addOnFailureListener(onFailureListener);
+//    }
 
 
 

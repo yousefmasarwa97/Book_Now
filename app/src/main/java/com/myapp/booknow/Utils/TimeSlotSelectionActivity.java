@@ -53,8 +53,11 @@ public class TimeSlotSelectionActivity extends AppCompatActivity {
             return; // Optionally return or handle this scenario appropriately
         }
 
+
         dbHelper = new DBHelper();
         String businessId = getIntent().getStringExtra("businessId");
+        String customerName = currentUser.getDisplayName();
+        String image = getIntent().getStringExtra("imageURL");
         String serviceId = getIntent().getStringExtra("serviceId");
         LocalDate selectedDate = (LocalDate) getIntent().getSerializableExtra("selectedDate");//get the date from the prev. activity
 
@@ -71,7 +74,7 @@ public class TimeSlotSelectionActivity extends AppCompatActivity {
         Log.d("TimeSlotsSelectionTest", "the serviceId is ::::-> " + serviceId);
         Log.d("TimeSlotsSelectionTest", "the selected date_string is ::::-> " + selectedDate);
 
-        generateAndDisplayTimeSlots(businessId, serviceId, selectedDate);
+        generateAndDisplayTimeSlots(customerName,image,businessId, serviceId, selectedDate);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +85,7 @@ public class TimeSlotSelectionActivity extends AppCompatActivity {
 
 
     }
-    private void generateAndDisplayTimeSlots(String businessId, String serviceId, LocalDate selectedDate) {
+    private void generateAndDisplayTimeSlots(String customerName,String image,String businessId, String serviceId, LocalDate selectedDate) {
         // Fetch the service duration first
         dbHelper.getServiceDuration(serviceId, new OnSuccessListener<Integer>() {
             @Override
@@ -135,7 +138,7 @@ public class TimeSlotSelectionActivity extends AppCompatActivity {
                                                     public void onClick(DialogInterface dialog, int which) {
 
                                                         // Booking the appointment
-                                                        dbHelper.bookOrUpdateAppointment(businessId, customerId, serviceId, selectedDate, selectedTimeSlot,
+                                                        dbHelper.bookOrUpdateAppointment(customerName,image,businessId, customerId, serviceId, selectedDate, selectedTimeSlot,
                                                                 aVoid -> {
                                                                     Toast.makeText(TimeSlotSelectionActivity.this, "Appointment booked successfully!", Toast.LENGTH_SHORT).show();
 
