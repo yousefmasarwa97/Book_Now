@@ -16,6 +16,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.myapp.booknow.R;
 import com.myapp.booknow.business.BusinessSpecialOffers;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,20 +53,16 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
     @Override
     public AppointmentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.featured_card_design, parent, false);//service_item = appointment_item
+                .inflate(R.layout.upcoming_appointments_card_design, parent, false);//service_item = appointment_item
         return new AppointmentViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AppointmentViewHolder holder, int position) {
 
-//        mAuth = FirebaseAuth.getInstance();
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        String userid=currentUser.getUid();
+
         Appointment appointmentItem = appointmentList.get(position);
-        //User user=mAuth.getCurrentUser();
-//        FirebaseFirestore db = FirebaseFirestore.getInstance();
-//        db.collection("Users").document(userid);
+
 
 
 
@@ -72,7 +70,9 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         //holder.appointmentNameTextView.setText(appointmentItem.getAppointmentId());//change to information about appointment
 
         holder.profilename.setText(appointmentItem.getCustomername());
-//       holder.appointmentDate.setText(appointmentItem.getDate().getDayOfMonth());
+//        holder.day.setText(appointmentItem.getDate().toString());
+//
+//        holder.time.setText(appointmentItem.getStartTime().toString() + "-" + appointmentItem.getEndTime().toString());
 
         //----------------------------//
         //----------------------------//
@@ -104,7 +104,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
     public static class AppointmentViewHolder extends RecyclerView.ViewHolder {
         TextView appointmentNameTextView;
         ImageView editAppointmentButton, deleteAppointmentButton;
-        public TextView profilename; // and other views
+        public TextView profilename,day,time; // and other views
         public TextView appointmentDate;
         public TextView status;
         public ImageView profileimage;
@@ -112,19 +112,19 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         public AppointmentViewHolder(View itemView) {
             super(itemView);
             //actions on service item = actions on appointment item
-            profilename = itemView.findViewById(R.id.featured_title); // can replace with actual view ID
-            profileimage = itemView.findViewById(R.id.featured_image);
-            appointmentDate = itemView.findViewById(R.id.featured_descreption);
-            status=itemView.findViewById(R.id.business_status);
-            status.setText(null);
+            profilename = itemView.findViewById(R.id.appointment_business_title); // can replace with actual view ID
+            profileimage = itemView.findViewById(R.id.appointment_business_image);
+            day = itemView.findViewById(R.id.appointment_business_day);
+            time = itemView.findViewById(R.id.appointment_business_time);
+
 //            appointmentNameTextView = itemView.findViewById(R.id.serviceNameTextView);
 //            editAppointmentButton = itemView.findViewById(R.id.editServiceButton);
 //            deleteAppointmentButton = itemView.findViewById(R.id.deleteServiceButton);
         }
 
     }
-//    public void setAppointmentList(List<Appointment> appointmentlist) {
-//        this.appointmentList = appointmentlist;
-//    }
+    public void setAppointmentList(List<Appointment> appointmentlist) {
+        this.appointmentList = appointmentlist;
+    }
 
 }
