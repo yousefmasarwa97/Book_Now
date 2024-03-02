@@ -9,7 +9,7 @@
             android:id="@+id/profile_IMG"
             android:icon="@drawable/profile_icon"
             android:iconTint="@color/lightgrey"
-            android:title="update profile" />
+            android:title="PROFILE" />
 
 
         <item
