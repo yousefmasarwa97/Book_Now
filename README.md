@@ -41,7 +41,14 @@ BookNow is an Android application designed to facilitate booking and managing ap
 
 ### Business UI
 <div style="display: flex; justify-content: space-around;">
-    <img src="ScreenShots/businessScreenShots/B_Dashboard.png" alt="Business Dashboard" width="400"/>
+    <img src="ScreenShots/businessScreenShots/Business_Login.png" alt="Business Dashboard" width="400"/>
+    <img src="ScreenShots/businessScreenShots/Business_Register.png" alt="Business Dashboard" width="400"/>
+    <img src="ScreenShots/businessScreenShots/B_Dashboard1.png" alt="Business Dashboard" width="400"/>
+    <img src="ScreenShots/businessScreenShots/B_Dashboard2.png" alt="Business Dashboard" width="400"/>
+    <img src="ScreenShots/businessScreenShots/B_Dashboard3.png" alt="Business Dashboard" width="400"/>
+    <img src="ScreenShots/businessScreenShots/B_Dashboard4.png" alt="Business Dashboard" width="400"/>
+    <img src="ScreenShots/businessScreenShots/B_Dashboard5.png" alt="Business Dashboard" width="400"/>
+    
 </div>
 
 ## Architecture
