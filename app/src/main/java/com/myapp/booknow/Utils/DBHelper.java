@@ -141,13 +141,14 @@ public class DBHelper {
         LocalDate S=LocalDate.now().atStartOfDay().toLocalDate();
 
         // Correct conversion
-//        Timestamp startTimestamp = Utils.localDateToTimestamp(S);
+        Timestamp startTimestamp = Utils.localDateToTimestamp(S);
 //        Timestamp endTimestamp = Utils.localDateToTimestamp(S.plusDays(7));
 
         db.collection("Appointments")
                 .whereEqualTo("businessId", businessId)
                 .whereEqualTo("status", status)
-                //.whereGreaterThanOrEqualTo("date", startTimestamp)
+                .whereGreaterThanOrEqualTo("date", startTimestamp)
+                .orderBy("date", Query.Direction.ASCENDING)
                 //.whereLessThan("date", endTimestamp)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
