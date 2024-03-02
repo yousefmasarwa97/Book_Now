@@ -34,7 +34,15 @@ public class C_Login extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.c_login);
 
-
+        ///----test----////
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        String uid = "";
+        if (currentUser != null) {
+            // User is signed in
+            uid = currentUser.getUid();
+        }
+        Log.d("loggedUserCheck","the logged in user is ::::: -> " +uid);
 
         countryCodePicker = findViewById(R.id.countryCodeHolder);
         phoneEditText = findViewById(R.id.phone_edit_text);

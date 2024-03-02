@@ -3,6 +3,7 @@ package com.myapp.booknow.business;
 import static android.app.PendingIntent.getActivity;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -281,9 +283,9 @@ public class BusinessDashboardActivity extends AppCompatActivity
 
 
         } else if (item_id == R.id.log_out) {
-            Intent edit_specific_dates = new Intent(BusinessDashboardActivity.this, C_Login.class);
-            startActivity(edit_specific_dates);
-
+//            Intent edit_specific_dates = new Intent(BusinessDashboardActivity.this, C_Login.class);
+//            startActivity(edit_specific_dates);
+            showLogoutConfirmationDialog();
         }else if (item_id == R.id.special_offers) {
             Intent edit_offer= new Intent(BusinessDashboardActivity.this, specialOfferManagmante.class);
             startActivity(edit_offer);
@@ -301,4 +303,27 @@ public class BusinessDashboardActivity extends AppCompatActivity
 
 
 }
+
+    private void showLogoutConfirmationDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("Logout")
+                .setMessage("Are you sure you want to logout?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        logoutUser();
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+
+    // Signs out the current user, and redirects to the Customer Login page
+    private void logoutUser() {
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(this, C_Login.class));
+        finish();
+    }
+
 }
