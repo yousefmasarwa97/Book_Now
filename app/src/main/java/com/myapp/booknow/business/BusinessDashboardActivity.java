@@ -82,7 +82,7 @@ public class BusinessDashboardActivity extends AppCompatActivity
         dbHelper = new DBHelper();
 
         appointmentsRecycler_B = findViewById(R.id.appointments_recycler);
-        specialOffers_recycle = findViewById(R.id.offer_recycle);
+        specialOffers_recycle = findViewById(R.id.offer_recycler);
 
         appointmentList = new ArrayList<>();
         appointmentAdapter = new AppointmentAdapter(appointmentList);

@@ -51,7 +51,8 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:padding="20dp">
 
                     <TextView
                         android:id="@+id/textView2"
@@ -59,8 +60,9 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:fontFamily="@font/brandon1"
-                        android:text="Business Dashboard"
-                        android:textSize="28sp" />
+                        android:text="BookNow"
+                        android:textSize="28sp"
+                        android:layout_marginTop="50dp"/>
 
                     <ImageView
                         android:id="@+id/menu_button"
@@ -94,6 +96,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="50dp"
+                            android:fontFamily="@font/muli_black"
                             android:text="SPECIAL OFFERS"
                             android:textAllCaps="true"
                             android:textColor="@color/colorAccent"
@@ -108,32 +111,13 @@
 
                     </LinearLayout>
 
-
-                    <LinearLayout
-                        android:id="@+id/special_offer"
-                        android:layout_width="1400dp"
-                        android:layout_height="300dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/offer_recycler"
+                        android:layout_width="244dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="-3dp"
                         android:layout_toRightOf="@+id/featured_background"
-                        android:background="@color/banner_background_light"
-                        android:orientation="vertical">
-
-
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/offer_recycle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:text="@string/s1"
-                            android:textColor="@color/lightgrey"
-                            android:orientation="vertical"/>
-
-                    </LinearLayout>
-
+                        android:background="@color/home_background" />
 
                 </RelativeLayout>
 
