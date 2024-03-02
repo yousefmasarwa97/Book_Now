@@ -72,7 +72,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         //holder.appointmentNameTextView.setText(appointmentItem.getAppointmentId());//change to information about appointment
 
         holder.profilename.setText(appointmentItem.getCustomername());
-       //holder.appointmentDate.setText(appointmentItem.getDate().toString());
+//       holder.appointmentDate.setText(appointmentItem.getDate().getDayOfMonth());
 
         //----------------------------//
         //----------------------------//

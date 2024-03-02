@@ -158,18 +158,9 @@ public class C_profile extends AppCompatActivity {
         }
 
         DBHelper dbhelper=new DBHelper();
-        dbhelper.update_name_and_image(customerId,name,imageUrl, new FirestoreCallback<List<Appointment>>() {
+        dbhelper.updateappointment_for_customer(customerId,name,imageUrl, new FirestoreCallback<List<Appointment>>() {
                     @Override
                     public void onSuccess(List<Appointment> result) {
-
-                        //checking:
-                        for (Appointment appointment : result) {
-                            Log.d("AppointmentListCheck", "appointment = " + appointment.toString());
-                        }
-
-                        appointmentList.clear();
-                        appointmentList.addAll(result);
-                        //appointmentAdapter.notifyDataSetChanged();
                         Log.d("appointmentsList", "Number of appointments fetched: " + result.size());
                     }
 

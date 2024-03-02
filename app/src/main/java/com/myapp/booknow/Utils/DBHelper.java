@@ -176,6 +176,38 @@ public class DBHelper {
 
                 }).addOnFailureListener(e -> Log.d("DBHelper","Error fetching businesses",e));
     }
+    public void updateappointment_for_customer(String customerid, String customerNme, String C_image, FirestoreCallback<List<Appointment>> onSuccessListener){
+        //The OnSuccessListener is an interface provided by Firebase. It defines a callback method, onSuccess,
+        // which is executed when the  Firestore query successfully completes.
+        // This method receives the list of businesses as its parameter.
+
+
+
+        db.collection("Appointments").whereEqualTo("customerId\n",customerid)
+//                .whereEqualTo("setupCompleted",true)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    List<Appointment> businessList = new ArrayList<>();
+                    //Once the query is complete, Firestore returns a 'querySnapshot' object
+                    //which contains all the documents that match the query criteria.
+                    //after that each document will be converted to a 'User' object, and will be added to the list
+                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                        Appointment user = documentSnapshot.toObject(Appointment.class);
+                        if (user.getCustomerId().equals(customerid)) {
+                            user.setCustomername(customerNme);
+                            user.setImageURL(C_image);
+
+                            // Update imageURL field with the appropriate photo URL
+                            String imageURL = documentSnapshot.getString("imageURL");
+                            user.setImageURL(C_image);
+
+                            businessList.add(user);
+                        }
+                    }
+                    onSuccessListener.onSuccess(businessList);
+
+                }).addOnFailureListener(e -> Log.d("DBHelper","Error fetching businesses",e));
+    }
 
     /**
      * Executes a query to get the businesses from the database.
@@ -1540,14 +1572,25 @@ public void fetchUpcomingAppointmentsForCustomer(String customerId, FirestoreCal
                     }
                 });
     }
-//    public void update_name_and_image(String customerid,String name,String image){
-////        Map<String, Object> customerupdate = new HashMap<>();
-////        customerupdate.put("CustomerName",name);
-////        customerupdate.put("customer image",image);
-//        db.collection("Appointments").whereEqualTo()
-////                .addOnSuccessListener(onSuccessListener)
-////                .addOnFailureListener(onFailureListener);
-//    }
+    public void update_name_and_image(String customerid,String name,String image){
+        db.collection("Appointments")
+                .whereEqualTo("customerId", customerid) // Use the unique identifier to locate the document
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            String documentId = document.getId(); // Get the document ID
+                            // Now you can update the document as shown above
+                            db.collection("Appointments").document(documentId)
+                                    .update("CustomerName", name)
+                                    .addOnSuccessListener(aVoid -> Log.d("Update", "Document successfully updated"))
+                                    .addOnFailureListener(e -> Log.w("Update", "Error updating document", e));
+                        }
+                    } else {
+                        Log.d("Query", "Error getting documents: ", task.getException());
+         }
+});
+    }
 
 
 
