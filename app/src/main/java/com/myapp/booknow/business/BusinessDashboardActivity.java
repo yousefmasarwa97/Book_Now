@@ -34,6 +34,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.myapp.booknow.Customer.C_Login;
+import com.myapp.booknow.Customer.viewUpcomingAppointments;
 import com.myapp.booknow.FirestoreCallback;
 import com.myapp.booknow.Utils.Appointment;
 import com.myapp.booknow.Utils.AppointmentAdapter;
@@ -71,6 +72,7 @@ public class BusinessDashboardActivity extends AppCompatActivity
     private MapView mapView;
     private GoogleMap map;
     private SpecialOfferAdapter offerAdapter;
+    private TextView appointments_viewAll;
 
 
     @SuppressLint("MissingInflatedId")
@@ -91,6 +93,7 @@ public class BusinessDashboardActivity extends AppCompatActivity
         menu_button = findViewById(R.id.menu_button);
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
+        appointments_viewAll=findViewById(R.id.view_all_bt);
 
 
         navigationView.bringToFront();
@@ -109,6 +112,15 @@ public class BusinessDashboardActivity extends AppCompatActivity
                 } else {
                     drawerLayout.openDrawer(GravityCompat.START);
                 }
+            }
+        });
+
+
+        appointments_viewAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), b_viewUpcomingAppointments.class);
+                startActivity(intent);
             }
         });
 
@@ -144,21 +156,7 @@ public class BusinessDashboardActivity extends AppCompatActivity
         navigationView.setCheckedItem(R.id.nav_home);// to ensure that the drawer is set ti "Home"
     }
 
-//    private void specialOffers_recycle(){
-//        specialOffers_recycle.setHasFixedSize(true);
-//        specialOffers_recycle.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-//
-//        specialOffers = new ArrayList<BusinessSpecialOffers>();
-//        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-//        FirebaseUser curr_user = mAuth.getCurrentUser();
-//        specialOffers.add(curr_user);
-//        String businessId = null;
-//        if (curr_user != null) {
-//            businessId = curr_user.getUid();
-//        }
-//        assert curr_user != null;
-//
-//    }
+
 
 
 
