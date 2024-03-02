@@ -40,7 +40,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/appointment_business_image"
-            android:text="Tuesday Feb 20 2024"
+            android:text="Monday Apr 15 2024"
             android:textSize="15dp"
             android:textStyle="bold" />
 
@@ -52,7 +52,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/appointment_business_image"
-            android:text="09 : 00  -  09 : 30"
+            android:text="15 : 00  -  15 : 30"
             android:textSize="17dp"
             android:textStyle="bold" />
 
@@ -66,7 +66,7 @@
             android:text="waiting"
             android:layout_below="@+id/appointment_business_title"
             android:layout_marginRight="5dp"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="40dp"
             android:textColor="@color/colorPrimaryDark"
             />
 
