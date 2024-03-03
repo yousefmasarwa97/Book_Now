@@ -51,11 +51,6 @@
         <activity android:name=".mvvm.viewmodel.business.AppointmentListActivity" />
         <activity android:name=".mvvm.viewmodel.customer.TimeSlotSelectionActivity" />
         <activity android:name=".mvvm.viewmodel.business.BusinessSpecialHoursEditActivity" />
-        <activity
-            android:name=".mvvm.viewmodel.TestDashboardActivity"
-            android:exported="false"
-            android:label="@string/title_activity_test_dashboard"
-            android:theme="@style/Theme.BookNow.NoActionBar" />
         <activity android:name=".mvvm.viewmodel.business.ServiceProviderSetWorkingDaysActivity" />
         <activity android:name=".mvvm.viewmodel.business.ServiceProviderSetNameAndServicesActivity" />
         <activity android:name=".mvvm.viewmodel.customer.ChooseDayandTimeActivity" />
