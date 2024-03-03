@@ -14,63 +14,63 @@
         android:theme="@style/Theme.BookNow"
         tools:targetApi="31">
         <activity
-            android:name=".business.b_viewUpcomingAppointments"
+            android:name=".mvvm.viewmodel.business.b_viewUpcomingAppointments"
             android:exported="false" />
         <activity
-            android:name=".business.bussines_UpcomingAppointmentsAdapter"
+            android:name=".mvvm.view.bussines_UpcomingAppointmentsAdapter"
             android:exported="false" />
         <activity
-            android:name=".Customer.C_profile"
+            android:name=".mvvm.viewmodel.customer.C_profile"
             android:exported="false" />
         <activity
-            android:name=".business.specialOfferManagmante"
+            android:name=".mvvm.viewmodel.business.specialOfferManagmante"
             android:exported="false" />
         <activity
-            android:name=".Customer.showCategoryBusinesses"
+            android:name=".mvvm.viewmodel.customer.showCategoryBusinesses"
             android:exported="false" />
         <activity
-            android:name=".Customer.viewAppointmentsHistory"
+            android:name=".mvvm.viewmodel.customer.viewAppointmentsHistory"
             android:exported="false" />
         <activity
-            android:name=".Customer.viewUpcomingAppointments"
+            android:name=".mvvm.viewmodel.customer.viewUpcomingAppointments"
             android:exported="false" />
         <activity
-            android:name=".Customer.VerifyOTP"
+            android:name=".mvvm.model.VerifyOTP"
             android:exported="false" />
         <activity
-            android:name=".Customer.C_Login"
+            android:name=".mvvm.viewmodel.customer.C_Login"
             android:exported="false" />
         <activity
-            android:name=".business.B_Register"
+            android:name=".mvvm.viewmodel.business.B_Register"
             android:exported="false" />
         <activity
-            android:name=".business.B_Login"
+            android:name=".mvvm.viewmodel.business.B_Login"
             android:exported="false" />
-        <activity android:name=".business.EditBusinessProfile" />
-        <activity android:name=".Utils.AppointmentDateSelectionActivity" />
-        <activity android:name=".Utils.AppointmentListActivity" />
-        <activity android:name=".Utils.TimeSlotSelectionActivity" />
-        <activity android:name=".business.BusinessSpecialHoursEditActivity" />
+        <activity android:name=".mvvm.viewmodel.business.EditBusinessProfile" />
+        <activity android:name=".mvvm.viewmodel.business.AppointmentDateSelectionActivity" />
+        <activity android:name=".mvvm.viewmodel.business.AppointmentListActivity" />
+        <activity android:name=".mvvm.viewmodel.customer.TimeSlotSelectionActivity" />
+        <activity android:name=".mvvm.viewmodel.business.BusinessSpecialHoursEditActivity" />
         <activity
-            android:name=".Utils.TestDashboardActivity"
+            android:name=".mvvm.viewmodel.TestDashboardActivity"
             android:exported="false"
             android:label="@string/title_activity_test_dashboard"
             android:theme="@style/Theme.BookNow.NoActionBar" />
-        <activity android:name=".Utils.ServiceProviderSetWorkingDaysActivity" />
-        <activity android:name=".Utils.ServiceProviderSetNameAndServicesActivity" />
-        <activity android:name=".business.ChooseDayandTimeActivity" />
-        <activity android:name=".business.ChooseServiceActivity" />
-        <activity android:name=".Utils.ShowBusinessActivity" />
-        <activity android:name=".business.BusinessServiceEditActivity" />
-        <activity android:name=".business.BusinessServicesManagementActivity" />
-        <activity android:name=".business.BusinessRegularHoursEditActivity" />
+        <activity android:name=".mvvm.viewmodel.business.ServiceProviderSetWorkingDaysActivity" />
+        <activity android:name=".mvvm.viewmodel.business.ServiceProviderSetNameAndServicesActivity" />
+        <activity android:name=".mvvm.viewmodel.customer.ChooseDayandTimeActivity" />
+        <activity android:name=".mvvm.viewmodel.customer.ChooseServiceActivity" />
+        <activity android:name=".mvvm.viewmodel.customer.ShowBusinessActivity" />
+        <activity android:name=".mvvm.viewmodel.business.BusinessServiceEditActivity" />
+        <activity android:name=".mvvm.viewmodel.business.BusinessServicesManagementActivity" />
+        <activity android:name=".mvvm.viewmodel.business.BusinessRegularHoursEditActivity" />
         <activity
-            android:name=".business.BusinessSetupActivity"
-            android:parentActivityName=".business.BusinessEmailVerificationActivity" />
-        <activity android:name=".business.BusinessEmailVerificationActivity" />
-        <activity android:name=".business.BusinessDashboardActivity" />
+            android:name=".mvvm.viewmodel.business.BusinessSetupActivity"
+            android:parentActivityName=".mvvm.viewmodel.business.BusinessEmailVerificationActivity" />
+        <activity android:name=".mvvm.viewmodel.business.BusinessEmailVerificationActivity" />
+        <activity android:name=".mvvm.viewmodel.business.BusinessDashboardActivity" />
         <activity
-            android:name=".Utils.SplashActivity"
+            android:name=".mvvm.view.SplashActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -79,8 +79,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Customer.C_Dashboard" />
-        <activity android:name=".Customer.viewCategories" />
+        <activity android:name=".mvvm.viewmodel.customer.C_Dashboard" />
+        <activity android:name=".mvvm.viewmodel.customer.viewCategories" />
     </application>
 
 </manifest>

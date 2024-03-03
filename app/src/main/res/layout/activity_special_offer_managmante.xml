@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/special_offer"
-    tools:context=".business.specialOfferManagmante">
+    tools:context=".mvvm.viewmodel.business.specialOfferManagmante">
 
 
 

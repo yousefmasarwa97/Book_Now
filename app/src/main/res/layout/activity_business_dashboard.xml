@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/home_background"
     android:orientation="vertical"
-    tools:context=".business.BusinessDashboardActivity">
+    tools:context=".mvvm.viewmodel.business.BusinessDashboardActivity">
 <!--        tools:openDrawer="start">-->
 
 
